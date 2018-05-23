@@ -13,6 +13,7 @@ class Common(Configuration):
     ALLOWED_HOSTS = []
 
     DJANGO_APPS = [
+        'django_extensions',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -70,7 +71,7 @@ class Common(Configuration):
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'OPTIONS': {
-                'read_default_file': './my.cnf',
+                'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
             }
         }
@@ -106,6 +107,15 @@ class Common(Configuration):
     STATIC_URL = '/static/'
 
     PMU_SCRAP_DIR = ''
+
+    NOTEBOOK_ARGUMENTS = [
+        '--notebook-dir', 'notebooks',
+    ]
+
+    IPYTHON_ARGUMENTS = [
+        '--ext', 'django_extensions.management.notebook_extension',
+        #'--debug',
+    ]
 
 class Development(Common):
     DEBUG = True

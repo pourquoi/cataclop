@@ -24,6 +24,15 @@ class Race(models.Model):
 
     session = models.ForeignKey('RaceSession', on_delete=models.CASCADE)
 
+    def get_player(self, num):
+        player = None
+        try:
+            player = next( p for p in self.player_set.all() if p.num == num )
+        except StopIteration:
+            pass
+
+        return player
+
     def __str__(self):
         return '{} R{}C{} {}'.format(self.start_at.strftime('%Y-%m-%d'), self.session.num, self.num, self.start_at.strftime('%H:%M'))
 
@@ -48,6 +57,8 @@ class Player(models.Model):
     race = models.ForeignKey('Race', on_delete=models.CASCADE)
 
     age = models.SmallIntegerField()
+
+    num = models.SmallIntegerField()
 
     is_racing = models.BooleanField(default=True)
     is_first_timer = models.BooleanField(default=False)
@@ -75,6 +86,11 @@ class Player(models.Model):
 
     time = models.IntegerField(null=True)
 
+    winner_dividend = models.IntegerField(null=True)
+    placed_dividend = models.IntegerField(null=True)
+
+    final_odds_ref = models.FloatField(null=True)
+
     horse = models.ForeignKey('Horse', on_delete=models.CASCADE)
     trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE)
     jockey = models.ForeignKey('Jockey', on_delete=models.CASCADE)
@@ -101,6 +117,15 @@ class Odds(models.Model):
 
     class Meta():
         verbose_name_plural = 'odds'
+
+class BetResult(models.Model):
+    imported_at = models.DateTimeField(auto_now=True)
+
+    combo = models.TextField()
+    dividend = models.IntegerField()
+
+    type = models.CharField(max_length=100)
+    race = models.ForeignKey('Race', on_delete=models.CASCADE)
 
 
 class Hippodrome(models.Model):

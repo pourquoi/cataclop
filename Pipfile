@@ -9,6 +9,13 @@ djangorestframework = "*"
 mysqlclient = "*"
 django-configurations = "*"
 pytz = "*"
+jupyter = "*"
+bencode = "*"
+pandas = "*"
+scikit-learn = "*"
+scipy = "*"
+django-extensions = "*"
+tables = "*"
 
 [dev-packages]
 

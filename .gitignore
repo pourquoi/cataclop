@@ -1,6 +1,15 @@
 # editor
 .vscode
 
+# cache
+*.py[cod]
+
+# notebooks
+.ipynb_checkpoints
+
 # secrets
 my.cnf
 cataclop/settings.py
+
+# data
+var/data/*

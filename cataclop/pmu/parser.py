@@ -107,10 +107,20 @@ class Parser:
             player.odds_set.all().delete()
 
             if p.get('dernierRapportDirect'):
-                self.importOdds(p['dernierRapportDirect'], player)
+                self.importOdds(p['dernierRapportDirect'], player, is_final=True)
 
             if p.get('dernierRapportReference'):
-                self.importOdds(p['dernierRapportReference'], player)
+                self.importOdds(p['dernierRapportReference'], player, is_final_ref=True)
+
+        race.betresult_set.all().delete()
+
+        try:
+            with open(os.path.join(self.root_dir, session.date.isoformat(), 'R{}C{}-odds.json'.format(session.num, race.num))) as json_data:
+                bet_results = json.load(json_data)
+                for r in bet_results:
+                    self.importBetResult(r, race)
+        except FileNotFoundError:
+            pass
 
         return race
 
@@ -181,7 +191,13 @@ class Parser:
         player.herder = herder
         player.owner = owner
 
+        player.final_odds_ref = None
+        player.winner_dividend = None
+        player.placed_dividend = None
+
         player.age = p['age']
+
+        player.num = p['numPmu']
 
         player.post_position = p['placeCorde']
 
@@ -229,7 +245,39 @@ class Parser:
 
         odds.save()
 
+        if is_final_ref:
+            player.final_odds_ref = odds.value
+            player.save()
+
         return odds
+
+    def importBetResult(self, r, race):
+
+        for rr in r['rapports']:
+            if r['typePari'] not in ['SIMPLE_GAGNANT', 'SIMPLE_PLACE', 'E_SIMPLE_PLACE', 'E_SIMPLE_GAGNANT']:
+                continue
+
+            result = BetResult(type=r['typePari'], combo=json.dumps(rr['combinaison']), dividend=rr['dividendePourUnEuro'])
+            result.race = race
+
+            result.save()
+
+            for n in rr['combinaison']:
+                p = race.get_player(n)
+
+                if p is None:
+                    continue
+
+                if r['typePari'] == 'E_SIMPLE_GAGNANT':
+                    p.winner_dividend = result.dividend
+                    p.save()
+                elif r['typePari'] == 'E_SIMPLE_PLACE':
+                    p.placed_dividend = result.dividend
+                    p.save()
+
+
+
+
 
 
 
