@@ -248,6 +248,9 @@ class Parser:
         if is_final_ref:
             player.final_odds_ref = odds.value
             player.save()
+        elif is_final:
+            player.final_odds = odds.value
+            player.save()
 
         return odds
 

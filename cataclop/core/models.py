@@ -89,6 +89,7 @@ class Player(models.Model):
     winner_dividend = models.IntegerField(null=True)
     placed_dividend = models.IntegerField(null=True)
 
+    final_odds = models.FloatField(null=True)
     final_odds_ref = models.FloatField(null=True)
 
     horse = models.ForeignKey('Horse', on_delete=models.CASCADE)

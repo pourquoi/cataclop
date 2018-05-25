@@ -1,32 +1,37 @@
 from collections import defaultdict, Counter
+import pandas as pd
 
-def select_dummy_values(dataset, features, limit=10):
-  dummy_values = {}
+def get_dummies(dataset, features, limit=10):
+  dummies = {}
   for feature in features:
       values = [
           value
           for (value, _) in Counter(dataset[feature]).most_common(limit)
       ]
-      dummy_values[feature] = values
+      dummies[feature] = values
 
-  return dummy_values
-
-
-def dummy_encode_dataframe(dataset, dummies):
-  for (feature, dummy_values) in dummies.items():
-      for dummy_value in dummy_values:
-          dummy_name = u'%s_value_%s' % (feature, unicode(dummy_value))
-          dataset[dummy_name] = (dataset[feature] == dummy_value).astype('double')
-      del dataset[feature]
-
-  return dataset
+  return dummies
 
 
-def get_dummy_features(DUMMY_VALUES, subset=None):
+def get_dummy_values(dataset, dummies):
+  df = {}
+  
+  for (feature, values) in dummies.items():
+      for val in values:
+          name = u'%s_value_%s' % (feature, val)
+          df[name] = (dataset[feature] == val).astype('double')
+
+  return pd.DataFrame(df)
+
+
+def get_dummy_features(dummies, subset=None):
   features = []
-  for (feature, dummy_values) in DUMMY_VALUES.items():
+
+  for (feature, values) in dummies.items():
       if subset != None and feature not in subset: continue
-      for dummy_value in dummy_values:
-          dummy_name = u'%s_value_%s' % (feature, unicode(dummy_value))
-          features.append(dummy_name)
+
+      for val in values:
+          name = u'%s_value_%s' % (feature, val)
+          features.append(name)
+
   return features
