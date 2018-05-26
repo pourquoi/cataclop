@@ -16,6 +16,8 @@ scikit-learn = "*"
 scipy = "*"
 django-extensions = "*"
 tables = "*"
+matplotlib = "*"
+certifi = "*"
 
 [dev-packages]
 
