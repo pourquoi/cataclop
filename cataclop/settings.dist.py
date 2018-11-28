@@ -2,6 +2,9 @@ import os
 
 from configurations import Configuration, values
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 class Common(Configuration):
     
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -94,6 +97,27 @@ class Common(Configuration):
         },
     ]
 
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+            }
+        },
+        'loggers': {
+            #'django.db.backends': {
+            #    'handlers': ['console'],
+            #    'level': 'DEBUG',
+            #},
+            'cataclop': {
+                'handlers': ['console'],
+                'level': 'DEBUG'
+            }
+        }
+    }
+
     LANGUAGE_CODE = 'en-us'
 
     TIME_ZONE = 'Europe/Paris'
@@ -106,7 +130,7 @@ class Common(Configuration):
 
     STATIC_URL = '/static/'
 
-    PMU_SCRAP_DIR = ''
+    PMU_SCRAP_DIR = '/path/to/scrap/dir'
 
     NOTEBOOK_ARGUMENTS = [
         '--notebook-dir', 'notebooks',
@@ -124,4 +148,12 @@ class Staging(Common):
     DEBUG = False
 
 class Production(Staging):
-    pass
+
+    @classmethod
+    def pre_setup(cls):
+        super(Production, cls).pre_setup()
+        
+        sentry_sdk.init(
+            dsn="https://<key>@sentry.io/<project>",
+            integrations=[DjangoIntegration()]
+        )

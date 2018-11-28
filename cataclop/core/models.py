@@ -24,7 +24,10 @@ class Race(models.Model):
 
     session = models.ForeignKey('RaceSession', on_delete=models.CASCADE)
 
-    def get_player(self, num):
+    def get_player(self, num: int):
+        """
+        Get a race player by a his number
+        """
         player = None
         try:
             player = next( p for p in self.player_set.all() if p.num == num )
@@ -59,6 +62,8 @@ class Player(models.Model):
     age = models.SmallIntegerField()
 
     num = models.SmallIntegerField()
+
+    music = models.CharField(max_length=100)
 
     is_racing = models.BooleanField(default=True)
     is_first_timer = models.BooleanField(default=False)
@@ -99,7 +104,7 @@ class Player(models.Model):
     owner = models.ForeignKey('Owner', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return '#{} - {}'.format(self.post_position, self.horse)
+        return '#{} - {}'.format(self.num, self.horse)
 
 class Odds(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
@@ -114,7 +119,7 @@ class Odds(models.Model):
     player = models.ForeignKey('Player', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.value
+        return "{:f}".format(self.value)
 
     class Meta():
         verbose_name_plural = 'odds'

@@ -1,49 +1,126 @@
-from sklearn.model_selection import KFold, GroupKFold
-from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+import numpy as np
 
 from cataclop.ml.pipeline import factories
 
 class Program(factories.Program):
 
-    def __init__(self, name, params):
-        super().__init__(name, params)
+    def __init__(self, name, params=None, version=None):
+        super().__init__(name=name, params=params, version=version)
+
+        self.dataset = None
+        self.bets = None
+        self.model = None
+        self.df = None
 
     @property
     def defaults(self):
-        return {
+        return {}
 
-        }
+    def run(self, mode='predict', **kwargs):
 
-    def run(self, **kwarg):
+        dataset_params = {}
 
-        d = factories.Dataset.factory('default')
-        d.load()
+        if kwargs.get('dataset_params') is not None:
+            dataset_params.update(kwargs.get('dataset_params'))
 
-        # todo prepare data (remove races etc..)
+        dataset = factories.Dataset.factory('default', params=dataset_params, version='1.4')
+        dataset.load(force=kwargs.get('dataset_reload', False))
 
-        groups = d.players['race'].values
+        model_params = {}
+        if kwargs.get('model_params') is not None:
+            model_params.update(kwargs.get('model_params'))
 
-        group_kfold = GroupKFold(n_splits=3)
+        self.model = factories.Model.factory('default', params=model_params, dataset=dataset, version='1.4')
 
-        features = ['race_count', 'victory_count', 'placed_2_count', 'placed_3_count']
+        if mode == 'train':
+            self.df = self.model.train(dataset)
+        elif mode == 'predict':
+            self.model.load()
+            self.df = self.model.predict(dataset)
+        else:
+            pass
 
-        d.players['pred'] = 0.0
+        self.dataset = dataset
+
+    def train(self, **kwargs):
+        return self.run('train', **kwargs)
+
+    def predict(self, **kwargs):
+        return self.run('predict', **kwargs)
+
+    def bet(self, targets=None, N=1, max_odds=20):
+
+        features = self.model.features
+        categorical_features = self.model.categorical_features
+
+        if targets is None:
+            targets = ['pred_{}_1'.format(model['name']) for model in self.model.models] + ['pred_sum']
+
+        self.df['pred_sum'] = self.df.loc[:, ['pred_{}_1'.format(model['name']) for model in self.model.models]].sum(axis=1)
+
+        races = self.df.sort_values('start_at').groupby('race_id')
+
+        bets = []
+
+        for (id, race) in races:
             
-        for train_index, test_index in group_kfold.split(d.players.values, d.players['pos'].values, groups):
-            X_train = d.players[features].iloc[train_index].values
-            y_train = (d.players['pos'] == 1).iloc[train_index].astype('int32').values
+            candidate_bets = []
             
-            X_test = d.players[features].iloc[test_index].values
-            y_test = (d.players['pos'] == 1).iloc[test_index].astype('int32').values
+            nums = []
             
-            clf = RandomForestClassifier(n_estimators=10)
-            clf = clf.fit(X_train, y_train)
-            
-            p = clf.predict_proba(X_test)
-            
-            idx = d.players.iloc[test_index].index
-            
-            d.players.loc[idx, 'pred'] = p[:, list(clf.classes_).index(1)]
-            
-            
-            
+            for target in targets:
+
+                r = race.sort_values(by=target, ascending=False)
+
+                for n in range(N):
+
+                    if len(r) <= N:
+                        continue
+
+                    player = r.iloc[n]
+
+                    odds = player['final_odds_ref']
+
+                    if max_odds is not None and odds > max_odds:
+                        continue
+
+                    #nth = (r['final_odds_ref']<odds).sum()+1
+
+                    bet = 1.
+
+                    profit = player['winner_dividend']/100.0 * bet - bet
+
+                    row = [id, player['date'], player['num'], odds, player['final_odds'], target, player[target], bet, profit]
+                    
+                    for f in features:
+                        row.append(player[f])
+                    for f in categorical_features:
+                        row.append(player[f])
+
+                    candidate_bets.append( row )
+
+                    nums.append(player['num'])
+
+                    break
+
+            #if len(candidate_bets) == 1:
+            #    bets += candidate_bets
+            bets += candidate_bets
+
+        cols = ['id', 'date', 'num', 'odds_ref', 'odds_final', 'target', 'pred', 'bet', 'profit'] + features + categorical_features
+
+        bets = pd.DataFrame(bets, columns=cols)
+
+        bets.index = bets['date']
+
+        bets = bets.sort_index()
+
+        bets['bets'] = bets['bet'].cumsum()
+        bets['stash'] = bets['profit'].cumsum()
+
+        self.bets = bets
+
+
+
+

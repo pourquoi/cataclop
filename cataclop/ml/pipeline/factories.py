@@ -1,10 +1,12 @@
 import json
 import hashlib
 import importlib
+import inspect
 import os
 
 from abc import ABC, abstractmethod
 from cataclop.ml.settings import DATA_DIR, MODEL_DIR, PROGRAM_DIR
+
 
 class PipelineEntity(ABC):
 
@@ -22,10 +24,10 @@ class PipelineEntity(ABC):
             self.params.update(params)
 
     @classmethod
-    def factory(cls, name, params=None):
+    def factory(cls, name, **kwargs):
         module = importlib.import_module(cls.get_class_path() + '.' + name)
         concrete_cls = getattr(module, cls.get_class_name(), None)
-        return concrete_cls(name, params)
+        return concrete_cls(name, **kwargs)
 
     @classmethod
     @abstractmethod
@@ -50,12 +52,12 @@ class PipelineEntity(ABC):
     @property
     def hash(self):
         s = self.name + self.version + json.dumps(self.params, sort_keys=True)
+
         return hashlib.md5(s.encode('utf-8')).hexdigest()
 
     @property
     def data_dir(self):
         return os.path.join(self.get_data_base_dir(), self.name + '-' + self.version + '-' + self.hash)
-
 
 
 class Program(PipelineEntity):
@@ -115,4 +117,10 @@ class Model(PipelineEntity):
         pass
 
     def save(self):
+        pass
+
+    def train(self, dataset):
+        pass
+
+    def predict(self, dataset):
         pass

@@ -17,13 +17,18 @@ parse "2018-01-*"
 '''
 
     def add_arguments(self, parser):
-        parser.add_argument('pattern', nargs='?', type=str, default=datetime.datetime.now().strftime('%Y-%m-%d'))
+        parser.add_argument('pattern', nargs='?', type=str, default=None)
 
     def handle(self, *args, **options):
 
         parser = Parser(SCRAP_DIR)
 
         pattern = options.get('pattern', datetime.date.today().isoformat())
+
+        if pattern == 'today' or pattern is None:
+            pattern = datetime.date.today().isoformat()
+        elif pattern == 'yesterday':
+            pattern = (datetime.date.today() - datetime.timedelta(1)).isoformat()
 
         pattern = os.path.join(SCRAP_DIR, pattern)
 

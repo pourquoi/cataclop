@@ -18,6 +18,13 @@ django-extensions = "*"
 tables = "*"
 matplotlib = "*"
 certifi = "*"
+fastparquet = "*"
+"jinja2" = "*"
+requests = "*"
+pyopenssl = "*"
+idna = "*"
+sentry-sdk = "==0.5.5"
+joblib = "*"
 
 [dev-packages]
 

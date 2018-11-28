@@ -2,6 +2,7 @@ import os
 import json
 import datetime
 import pytz
+import glob
 from pytz import timezone
 
 from django.db import transaction
@@ -53,9 +54,43 @@ class Parser:
 
         for r in rs['courses']:
             self.importRace(r, race_session)
+            self.importOddsEvolution(r, race_session)
 
         return race_session
 
+
+    def importOddsEvolution(self, r, session):
+
+        pattern = os.path.join(self.root_dir, session.date.isoformat(), 'R{}C{}-evolution'.format(session.num, r['numOrdre']), 't-minus-[0-9]*')
+
+        odds_files = glob.glob(pattern)
+
+        try:
+            race = Race.objects.get(session=session, start_at__date=session.date, num=r['numOrdre'])
+        except ObjectDoesNotExist:
+            return
+
+        for f in odds_files:
+            try:
+                with open(f) as json_data:
+                    players = json.load(json_data)
+
+                    for p in players['participants']:
+
+                        player = race.get_player(p['numPmu'])
+
+                        if player is None:
+                            continue
+
+                        if p.get('dernierRapportDirect'):
+                            self.importOdds(p['dernierRapportDirect'], player, is_final=False)
+
+                        if p.get('dernierRapportReference'):
+                            self.importOdds(p['dernierRapportReference'], player, is_final_ref=False)
+
+            except FileNotFoundError:
+                pass
+                    
 
     def importRace(self, r, session):
 
@@ -98,19 +133,22 @@ class Parser:
         if not self.dry_run:
             race.save()
 
-        for p in players['participants']:
-            player = self.importPlayer(p, race)
+        try:
+            for p in players['participants']:
+                player = self.importPlayer(p, race)
 
-            if not player:
-                continue
+                if not player:
+                    continue
 
-            player.odds_set.all().delete()
+                player.odds_set.all().delete()
 
-            if p.get('dernierRapportDirect'):
-                self.importOdds(p['dernierRapportDirect'], player, is_final=True)
+                if p.get('dernierRapportDirect'):
+                    self.importOdds(p['dernierRapportDirect'], player, is_final=True)
 
-            if p.get('dernierRapportReference'):
-                self.importOdds(p['dernierRapportReference'], player, is_final_ref=True)
+                if p.get('dernierRapportReference'):
+                    self.importOdds(p['dernierRapportReference'], player, is_final_ref=True)
+        except Exception:
+            return None
 
         race.betresult_set.all().delete()
 
@@ -177,9 +215,9 @@ class Parser:
                     herder.save()
 
         try:
-            player = Player.objects.get(horse=horse, trainer=trainer, jockey=jockey)
+            player = Player.objects.get(race=race, horse=horse, trainer=trainer, jockey=jockey)
         except ObjectDoesNotExist:
-            player = Player(horse=horse, trainer=trainer, jockey=jockey)
+            player = Player(race=race, horse=horse, trainer=trainer, jockey=jockey)
 
         if not p.get('placeCorde'):
             if player.pk:

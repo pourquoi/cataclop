@@ -1,6 +1,9 @@
 # editor
 .vscode
 
+# libs
+node_modules
+
 # cache
 *.py[cod]
 
@@ -10,6 +13,7 @@
 # secrets
 my.cnf
 cataclop/settings.py
+scripts/bet_config.json
 
 # data
 var/data/*
