@@ -123,7 +123,7 @@ class Model(factories.Model):
 
         self.models = []
 
-        for n in [10, 20, 30, 40, 50, 100]:
+        for n in [10, 100]:
 
             self.models.append(
                 {
@@ -133,16 +133,16 @@ class Model(factories.Model):
                 }
             )
 
-        for n in [10, 20, 30, 40, 50, 100, 150]:
+        for n in [10, 100]:
             self.models.append(
                 {
                     'name': 'mlp_{}'.format(n),
-                    'steps': [RobustScaler(), MLPRegressor(hidden_layer_sizes=(n,), random_state=self.params['seed'])],
+                    'steps': [MLPRegressor(activation='tanh', hidden_layer_sizes=(n,), random_state=self.params['seed'])],
                     'estimators': []
                 }
             )
 
-        for n in [10, 20, 30, 40, 50, 100]:
+        for n in [10, 100]:
             self.models.append(
                 {
                     'name': 'gbr_{}'.format(n),
@@ -151,7 +151,7 @@ class Model(factories.Model):
                 }
             )
 
-        for n in [10, 20, 30, 40, 50, 60, 70, 100, 150]:
+        for n in [10, 100]:
             self.models.append(
                 {
                     'name': 'rf_{}'.format(n),
@@ -180,7 +180,7 @@ class Model(factories.Model):
                 dummies = preprocessing.get_dummies(df.iloc[train_index], categorical_features)
                 X_train = pd.concat([X_train, preprocessing.get_dummy_values(df.iloc[train_index], dummies)], axis=1)
 
-                idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['category'] != 'ATTELjE') & (df.iloc[train_index]['final_odds_ref'] < 30) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] <= 4) | (df.iloc[train_index]['position'] == self.params['nan_flag'])) 
+                idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['category'] != 'COURSE_A_CONDITIONS') & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 4) | (df.iloc[train_index]['position'] == self.params['nan_flag'])) 
                 X_train = X_train[ idx ]
                 y_train = df['target'].iloc[train_index][ idx ]
 

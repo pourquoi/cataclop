@@ -31,7 +31,7 @@ class Program(factories.Program):
         if kwargs.get('model_params') is not None:
             model_params.update(kwargs.get('model_params'))
 
-        self.model = factories.Model.factory('default', params=model_params, dataset=dataset, version='1.4')
+        self.model = factories.Model.factory('default', params=model_params, dataset=dataset, version='1.9')
 
         if mode == 'train':
             self.df = self.model.train(dataset)
