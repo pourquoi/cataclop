@@ -17,3 +17,6 @@ scripts/bet_config.json
 
 # data
 var/data/*
+!var/data/.gitkeep
+var/models/*
+!var/models/.gitkeep
