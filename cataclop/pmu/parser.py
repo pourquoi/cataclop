@@ -104,7 +104,9 @@ class Parser:
         race.start_at = datetime.datetime.fromtimestamp(r['heureDepart']/1000)
 
         race.category = r['discipline'].upper()
-        race.sub_category = r['categorieParticularite'].upper()
+
+        if r.get('categorieParticularite'):
+            race.sub_category = r['categorieParticularite'].upper()
 
         if r['numCourseDedoublee'] != 0:
             race.num_bis = r['numCourseDedoublee']

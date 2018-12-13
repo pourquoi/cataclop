@@ -30,19 +30,23 @@ parse "2018-01-*"
         elif pattern == 'yesterday':
             pattern = (datetime.date.today() - datetime.timedelta(1)).isoformat()
 
-        pattern = os.path.join(SCRAP_DIR, pattern)
+        patterns = pattern.split()
 
-        self.stdout.write('Parsing pattern {}'.format(pattern))
+        for pattern in patterns:
 
-        dirs = []
-        for dir in glob.glob(pattern):
-            dirs.append(dir)
+            pattern = os.path.join(SCRAP_DIR, pattern)
 
-        dirs.sort()
+            self.stdout.write('Parsing pattern {}'.format(pattern))
 
-        self.stdout.write('Found {} days'.format(len(dirs)))
+            dirs = []
+            for dir in glob.glob(pattern):
+                dirs.append(dir)
 
-        for dir in dirs:
-            date = os.path.basename(os.path.normpath(dir))
-            self.stdout.write('Parsing date {} ...'.format(date))
-            parser.parse(date)
+            dirs.sort()
+
+            self.stdout.write('Found {} days'.format(len(dirs)))
+
+            for dir in dirs:
+                date = os.path.basename(os.path.normpath(dir))
+                self.stdout.write('Parsing date {} ...'.format(date))
+                parser.parse(date)

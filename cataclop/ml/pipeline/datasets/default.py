@@ -40,7 +40,8 @@ class Dataset(factories.Dataset):
     @property
     def defaults(self):
         return {
-            'categories': ['PLAT', 'ATTELE'],
+            'categories': None, #['PLAT', 'ATTELE'],
+            'sub_categories': None,
             'from': None,
             'to': None,
             'race': None,
@@ -82,6 +83,10 @@ class Dataset(factories.Dataset):
             races = races.filter(start_at__lte=self.params.get('to'))
         if self.params.get('race_id') is not None:
             races = races.filter(id=self.params.get('race_id'))
+        if self.params.get('categories') is not None:
+            races = races.filter(category__in=self.params.get('categories'))
+        if self.params.get('sub_categories') is not None:
+            races = races.filter(sub_category__in=self.params.get('sub_categories'))
 
         hippos = models.Hippodrome.objects.all()
 

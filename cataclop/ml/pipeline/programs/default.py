@@ -91,7 +91,7 @@ class Program(factories.Program):
 
                     profit = player['winner_dividend']/100.0 * bet - bet
 
-                    row = [id, player['date'], player['num'], odds, player['final_odds'], target, player[target], bet, profit]
+                    row = [id, player['date'], player['num'], odds, player['final_odds'], target, player[target], r[target].std(), bet, profit]
                     
                     for f in features:
                         row.append(player[f])
@@ -108,7 +108,7 @@ class Program(factories.Program):
             #    bets += candidate_bets
             bets += candidate_bets
 
-        cols = ['id', 'date', 'num', 'odds_ref', 'odds_final', 'target', 'pred', 'bet', 'profit'] + features + categorical_features
+        cols = ['id', 'date', 'num', 'odds_ref', 'odds_final', 'target', 'pred', 'pred_std', 'bet', 'profit'] + features + categorical_features
 
         bets = pd.DataFrame(bets, columns=cols)
 
