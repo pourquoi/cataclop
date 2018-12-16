@@ -121,7 +121,7 @@ class Program(factories.Program):
         cols = ['id', 'date', 'num', 'odds_ref', 'odds_final', 'target', 'pred', 'pred_std', 'bet', 'profit']
 
         for nn in range(1,4):
-            cols.append('next_pred_{}'.format(n))
+            cols.append('next_pred_{}'.format(nn))
         
         cols = cols + features + categorical_features
 
