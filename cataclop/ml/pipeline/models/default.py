@@ -13,7 +13,8 @@ from sklearn.preprocessing import MinMaxScaler, Normalizer, StandardScaler, MinM
 
 from sklearn.pipeline import make_pipeline
 from sklearn.base import BaseEstimator, TransformerMixin, clone as clone
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, Ridge
+from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, RandomForestRegressor, GradientBoostingRegressor
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.svm import SVC
@@ -123,6 +124,21 @@ class Model(factories.Model):
 
         self.models = []
 
+        for a in [0.1, 1.0, 10.0]:
+            self.models.append(
+                {
+                    'name': 'ridge_{}'.format(a),
+                    'steps': [RobustScaler(), Ridge(alpha=a)],
+                    'estimators': []
+                }
+            )
+
+        self.models.append({
+            'name': 'svr',
+            'steps': [RobustScaler(), svm.LinearSVR()],
+            'estimators': []
+        })
+
         for n in [10, 20, 30, 40, 100]:
 
             self.models.append(
@@ -137,12 +153,12 @@ class Model(factories.Model):
             self.models.append(
                 {
                     'name': 'mlp_{}'.format(n),
-                    'steps': [MLPRegressor(activation='tanh', hidden_layer_sizes=(n,), random_state=self.params['seed'])],
+                    'steps': [MLPRegressor(activation='relu', hidden_layer_sizes=(n,), random_state=self.params['seed'])],
                     'estimators': []
                 }
             )
 
-        for n in [10, 20, 30, 40, 100]:
+        for n in [10, 20, 30, 40, 100, 200]:
             self.models.append(
                 {
                     'name': 'gbr_{}'.format(n),
@@ -151,7 +167,7 @@ class Model(factories.Model):
                 }
             )
 
-        for n in [10, 20, 30, 40, 100]:
+        for n in [10, 20, 30, 40, 100, 200]:
             self.models.append(
                 {
                     'name': 'rf_{}'.format(n),
@@ -180,8 +196,8 @@ class Model(factories.Model):
                 dummies = preprocessing.get_dummies(df.iloc[train_index], categorical_features)
                 X_train = pd.concat([X_train, preprocessing.get_dummy_values(df.iloc[train_index], dummies)], axis=1)
 
-                idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['category'] != 'CfOURSE_A_CONDITIONS') & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 3) | (df.iloc[train_index]['position'] == self.params['nan_flag'])) 
-                #idx = (df.iloc[train_index]['target'] != self.params['nan_flag'])
+                #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['category'] != 'CfOURSE_A_CONDITIONS') & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 2) | (df.iloc[train_index]['position'] == self.params['nan_flag'])) 
+                idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 4))
                 X_train = X_train[ idx ]
                 y_train = df['target'].iloc[train_index][ idx ]
 

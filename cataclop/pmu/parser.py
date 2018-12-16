@@ -11,12 +11,17 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from cataclop.core.models import *
 
+import logging
+logger = logging.getLogger(__name__)
+
 class Parser:
 
     dry_run = False
 
-    def __init__(self, root_dir):
+    def __init__(self, root_dir, **kwargs):
         self.root_dir = root_dir
+
+        self.fast = kwargs.get('fast', False)
 
 
     def parse(self, date):
@@ -28,7 +33,12 @@ class Parser:
         sessions = []
 
         for rs in p['reunions']:
-            sessions.append(self.importRaceSession(rs))
+            try:
+
+                sessions.append(self.importRaceSession(rs))
+            except Exception as err:
+                logger.error(err)
+                pass
 
         return sessions
 
@@ -53,8 +63,9 @@ class Parser:
             race_session.save()
 
         for r in rs['courses']:
-            self.importRace(r, race_session)
-            self.importOddsEvolution(r, race_session)
+            race = self.importRace(r, race_session)
+            if race is not None:
+                self.importOddsEvolution(r, race_session)
 
         return race_session
 
@@ -149,18 +160,21 @@ class Parser:
 
                 if p.get('dernierRapportReference'):
                     self.importOdds(p['dernierRapportReference'], player, is_final_ref=True)
-        except Exception:
+        except Exception as err:
+            logger.error(err)
+            race.delete()
             return None
 
-        race.betresult_set.all().delete()
+        if not self.fast:
+            race.betresult_set.all().delete()
 
-        try:
-            with open(os.path.join(self.root_dir, session.date.isoformat(), 'R{}C{}-odds.json'.format(session.num, race.num))) as json_data:
-                bet_results = json.load(json_data)
-                for r in bet_results:
-                    self.importBetResult(r, race)
-        except FileNotFoundError:
-            pass
+            try:
+                with open(os.path.join(self.root_dir, session.date.isoformat(), 'R{}C{}-odds.json'.format(session.num, race.num))) as json_data:
+                    bet_results = json.load(json_data)
+                    for r in bet_results:
+                        self.importBetResult(r, race)
+            except FileNotFoundError:
+                pass
 
         return race
 
@@ -218,6 +232,8 @@ class Parser:
 
         try:
             player = Player.objects.get(race=race, horse=horse, trainer=trainer, jockey=jockey)
+            if self.fast:
+                return player
         except ObjectDoesNotExist:
             player = Player(race=race, horse=horse, trainer=trainer, jockey=jockey)
 
@@ -279,7 +295,7 @@ class Parser:
     def importOdds(self, o, player, is_final=False, is_final_ref=False):
         
         odds = Odds(value=o['rapport'], is_final=is_final, is_final_ref=is_final_ref)
-        odds.evolution = o['nombreIndicateurTendance']
+        odds.evolution = o.get('nombreIndicateurTendance', 0)
         odds.date = datetime.datetime.fromtimestamp(o['dateRapport']/1000)
         odds.player = player
 

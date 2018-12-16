@@ -49,7 +49,7 @@ class Program(factories.Program):
     def predict(self, **kwargs):
         return self.run('predict', **kwargs)
 
-    def bet(self, targets=None, N=1, max_odds=20):
+    def bet(self, targets=None, N=1, max_odds=20, break_on_bet=True, break_on_odds=False):
 
         features = self.model.features
         categorical_features = self.model.categorical_features
@@ -73,17 +73,20 @@ class Program(factories.Program):
 
                 r = race.sort_values(by=target, ascending=False)
 
-                for n in range(N):
+                if len(r) <= N:
+                    break
 
-                    if len(r) <= N:
-                        continue
+                for n in range(N):
 
                     player = r.iloc[n]
 
                     odds = player['final_odds_ref']
 
                     if max_odds is not None and odds > max_odds:
-                        continue
+                        if break_on_odds:
+                            break
+                        else:
+                            continue
 
                     #nth = (r['final_odds_ref']<odds).sum()+1
 
@@ -92,6 +95,12 @@ class Program(factories.Program):
                     profit = player['winner_dividend']/100.0 * bet - bet
 
                     row = [id, player['date'], player['num'], odds, player['final_odds'], target, player[target], r[target].std(), bet, profit]
+
+                    for nn in range(1,4):
+                        if n+nn < len(r):
+                            row.append(r.iloc[n+nn][target])
+                        else:
+                            row.append(np.nan)
                     
                     for f in features:
                         row.append(player[f])
@@ -102,13 +111,19 @@ class Program(factories.Program):
 
                     nums.append(player['num'])
 
-                    break
+                    if break_on_bet:
+                        break
 
             #if len(candidate_bets) == 1:
             #    bets += candidate_bets
             bets += candidate_bets
 
-        cols = ['id', 'date', 'num', 'odds_ref', 'odds_final', 'target', 'pred', 'pred_std', 'bet', 'profit'] + features + categorical_features
+        cols = ['id', 'date', 'num', 'odds_ref', 'odds_final', 'target', 'pred', 'pred_std', 'bet', 'profit']
+
+        for nn in range(1,4):
+            cols.append('next_pred_{}'.format(n))
+        
+        cols = cols + features + categorical_features
 
         bets = pd.DataFrame(bets, columns=cols)
 

@@ -4,9 +4,9 @@ from . import managers
 class Race(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    start_at = models.DateTimeField()
+    start_at = models.DateTimeField(db_index=True)
 
-    num = models.SmallIntegerField()
+    num = models.SmallIntegerField(db_index=True)
 
     num_bis = models.SmallIntegerField(null=True)
 
@@ -43,8 +43,8 @@ class Race(models.Model):
 class RaceSession(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    num = models.SmallIntegerField()
-    date = models.DateField()
+    num = models.SmallIntegerField(db_index=True)
+    date = models.DateField(db_index=True)
 
     hippodrome = models.ForeignKey('Hippodrome', on_delete=models.CASCADE)
 
@@ -61,7 +61,7 @@ class Player(models.Model):
 
     age = models.SmallIntegerField()
 
-    num = models.SmallIntegerField()
+    num = models.SmallIntegerField(db_index=True)
 
     music = models.CharField(max_length=100)
 
@@ -137,9 +137,9 @@ class BetResult(models.Model):
 class Hippodrome(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    code = models.CharField(max_length=10)
+    code = models.CharField(max_length=10, db_index=True)
     name = models.CharField(max_length=100)
-    country = models.CharField(max_length=3)
+    country = models.CharField(max_length=3, db_index=True)
 
     def __str__(self):
         return '{} ({})'.format(self.name, self.country)
@@ -148,7 +148,7 @@ class Hippodrome(models.Model):
 class Jockey(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
         return self.name
@@ -157,7 +157,7 @@ class Jockey(models.Model):
 class Trainer(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
         return self.name
@@ -166,16 +166,17 @@ class Trainer(models.Model):
 class Herder(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
         return self.name
 
 
+
 class Owner(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
         return self.name
@@ -184,7 +185,7 @@ class Owner(models.Model):
 class Horse(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, db_index=True)
     sex = models.CharField(max_length=20)
     breed = models.CharField(max_length=100, null=True)
 

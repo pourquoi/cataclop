@@ -18,10 +18,11 @@ parse "2018-01-*"
 
     def add_arguments(self, parser):
         parser.add_argument('pattern', nargs='?', type=str, default=None)
+        parser.add_argument('--fast', action='store_true')
 
     def handle(self, *args, **options):
 
-        parser = Parser(SCRAP_DIR)
+        parser = Parser(SCRAP_DIR, fast=options.get('fast'))
 
         pattern = options.get('pattern', datetime.date.today().isoformat())
 
