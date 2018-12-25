@@ -25,6 +25,10 @@ pyopenssl = "*"
 idna = "*"
 sentry-sdk = "==0.5.5"
 joblib = "*"
+xgboost = "*"
+seaborn = "*"
+keras = "*"
+theano = "*"
 
 [dev-packages]
 

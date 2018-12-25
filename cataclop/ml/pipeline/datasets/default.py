@@ -131,7 +131,7 @@ class Dataset(factories.Dataset):
         df.date = df.date.astype('str')
 
         # append average speed, might be used as a target
-        df['speed'] = (df['distance'] / df['time']).fillna(1000)
+        df['speed'] = (df['distance'] / df['time']).fillna(0)
 
         df['win'] = (df['position'] == 1).astype(np.float)
 

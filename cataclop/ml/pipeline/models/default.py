@@ -13,12 +13,13 @@ from sklearn.preprocessing import MinMaxScaler, Normalizer, StandardScaler, MinM
 
 from sklearn.pipeline import make_pipeline
 from sklearn.base import BaseEstimator, TransformerMixin, clone as clone
-from sklearn.linear_model import LogisticRegression, Ridge
+from sklearn.linear_model import LogisticRegression, Ridge, Lasso
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, RandomForestRegressor, GradientBoostingRegressor
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier, MLPRegressor
+from xgboost import XGBRegressor
 
 from cataclop.ml.exploration import random_race
 from cataclop.ml import preprocessing
@@ -53,7 +54,7 @@ class Model(factories.Model):
 
     @property
     def features(self):
-        features = ['prize', 'declared_player_count']
+        features = ['prize', 'declared_player_count', 'final_odds_ref']
 
         features += ['odds_{:d}'.format(i) for i in range(10)]
 
@@ -108,8 +109,12 @@ class Model(factories.Model):
 
         df['position'].fillna(self.params['nan_flag'])
 
-        df['target'] = df['winner_dividend'] / 100.
-        df['target'].fillna(0, inplace=True)
+        #df['target'] = df['speed'].astype('float').replace(1000, self.params['nan_flag'])
+
+        df['target_returns'] = df['winner_dividend'] / 100.
+        df['target_returns'].fillna(0, inplace=True)
+
+        df['target'] = df['position'].fillna(self.params['nan_flag'])
 
         for model in self.models:
             for i in range(self.params['n_targets']):
@@ -124,11 +129,29 @@ class Model(factories.Model):
 
         self.models = []
 
-        for a in [0.1, 1.0, 10.0]:
+        for n in [100]:
+            self.models.append(
+                {
+                    'name': 'xgb_{}'.format(n),
+                    'steps': [XGBRegressor(n_estimators=n, missing=self.params['nan_flag'], random_state=self.params['seed'])],
+                    'estimators': []
+                }
+            )
+        
+        for a in [1]:
             self.models.append(
                 {
                     'name': 'ridge_{}'.format(a),
                     'steps': [RobustScaler(), Ridge(alpha=a)],
+                    'estimators': []
+                }
+            )
+
+        for a in [1]:
+            self.models.append(
+                {
+                    'name': 'lasso_{}'.format(a),
+                    'steps': [RobustScaler(), Lasso(alpha=a)],
                     'estimators': []
                 }
             )
@@ -139,7 +162,7 @@ class Model(factories.Model):
             'estimators': []
         })
 
-        for n in [10, 20, 30, 40, 100]:
+        for n in [5]:
 
             self.models.append(
                 {
@@ -149,7 +172,7 @@ class Model(factories.Model):
                 }
             )
 
-        for n in [10, 20, 30, 40, 100]:
+        for n in [100]:
             self.models.append(
                 {
                     'name': 'mlp_{}'.format(n),
@@ -158,7 +181,7 @@ class Model(factories.Model):
                 }
             )
 
-        for n in [10, 20, 30, 40, 100, 200]:
+        for n in [100]:
             self.models.append(
                 {
                     'name': 'gbr_{}'.format(n),
@@ -167,7 +190,7 @@ class Model(factories.Model):
                 }
             )
 
-        for n in [10, 20, 30, 40, 100, 200]:
+        for n in [100]:
             self.models.append(
                 {
                     'name': 'rf_{}'.format(n),
@@ -175,6 +198,7 @@ class Model(factories.Model):
                     'estimators': []
                 }
             )
+        
 
         df = self.prepare_data(dataset)
 
@@ -198,7 +222,8 @@ class Model(factories.Model):
 
                 #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['category'] != 'CfOURSE_A_CONDITIONS') & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 2) | (df.iloc[train_index]['position'] == self.params['nan_flag'])) 
                 #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 4))
-                idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['country'] != 'FRA') & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 4))
+                #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] > 3) | (df.iloc[train_index]['position'] == self.params['nan_flag']) )
+                idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] <= 10) )
                 X_train = X_train[ idx ]
                 y_train = df['target'].iloc[train_index][ idx ]
 
