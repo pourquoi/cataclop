@@ -29,6 +29,7 @@ xgboost = "*"
 seaborn = "*"
 keras = "*"
 theano = "*"
+scikit-optimize = "*"
 
 [dev-packages]
 

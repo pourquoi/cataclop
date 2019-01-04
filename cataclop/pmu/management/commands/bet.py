@@ -50,7 +50,7 @@ class Command(BaseCommand):
             program.bet(max_odds=None)
 
             for row in program.bets.itertuples(index=True, name='Pandas'):
-                self.better.bet(date=race.start_at, session_num=race.session.num, race_num=race.num, num=getattr(row, 'num'), amount=1.5, simulation=self.simulation)
+                self.better.bet(date=race.start_at, session_num=race.session.num, race_num=race.num, num=getattr(row, 'num'), amount=getattr(row, 'bet'), simulation=self.simulation)
                 break
 
     def get_next_race(self):

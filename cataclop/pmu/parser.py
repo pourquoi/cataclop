@@ -23,6 +23,12 @@ class Parser:
 
         self.fast = kwargs.get('fast', False)
 
+    def parseMissingDividend(self):
+        qs = Player.objects.filter(position=1, winner_dividend__isnull=True).prefetch_related('race').values('race__start_at__date').distinct()
+
+        for row in qs:
+            print(row['race__start_at__date'].strftime('%Y-%m-%d'))
+            self.parse(row['race__start_at__date'].strftime('%Y-%m-%d'))
 
     def parse(self, date):
         with open(os.path.join(self.root_dir, date, 'programme.json')) as json_data:

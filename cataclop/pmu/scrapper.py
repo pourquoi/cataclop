@@ -44,7 +44,11 @@ class Scrapper:
                     data = json.load(data_file)
             else:
                 r = requests.get(url, params={'meteo': 'true', 'specialisation': 'INTERNET'})
-                data = r.json()
+                if r.status_code == requests.codes.ok:
+                    data = r.json()
+                else:
+                    logger.error('request failed with status {}. {}'.format(r.status_code, url))
+                    return
 
             if not os.path.exists(os.path.dirname(f)):
                 os.makedirs(os.path.dirname(f))
@@ -78,7 +82,7 @@ class Scrapper:
                                 with open(odds_file, 'w') as f:
                                     json.dump(data, f)
                         else:
-                            logger.error('final odds request failed for race {} {}'.format(date.strftime('%Y-%m-%d'), race_name))
+                            logger.error('final odds request failed for race {} {}. status {}'.format(date.strftime('%Y-%m-%d'), race_name, r.status_code))
 
 
                     url = race_url + 'participants'

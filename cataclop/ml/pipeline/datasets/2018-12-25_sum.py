@@ -127,7 +127,7 @@ class Dataset(factories.Dataset):
         df['winner_dividend'].fillna(0., inplace=True)
         df['placed_dividend'].fillna(0., inplace=True)
 
-        df['winner_dividend'] = df.apply(lambda p: p['final_odds']*100. if p['winner_dividend'] == 0 and p['position'] == 1 else p['winner_dividend'], axis=1)
+        df['winner_dividend'] = df.apply(lambda p: p['final_odds']*100. if p['winner_dividend'] == 0 and p['position'] == 1 else 0, axis=1)
 
         df = append_hist(df, 6)
 

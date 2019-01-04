@@ -21,17 +21,24 @@ class Program(factories.Program):
 
         dataset_params = {}
 
+        if mode == 'train':
+            dataset_params = {
+                'from': '2016-01-01',
+                'to': '2018-11-23',
+                'categories': ['PLAT']
+            }
+
         if kwargs.get('dataset_params') is not None:
             dataset_params.update(kwargs.get('dataset_params'))
 
-        dataset = factories.Dataset.factory('default', params=dataset_params, version='1.4')
+        dataset = factories.Dataset.factory('2018-12-25_sum', params=dataset_params, version='1.0')
         dataset.load(force=kwargs.get('dataset_reload', False))
 
         model_params = {}
         if kwargs.get('model_params') is not None:
             model_params.update(kwargs.get('model_params'))
 
-        self.model = factories.Model.factory('stacked', params=model_params, dataset=dataset, version='1.0')
+        self.model = factories.Model.factory('2018-12-25_sum', params=model_params, dataset=dataset, version='1.0')
 
         if mode == 'train':
             self.df = self.model.train(dataset)
@@ -49,13 +56,21 @@ class Program(factories.Program):
     def predict(self, **kwargs):
         return self.run('predict', **kwargs)
 
-    def bet(self, targets=None, N=1, max_odds=20, break_on_bet=True, break_on_odds=False):
+    def bet(self):
+        self._bet()
+
+        b = self.bets
+        b = b[ (b['target'] == 'pred_sum') & (b['pred'] > 313.) & (b['sub_category'] == 'COURSE_A_CONDITIONS') & (b['pred_std'] > 0) & (b['odds_ref'] < 20) & (b['declared_player_count'] > 1) ].copy()
+
+        self.bets = b
+
+    def _bet(self, targets=None, N=1, max_odds=30, break_on_bet=True, break_on_odds=True):
 
         features = self.model.features
         categorical_features = self.model.categorical_features
 
         if targets is None:
-            targets = ['pred_{}_1'.format(model['name']) for model in self.model.models] + ['pred_sum']
+            targets = ['pred_sum']
 
         self.df['pred_sum'] = self.df.loc[:, ['pred_{}_1'.format(model['name']) for model in self.model.models]].sum(axis=1)
 
@@ -88,9 +103,15 @@ class Program(factories.Program):
                         else:
                             continue
 
-                    #nth = (r['final_odds_ref']<odds).sum()+1
+                    if player[target] < 0:
+                        break
 
-                    bet = 1.
+                    bet = np.clip(player[target]/100.0, 0, 10)
+                    
+                    bet = np.round(1+bet) * 1.5
+                    
+                    if bet <= 0:
+                        break
 
                     profit = player['winner_dividend']/100.0 * bet - bet
 
