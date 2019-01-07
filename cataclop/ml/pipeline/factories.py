@@ -59,6 +59,9 @@ class PipelineEntity(ABC):
     def data_dir(self):
         return os.path.join(self.get_data_base_dir(), self.name + '-' + self.version + '-' + self.hash)
 
+    def __str__(self):
+        return self.name
+
 
 class Program(PipelineEntity):
 
@@ -75,6 +78,12 @@ class Program(PipelineEntity):
         return PROGRAM_DIR
 
     def run(self, **kwargs):
+        pass
+
+    def check_race(self, race):
+        return True
+
+    def save(self):
         pass
 
 

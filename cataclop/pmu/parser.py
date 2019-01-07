@@ -16,12 +16,11 @@ logger = logging.getLogger(__name__)
 
 class Parser:
 
-    dry_run = False
-
     def __init__(self, root_dir, **kwargs):
         self.root_dir = root_dir
 
         self.fast = kwargs.get('fast', False)
+        self.dry_run = kwargs.get('dry_run', False)
 
     def parseMissingDividend(self):
         qs = Player.objects.filter(position=1, winner_dividend__isnull=True).prefetch_related('race').values('race__start_at__date').distinct()
@@ -30,7 +29,10 @@ class Parser:
             print(row['race__start_at__date'].strftime('%Y-%m-%d'))
             self.parse(row['race__start_at__date'].strftime('%Y-%m-%d'))
 
-    def parse(self, date):
+    def parse(self, date=None):
+        if date is None:
+            date = datetime.date.today().isoformat()
+
         with open(os.path.join(self.root_dir, date, 'programme.json')) as json_data:
             p = json.load(json_data)
 

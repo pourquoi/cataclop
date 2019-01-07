@@ -17,7 +17,7 @@ const browser = new HeadlessChrome({
     }
 })
 
-var address, bet, num, typebet, simulation = false;
+var address, bet, bets, num, typebet, simulation = false;
 
 var debug = 1;
 
@@ -84,37 +84,47 @@ async function play() {
         await mainTab.wait(1000);
     }
 
-    await mainTab.evaluate(function (num, bet, typebet, simulation) {
-        $('a.E_SIMPLE')[0].click();
+    var b_idx = 0;
+    for(;b_idx<bets.length;b_idx++) {
 
-        console.log('num', num, 'bet', bet);
+        num = bets[b_idx][0]
+        bet = bets[b_idx][1]
 
-        $('#participant-check-' + num)[0].click();
-    }, num, bet, typebet, simulation)
+        await mainTab.evaluate(function (num, bet, typebet, simulation) {
+            $('a.E_SIMPLE')[0].click();
 
-    await mainTab.wait(1000);
+            console.log('num', num, 'bet', bet);
 
-    await mainTab.evaluate(function (num, bet, typebet, simulation) {
-        console.log($('#pari-variant-GAGNANT').attr('class'))
+            $('#participant-check-' + num)[0].click();
+        }, num, bet, typebet, simulation)
 
-        if (typebet == 'gagnant')
-            $('#pari-variant-GAGNANT')[0].click()
-        else
-            $('#pari-variant-PLACE')[0].click();
+        await mainTab.wait(1000);
 
-        var b = Math.round(bet / 1.5);
-        $('.pari-mise-input').val(b);
-        $('.pari-mise-input').change();
+        await mainTab.evaluate(function (num, bet, typebet, simulation) {
+            console.log($('#pari-variant-GAGNANT').attr('class'))
 
-        if (!simulation) {
-            console.log('pari total', $('.pari-total').text());
-            console.log('bet validate button exists', $('#pari-validate').attr('class'));
-            $('#pari-validate').click();
-        }
-    }, num, bet, typebet, simulation)
+            if (typebet == 'gagnant')
+                $('#pari-variant-GAGNANT')[0].click()
+            else
+                $('#pari-variant-PLACE')[0].click();
 
+            var b = Math.round(bet / 1.5);
+            $('.pari-mise-input').val(b);
+            $('.pari-mise-input').change();
 
-    await mainTab.wait(1000);
+            if (!simulation) {
+                console.log('pari total', $('.pari-total').text());
+                console.log('bet validate button exists', $('#pari-validate').attr('class'));
+                $('#pari-validate').click();
+            }
+        }, num, bet, typebet, simulation)
+
+        if( b_idx != bets.length-1 )
+            await mainTab.wait(3000);
+        else 
+            await mainTab.wait(1000);
+    }
+
 
     await mainTab.resizeFullScreen()
     await mainTab.saveScreenshot('/tmp/cap1')
@@ -124,16 +134,19 @@ async function play() {
     process.exit(0);
 }
 
-if (process.argv.length != 7) {
-    console.log('Usage: bet.js <URL> <num> <bet> <type> <simulation>');
+if (process.argv.length != 6) {
+    console.log("Usage: bet.js <URL> <bets> <type> <simulation>\n");
     process.exit(1);
 } else {
 
     address = process.argv[2];
-    num = process.argv[3];
-    bet = process.argv[4];
-    typebet = process.argv[5];
-    simulation = process.argv[6] == '0' ? false : true;
+    bets_cmd = process.argv[3];
+    typebet = process.argv[4];
+    simulation = process.argv[5] == '0' ? false : true;
+
+    bets = bets_cmd.split(',').map( b => {
+        return b.split(':')
+    })
 
     Promise.race([
         play(),
