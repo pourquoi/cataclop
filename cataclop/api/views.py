@@ -1,5 +1,5 @@
 import datetime
-from .serializers import UserSerializer, RaceSerializer
+from .serializers import UserSerializer, RaceSerializer, BetSerializer
 from rest_framework import viewsets
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from cataclop.users.models import User
 from cataclop.core.models import Race
-
+from cataclop.pmu.models import Bet
 
 class AuthToken(ObtainAuthToken):
 
@@ -36,8 +36,24 @@ class RaceViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         q = self.queryset
+
+        q = self.queryset.order_by('-start_at')
+
         if self.request.query_params.get('date'):
             date = datetime.datetime.strptime(self.request.query_params.get('date'), '%Y-%m-%d')
             q = q.filter(start_at__date = date.date())
+
+        return q
+
+class BetViewSet(viewsets.ModelViewSet):
+    queryset = Bet.objects.all()
+    serializer_class = BetSerializer
+
+    def get_queryset(self):
+        q = self.queryset.order_by('-created_at')
+
+        if self.request.query_params.get('date'):
+            date = datetime.datetime.strptime(self.request.query_params.get('date'), '%Y-%m-%d')
+            q = q.filter(created_at__date = date.date())
 
         return q

@@ -78,15 +78,23 @@ class Program(factories.Program):
     def predict(self, **kwargs):
         return self.run('predict', **kwargs)
 
-    def bet(self, targets=None, N=1, max_odds=20, break_on_bet=True, break_on_odds=False):
+    def check_race(self, race):
+        return race.category == 'ATTELE' and race.sub_category == 'AUTOSTART'
+
+    def bet(self):
+
+        max_odds = None
+        break_on_bet = False
+        break_on_odds = False
+        N = 3
+
+        targets = ['pred_stacked_{}_1'.format(model['name']) for model in self.model.stacked_models]
 
         features = self.model.features
         categorical_features = self.model.categorical_features
 
         if targets is None:
             targets = ['pred_{}_1'.format(model['name']) for model in self.model.models] + ['pred_sum']
-
-        self.df['pred_sum'] = self.df.loc[:, ['pred_{}_1'.format(model['name']) for model in self.model.models]].sum(axis=1)
 
         races = self.df.sort_values('start_at').groupby('race_id')
 
@@ -155,15 +163,19 @@ class Program(factories.Program):
         cols = cols + features + categorical_features
 
         bets = pd.DataFrame(bets, columns=cols)
+        bets['date'] = pd.to_datetime(bets['date'])
 
-        bets.index = bets['date']
+        bets = bets.set_index(bets['date'])
 
         bets = bets.sort_index()
 
         bets['bets'] = bets['bet'].cumsum()
         bets['stash'] = bets['profit'].cumsum()
 
-        self.bets = bets
+        bb = bets[ (bets['sub_category']=='AUTOSTART') & (bets['nb']==2) & (bets['target']=='pred_stacked_mlp_relu_1') & (bets['odds_ref']<8) & (bets['odds_ref']>3) & (bets['pred']<=1) ].copy()
+
+        self.bets = bb
+
         return self.bets
 
 

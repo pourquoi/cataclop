@@ -83,7 +83,7 @@ class Program(PipelineEntity):
     def check_race(self, race):
         return True
 
-    def save(self):
+    def lock(self, key):
         pass
 
 

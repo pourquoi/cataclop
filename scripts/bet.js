@@ -4,8 +4,11 @@ process = require('process')
 fs = require('fs')
     ;
 
+
+var config = JSON.parse(fs.readFileSync('./scripts/bet_config.json', 'utf8'));
+
 const browser = new HeadlessChrome({
-    headless: false, // If you turn this off, you can actually see the browser navigate with your instructions
+    headless: !!config.headless, // If you turn this off, you can actually see the browser navigate with your instructions
     // see above if using remote interface
     chrome: {
         flags: ['--disable-gpu', '--window-size=1280,1696', '--enable-logging'],
@@ -20,10 +23,6 @@ const browser = new HeadlessChrome({
 var address, bet, bets, num, typebet, simulation = false;
 
 var debug = 1;
-
-var config = JSON.parse(fs.readFileSync('./scripts/bet_config.json', 'utf8'));
-
-console.log(JSON.stringify(config, null, 4));
 
 async function play() {
     console.log('init browser');

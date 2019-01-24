@@ -92,10 +92,14 @@ class Player(models.Model):
     time = models.IntegerField(null=True)
 
     winner_dividend = models.IntegerField(null=True)
+    winner_dividend_offline = models.IntegerField(null=True)
     placed_dividend = models.IntegerField(null=True)
+    placed_dividend_offline = models.IntegerField(null=True)
 
     final_odds = models.FloatField(null=True)
+    final_odds_offline = models.FloatField(null=True)
     final_odds_ref = models.FloatField(null=True)
+    final_odds_ref_offline = models.FloatField(null=True)
 
     horse = models.ForeignKey('Horse', on_delete=models.CASCADE)
     trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE)
@@ -104,7 +108,7 @@ class Player(models.Model):
     owner = models.ForeignKey('Owner', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return '#{} - {}'.format(self.num, self.horse)
+        return '#{} ({}) - {}'.format(self.num, self.final_odds_ref, self.horse)
 
 class Odds(models.Model):
     imported_at = models.DateTimeField(auto_now=True)

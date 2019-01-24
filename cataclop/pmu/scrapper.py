@@ -13,7 +13,7 @@ class Scrapper:
     def __init__(self, root_dir):
         self.root_dir = root_dir
 
-    def scrap(self, start_date=None, end_date=None, force_scrap_races=False, force_scrap_players=False):
+    def scrap(self, start_date=None, end_date=None, force_scrap_races=False, force_scrap_players=False, with_offline=True):
         '''
         scrap races from start_date to end_date included
         '''
@@ -87,18 +87,29 @@ class Scrapper:
 
                     url = race_url + 'participants'
 
-                    race_file = os.path.join(base_dir, race_name + '.json')
+                    modes = ['INTERNET']
 
-                    if not os.path.isfile(race_file) or force_scrap_players:
+                    if with_offline:
+                        modes.append('OFFLINE')
 
-                        r = requests.get(url, {'specialisation': 'INTERNET'})
-
-                        if r.status_code == requests.codes.ok:
-
-                            with open(race_file, 'w') as f:
-                                json.dump(r.json(), f)
-
+                    for mode in modes:
+                        
+                        # BC
+                        if mode != 'INTERNET':
+                            race_file = os.path.join(base_dir, race_name + '.' + mode.lower + '.json')
                         else:
-                            logger.error('race request failed for race {} {}'.format(date.strftime('%Y-%m-%d'), race_name))
+                            race_file = os.path.join(base_dir, race_name + '.json')
 
-                    logger.info('R{} C{} in {}'.format(race['numReunion'], race['numOrdre'], time_remaining))
+                        if not os.path.isfile(race_file) or force_scrap_players:
+
+                            r = requests.get(url, {'specialisation': mode})
+
+                            if r.status_code == requests.codes.ok:
+
+                                with open(race_file, 'w') as f:
+                                    json.dump(r.json(), f)
+
+                            else:
+                                logger.error('race request failed for race {} {} {}'.format(mode, date.strftime('%Y-%m-%d'), race_name))
+
+                    logger.info('R{} C{} in {}'.format(race['numReunion'], race['numOrdre'], (race_time - now)))

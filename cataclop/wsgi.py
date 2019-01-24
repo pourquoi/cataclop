@@ -13,7 +13,7 @@ from configurations.wsgi import get_wsgi_application
 configuration = os.getenv('ENVIRONMENT', 'development').title()
 
 os.environ.setdefault('DJANGO_CONFIGURATION', configuration)
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cataclop.settings")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cataclop.settings')
 
 from configurations.wsgi import get_wsgi_application
 

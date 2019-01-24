@@ -174,11 +174,11 @@ class Model(factories.Model):
                 }
             )
 
-        for n in [100]:
+        for n in [1, 10, 30, 100]:
             self.models.append(
                 {
                     'name': 'mlp_{}'.format(n),
-                    'steps': [MLPRegressor(activation='relu', hidden_layer_sizes=(n,), random_state=self.params['seed'])],
+                    'steps': [RobustScaler(), MLPRegressor(activation='relu', hidden_layer_sizes=(n,), random_state=self.params['seed'])],
                     'estimators': []
                 }
             )

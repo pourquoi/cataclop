@@ -7,6 +7,7 @@ from cataclop.api import views as api_views
 router = routers.DefaultRouter()
 router.register(r'users', api_views.UserViewSet)
 router.register(r'races', api_views.RaceViewSet)
+router.register(r'bets', api_views.BetViewSet)
 
 urlpatterns = [
     url(r'^login', api_views.AuthToken.as_view())

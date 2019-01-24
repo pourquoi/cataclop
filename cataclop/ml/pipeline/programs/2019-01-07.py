@@ -85,7 +85,7 @@ class Program(factories.Program):
         return self.run('predict', **kwargs)
 
     def check_race(self, race):
-        return race.sub_category != 'COURSE_A_CONDITIONS' and race.session.hippodrome.country == 'FRA'
+        return race.category == 'PLAT' and race.sub_category != 'COURSE_A_CONDITIONS' and race.session.hippodrome.country == 'FRA'
 
     def bet(self):
 
@@ -205,7 +205,7 @@ class Program(factories.Program):
         bets['bets'] = bets['bet'].cumsum()
         bets['stash'] = bets['profit'].cumsum()
 
-        bb = bets[ (bets['country']=='FRA') & (bets['sub_category']!='COURSE_A_CONDITIONS') & (bets['nb']==0) & (bets['target']=='pred_knn_10_1') & (bets['odds_ref']>10) & (bets['odds_ref']<20) & (bets['pred']>20)].copy()        
+        bb = bets[ (bets['country']=='FRA') & (bets['sub_category']!='COURSE_A_CONDITIONS') & (bets['nb']==0) & ( (bets['target']=='pred_knn_10_1') | (bets['target']=='pred_minus_ref_lasso_1') ) & (bets['odds_ref']>10) & (bets['odds_ref']<20) & (bets['pred']>20)].copy()        
 
         self.bets = bb
 

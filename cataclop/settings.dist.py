@@ -132,6 +132,9 @@ class Common(Configuration):
 
     PMU_SCRAP_DIR = '/path/to/scrap/dir'
 
+    SMSAPI_SECRET = 'bob'
+    SMSAPI_SECRET = '999999'
+
     NOTEBOOK_ARGUMENTS = [
         '--notebook-dir', 'notebooks',
     ]
