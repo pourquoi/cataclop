@@ -96,7 +96,7 @@ class Scrapper:
                         
                         # BC
                         if mode != 'INTERNET':
-                            race_file = os.path.join(base_dir, race_name + '.' + mode.lower + '.json')
+                            race_file = os.path.join(base_dir, race_name + '.' + mode.lower() + '.json')
                         else:
                             race_file = os.path.join(base_dir, race_name + '.json')
 

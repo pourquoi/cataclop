@@ -37,4 +37,3 @@ GRANT ALL PRIVILEGES ON `cataclop-django`.* TO 'cataclop'@'localhost';
 pipenv shell
 python manage.py migrate
 ```
-
