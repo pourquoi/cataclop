@@ -86,8 +86,11 @@ class Model(factories.Model):
         return stacked_features
 
     def load(self):
-        self.models = load(os.path.join(self.data_dir, 'models.joblib'))
-        self.stacked_models = load(os.path.join(self.data_dir, 'stacked_models.joblib'))
+        models = load(os.path.join(self.data_dir, 'models.joblib'))
+        
+        self.models = [model for model in models if model['name'] in ['knn_10', 'lasso_1']]
+
+        #self.stacked_models = load(os.path.join(self.data_dir, 'stacked_models.joblib'))
 
     def save(self, clear=False):
 
@@ -437,50 +440,6 @@ class Model(factories.Model):
                         df['pred_{}_{}'.format(model['name'], i+1)] /= n_estimators
                 else:
                     df['pred_{}_1'.format(model['name'])] /= n_estimators
-
-        df = self.prepared_stacked_data(df)
-        
-
-        for model in self.stacked_models:
-
-            for estimator in model['estimators']:
-
-                X = df[self.stacked_features].copy()
-                X = pd.concat([X, preprocessing.get_dummy_values(df, estimator['dummies'])], axis=1)
-                X.fillna(self.params['nan_flag'], inplace=True)
-
-                X = X.values
-                y = df['target'].values
-
-                if self.params['n_targets'] > 1:
-                    p = estimator['pipeline'].predict_proba(X)
-
-                    clf = estimator['pipeline'].steps[-1][1]
-
-                    for i in self.params['n_targets']:
-                        df['pred_stacked_{}_{}'.format(model['name'], i+1)] += p[:, list(clf.classes_).index(i+1)]
-
-                else:
-
-                    p = estimator['pipeline'].predict(X)
-
-                    df['pred_stacked_{}_1'.format(model['name'])] += p
-
-            n_estimators = len(model['estimators'])
-
-            if n_estimators:
-
-                if self.params['n_targets'] > 1:
-                    for i in self.params['n_targets']:
-                        df['pred_stacked_{}_{}'.format(model['name'], i+1)] /= n_estimators
-                else:
-                    df['pred_stacked_{}_1'.format(model['name'])] /= n_estimators
-
-        '''
-        for model in self.models:
-            for i in range(self.params['n_targets']):
-                df['pred_{}_{}'.format(model['name'], i+1)] = -df['pred_{}_{}'.format(model['name'], i+1)]
-        '''
 
         return df
 

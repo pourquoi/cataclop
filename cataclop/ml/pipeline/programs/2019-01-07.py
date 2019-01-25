@@ -99,19 +99,11 @@ class Program(factories.Program):
 
         df = self.df
 
-        df['pred_rnd'] = np.random.rand(df.shape[0])
-        df['pred_sum'] = df[['pred_{}_1'.format(model['name']) for model in self.model.models ]].sum(axis=1)
-
         for model in self.model.models:
             df['pred_minus_ref_{}'.format(model['name'])] = df['pred_{}_1'.format(model['name'])] - df['final_odds_ref']
-            
-        for model in self.model.stacked_models:
-            df['pred_minus_ref_stacked_{}'.format(model['name'])] = df['pred_stacked_{}_1'.format(model['name'])] - df['final_odds_ref']
 
-        targets = ['pred_rnd', 'final_odds_ref', 'pred_sum']
+        targets = ['final_odds_ref']
         targets += ['pred_{}_1'.format(model['name']) for model in self.model.models]
-        targets += ['pred_stacked_{}_1'.format(model['name']) for model in self.model.stacked_models]
-        targets += ['pred_minus_ref_stacked_{}'.format(model['name']) for model in self.model.stacked_models]
         targets += ['pred_minus_ref_{}'.format(model['name']) for model in self.model.models]
 
         races = df.sort_values('start_at').groupby('race_id')

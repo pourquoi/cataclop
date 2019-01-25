@@ -95,7 +95,9 @@ class Model(factories.Model):
 
     def load(self):
         self.models = load(os.path.join(self.data_dir, 'models.joblib'))
-        self.stacked_models = load(os.path.join(self.data_dir, 'stacked_models.joblib'))
+        stacked_models = load(os.path.join(self.data_dir, 'stacked_models.joblib'))
+
+        self.stacked_models = [model for model in stacked_models if model['name'] == 'mlp_relu']
 
     def save(self, clear=False):
 
@@ -186,7 +188,10 @@ class Model(factories.Model):
 
         #df['target_pos'] = np.clip(df['position'].fillna(df['declared_player_count']), 1, 2)
 
-        df['target_pos'] = df.apply(lambda p: 1 if p['position'] >= 1 and p['position'] <= 3 else 2, axis=1)
+        if train:
+            df['target_pos'] = df.apply(lambda p: 1 if p['position'] >= 1 and p['position'] <= 3 else 2, axis=1)
+        else:
+            df['target_pos'] = 0
 
         #df['target_pos'] = df['position'].fillna(df['declared_player_count']) / df['declared_player_count']
 

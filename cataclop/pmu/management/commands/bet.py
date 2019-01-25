@@ -23,6 +23,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--simulation', action='store_true')
         parser.add_argument('--immediate', action='store_true')
+        parser.add_argument('--skip-scrap', action='store_true')
         parser.add_argument('--loop', action='store_true')
 
     def handle(self, *args, **options):
@@ -31,6 +32,7 @@ class Command(BaseCommand):
         self.scrapper = Scrapper(root_dir=SCRAP_DIR)
         self.parser = Parser(SCRAP_DIR)
         self.simulation = options.get('simulation')
+        self.skip_scrap = options.get('skip_scrap')
         self.immediate = options.get('immediate')
         self.loop = options.get('loop')
         self.programs = []
@@ -101,8 +103,9 @@ class Command(BaseCommand):
 
         # final scrap
 
-        self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
-        self.parser.parse()
+        if not self.skip_scrap:
+            self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
+            self.parser.parse()
 
         bets = []
 
@@ -117,7 +120,7 @@ class Command(BaseCommand):
                         'race_id': race.id
                     }, locked=True, dataset_reload=True)
                 except:
-                    logger.error('program prediction failed for race: {}'.format(race.id))
+                    logger.error('program prediction failed for race: {} {}'.format(race.id, sys.exc_info()[0]))
                     continue
 
                 try:
