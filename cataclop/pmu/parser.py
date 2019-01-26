@@ -26,7 +26,6 @@ class Parser:
         qs = Player.objects.filter(position=1, winner_dividend__isnull=True).prefetch_related('race').values('race__start_at__date').distinct()
 
         for row in qs:
-            print(row['race__start_at__date'].strftime('%Y-%m-%d'))
             self.parse(row['race__start_at__date'].strftime('%Y-%m-%d'))
 
     def parse(self, date=None):
@@ -42,7 +41,6 @@ class Parser:
 
         for rs in p['reunions']:
             try:
-
                 sessions.append(self.importRaceSession(rs))
             except Exception as err:
                 logger.error(err)
@@ -113,8 +111,6 @@ class Parser:
 
     def importRace(self, r, session):
 
-        print('R{}C{}'.format(session.num, r['numOrdre']))
-        
         try:
             race = Race.objects.get(session=session, start_at__date=session.date, num=r['numOrdre'])
         except ObjectDoesNotExist:

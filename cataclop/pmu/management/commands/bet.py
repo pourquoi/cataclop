@@ -39,8 +39,6 @@ class Command(BaseCommand):
 
         self.wait_until_minutes = 3
 
-        print(options)
-
         self.load_programs()
         self.bet()
 
@@ -85,7 +83,7 @@ class Command(BaseCommand):
 
             race = self.get_next_race(exclude=checked_races)
 
-            print(race)
+            logger.debug(str(race))
 
             if race is None:
                 return

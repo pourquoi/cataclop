@@ -112,4 +112,4 @@ class Scrapper:
                             else:
                                 logger.error('race request failed for race {} {} {}'.format(mode, date.strftime('%Y-%m-%d'), race_name))
 
-                    logger.info('R{} C{} in {}'.format(race['numReunion'], race['numOrdre'], (race_time - now)))
+                    logger.debug('R{} C{} in {}'.format(race['numReunion'], race['numOrdre'], (race_time - now)))
