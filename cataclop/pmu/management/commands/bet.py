@@ -13,7 +13,7 @@ from cataclop.core import models
 
 from cataclop.ml.pipeline import factories
 
-from .signals import next_race_queued
+from cataclop.pmu.signals import next_race_queued
 
 import logging
 logger = logging.getLogger(__name__)
