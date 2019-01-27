@@ -19,7 +19,7 @@ def bet_sms_notification(sender, **kwargs):
         pass
 
 @receiver(next_race_queued)
-def log_next_race(sender, **kwargs)
+def log_next_race(sender, **kwargs):
 
     try:
         with os.open(NEXT_RACE_LOG_FILE, 'w') as f:
