@@ -13,6 +13,8 @@ from cataclop.core import models
 
 from cataclop.ml.pipeline import factories
 
+from .signals import next_race_queued
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -91,6 +93,8 @@ class Command(BaseCommand):
             checked_races.append(race.id)
 
             programs = [p for p in self.programs if p.check_race(race)]
+
+        next_race_queued.send(sender=self.__class__, race=str(race))
 
         time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
 
