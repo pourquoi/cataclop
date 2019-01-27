@@ -20,3 +20,4 @@ var/data/*
 !var/data/.gitkeep
 var/models/*
 !var/models/.gitkeep
+var/next_race

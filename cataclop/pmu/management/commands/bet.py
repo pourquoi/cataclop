@@ -105,6 +105,13 @@ class Command(BaseCommand):
             self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
             self.parser.parse()
 
+        # race might have been delayed
+        race.refresh_from_db()
+        time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
+        if not self.immediate and time_remaining > 60*self.wait_until_minutes:
+            logger.info('race {} delayed'.format(str(race)))
+            return
+
         bets = []
 
         for program in programs:
