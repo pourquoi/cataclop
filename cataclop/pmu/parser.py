@@ -28,7 +28,7 @@ class Parser:
         for row in qs:
             self.parse(row['race__start_at__date'].strftime('%Y-%m-%d'))
 
-    def parse(self, date=None):
+    def parse(self, date=None, with_offline=False):
         if date is None:
             date = datetime.date.today().isoformat()
 
@@ -41,7 +41,7 @@ class Parser:
 
         for rs in p['reunions']:
             try:
-                sessions.append(self.importRaceSession(rs))
+                sessions.append(self.importRaceSession(rs, with_offline=with_offline))
             except Exception as err:
                 logger.error(err)
                 pass
@@ -50,7 +50,7 @@ class Parser:
 
 
     @transaction.atomic
-    def importRaceSession(self, rs):
+    def importRaceSession(self, rs, with_offline=False):
         try:
             race_session = RaceSession.objects.get(num=rs['numOfficiel'], date=datetime.date.fromtimestamp(rs['dateReunion']/1000))
         except ObjectDoesNotExist:
@@ -69,14 +69,14 @@ class Parser:
             race_session.save()
 
         for r in rs['courses']:
-            race = self.importRace(r, race_session)
+            race = self.importRace(r, race_session, with_offline=with_offline)
             if race is not None:
                 self.importOddsEvolution(r, race_session)
 
         return race_session
 
 
-    def importOddsEvolution(self, r, session):
+    def importOddsEvolution(self, r, session, offline=False):
 
         pattern = os.path.join(self.root_dir, session.date.isoformat(), 'R{}C{}-evolution'.format(session.num, r['numOrdre']), 't-minus-[0-9]*')
 
@@ -100,16 +100,16 @@ class Parser:
                             continue
 
                         if p.get('dernierRapportDirect'):
-                            self.importOdds(p['dernierRapportDirect'], player, is_final=False)
+                            self.importOdds(p['dernierRapportDirect'], player, is_final=False, offline=False)
 
                         if p.get('dernierRapportReference'):
-                            self.importOdds(p['dernierRapportReference'], player, is_final_ref=False)
+                            self.importOdds(p['dernierRapportReference'], player, is_final_ref=False, offline=False)
 
             except FileNotFoundError:
                 pass
                     
 
-    def importRace(self, r, session):
+    def importRace(self, r, session, with_offline=False):
 
         try:
             race = Race.objects.get(session=session, start_at__date=session.date, num=r['numOrdre'])
@@ -157,17 +157,45 @@ class Parser:
                 if not player:
                     continue
 
-                player.odds_set.all().delete()
+                player.odds_set.filter(offline=False).delete()
 
                 if p.get('dernierRapportDirect'):
-                    self.importOdds(p['dernierRapportDirect'], player, is_final=True)
+                    self.importOdds(p['dernierRapportDirect'], player, is_final=True, offline=False)
 
                 if p.get('dernierRapportReference'):
-                    self.importOdds(p['dernierRapportReference'], player, is_final_ref=True)
+                    self.importOdds(p['dernierRapportReference'], player, is_final_ref=True, offline=False)
         except Exception as err:
             logger.error(err)
             race.delete()
             return None
+
+        if with_offline:
+            players = None
+            try:
+                with open(os.path.join(self.root_dir, session.date.isoformat(), 'R{}C{}.offline.json'.format(session.num, race.num))) as json_data:
+                    players = json.load(json_data)
+            except FileNotFoundError:
+                pass
+
+            if players is not None:
+                try:
+                    for p in players['participants']:
+
+                        player = self.importPlayer(p, race)
+
+                        if not player:
+                            continue
+
+                        player.odds_set.filter(offline=True).delete()
+
+                        if p.get('dernierRapportDirect'):
+                            self.importOdds(p['dernierRapportDirect'], player, is_final=True, offline=True)
+
+                        if p.get('dernierRapportReference'):
+                            self.importOdds(p['dernierRapportReference'], player, is_final_ref=True, offline=True)
+                except Exception as err:
+                    logger.error(err)
+                    pass
 
         if not self.fast:
             race.betresult_set.all().delete()
@@ -241,17 +269,12 @@ class Parser:
         except ObjectDoesNotExist:
             player = Player(race=race, horse=horse, trainer=trainer, jockey=jockey)
 
-        if not p.get('placeCorde'):
-            if player.pk:
-                player.delete()
-            return None
-
         player.race = race
 
         player.herder = herder
         player.owner = owner
 
-        player.final_odds_ref = None
+        #player.final_odds_ref = None
         player.winner_dividend = None
         player.placed_dividend = None
 
@@ -259,7 +282,7 @@ class Parser:
 
         player.num = p['numPmu']
 
-        player.post_position = p['placeCorde']
+        player.post_position = p.get('placeCorde', p['numPmu'])
 
         player.position = p.get('ordreArrivee')
 
@@ -296,20 +319,27 @@ class Parser:
 
         return player
 
-    def importOdds(self, o, player, is_final=False, is_final_ref=False):
+    def importOdds(self, o, player, is_final=False, is_final_ref=False, offline=False):
         
         odds = Odds(value=o['rapport'], is_final=is_final, is_final_ref=is_final_ref)
         odds.evolution = o.get('nombreIndicateurTendance', 0)
         odds.date = datetime.datetime.fromtimestamp(o['dateRapport']/1000)
         odds.player = player
+        odds.offline = offline
 
         odds.save()
 
         if is_final_ref:
-            player.final_odds_ref = odds.value
+            if offline:
+                player.final_odds_ref_offline = odds.value
+            else:
+                player.final_odds_ref = odds.value
             player.save()
         elif is_final:
-            player.final_odds = odds.value
+            if offline:
+                player.final_odds_offline = odds.value
+            else:
+                player.final_odds = odds.value
             player.save()
 
         return odds

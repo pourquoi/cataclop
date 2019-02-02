@@ -25,4 +25,6 @@ class Command(BaseCommand):
         if end == 'yesterday':
             end = (datetime.date.today() - datetime.timedelta(1)).isoformat()
 
-        scrapper.scrap(start, end, True, True)
+        with_offline = True
+
+        scrapper.scrap(start, end, True, True, with_offline=with_offline)

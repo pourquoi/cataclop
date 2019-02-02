@@ -117,6 +117,8 @@ class Odds(models.Model):
     evolution = models.FloatField()
     date = models.DateTimeField()
 
+    offline = models.BooleanField(default=False)
+
     is_final = models.BooleanField(default=False)
     is_final_ref = models.BooleanField(default=False)
 

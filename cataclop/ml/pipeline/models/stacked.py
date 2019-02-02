@@ -63,9 +63,11 @@ class Model(factories.Model):
 
         features += ['hist_{}_pos'.format(i+1) for i in range(6)]
 
-        features += self.dataset.agg_features
+        agg_features = [ f for f in self.dataset.agg_features if f not in ['final_odds_ref', 'final_odds_ref_offline'] ]
 
-        for f in self.dataset.agg_features:
+        features += agg_features
+
+        for f in agg_features:
             features.append('{}_r'.format(f))
             for s in self.dataset.agg_features_funcs:
                 features.append('{}_{}'.format(f, s[0]))
@@ -78,7 +80,7 @@ class Model(factories.Model):
 
     @property
     def stacked_features(self):
-        stacked_features = ['declared_player_count', 'final_odds_ref'] + ['odds_{:d}'.format(i) for i in range(10)]
+        stacked_features = self.features + ['final_odds_ref', 'final_odds_ref_offline']
         if self.params['n_targets'] > 1:
             for n in range(self.params['n_targets']):
                 stacked_features = stacked_features + ['pred_{}_{}'.format(model['name'], n+1) for model in self.models]
@@ -186,7 +188,7 @@ class Model(factories.Model):
 
         #df['target_pos'] = np.clip(df['position'].fillna(df['declared_player_count']), 1, 2)
 
-        df['target_pos'] = df.apply(lambda p: 1 if p['position'] >= 1 and p['position'] <= 3 else 2, axis=1)
+        df['target_pos'] = df.apply(lambda p: 1 if p['position'] >= 1 and p['position'] <= 2 else 2 if p['position'] > 2 and p['position'] <= 4 else 3, axis=1)
 
         #df['target_pos'] = df['position'].fillna(df['declared_player_count']) / df['declared_player_count']
 
@@ -276,7 +278,7 @@ class Model(factories.Model):
         })
         '''
 
-        for n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+        for n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30]:
 
             if self.params['n_targets'] > 1:
                 self.models.append(
@@ -410,13 +412,11 @@ class Model(factories.Model):
         )
         '''
 
-        '''
         self.stacked_models.append({
             'name': 'xgb',
-            'steps': [XGBRegressor()],
+            'steps': [XGBRegressor(missing=self.params['nan_flag'], random_state=self.params['seed'])],
             'estimators': []
         })
-        '''
 
         '''
         self.stacked_models.append({
@@ -439,8 +439,14 @@ class Model(factories.Model):
         })
 
         self.stacked_models.append({
-            'name': 'mlp_relu',
-            'steps': [RobustScaler(), MLPRegressor(activation='relu', hidden_layer_sizes=(10,), random_state=self.params['seed'])],
+            'name': 'mlp_sigmoid_100',
+            'steps': [RobustScaler(), MLPRegressor(activation='logistic', hidden_layer_sizes=(100,), random_state=self.params['seed'])],
+            'estimators': []
+        })
+
+        self.stacked_models.append({
+            'name': 'mlp_relu_100',
+            'steps': [RobustScaler(), MLPRegressor(activation='relu', hidden_layer_sizes=(100,), random_state=self.params['seed'])],
             'estimators': []
         })
 
@@ -454,7 +460,7 @@ class Model(factories.Model):
 
                 #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 30)
                 #idx = (df.iloc[train_index]['target_returns'] != self.params['nan_flag']) & (df.iloc[train_index]['country'] == 'FRA') & (df.iloc[train_index]['sub_category'] == 'HANDICAP') & (df.iloc[train_index]['final_odds_ref'] > 0 ) & ((df.iloc[train_index]['position'] <= 10) )
-                idx = (df.iloc[train_index]['target_returns'] != self.params['nan_flag'])
+                idx = (df.iloc[train_index]['target_returns'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 30)
                 y_train = df['target_returns'].iloc[train_index]
 
                 dummies = preprocessing.get_dummies(df.iloc[train_index], self.categorical_features)

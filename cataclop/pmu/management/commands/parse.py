@@ -50,4 +50,4 @@ parse "2018-01-*"
             for dir in dirs:
                 date = os.path.basename(os.path.normpath(dir))
                 self.stdout.write('Parsing date {} ...'.format(date))
-                parser.parse(date)
+                parser.parse(date, with_offline=True)

@@ -26,7 +26,9 @@ class Dataset(factories.Dataset):
                         'placed_earnings',
                         'prev_year_earnings',
                         'handicap_distance',
-                        'handicap_weight'
+                        'handicap_weight',
+                        'final_odds_ref',
+                        'final_odds_ref_offline'
                     ]
         self.agg_features_funcs = [
             ('mean', np.mean), 
