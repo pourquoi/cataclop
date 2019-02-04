@@ -97,8 +97,11 @@ class Model(factories.Model):
         return stacked_features
 
     def load(self):
-        self.models = load(os.path.join(self.data_dir, 'models.joblib'))
-        self.stacked_models = load(os.path.join(self.data_dir, 'stacked_models.joblib'))
+        models = load(os.path.join(self.data_dir, 'models.joblib'))
+
+        self.models = [model for model in models if model['name'] == 'knn_2']
+
+        self.stacked_models = []
 
     def save(self, clear=False):
 
