@@ -46,9 +46,14 @@ class Program(factories.Program):
         self.dataset.save()
         self.model.save()
 
+    def check_race(self, race):
+        return race.category == 'PLAT' and race.sub_category == 'HANDICAP'
+
     def run(self, mode='predict', **kwargs):
 
-        dataset_params = {}
+        dataset_params = {
+
+        }
 
         if kwargs.get('dataset_params') is not None:
             dataset_params.update(kwargs.get('dataset_params'))
@@ -56,7 +61,12 @@ class Program(factories.Program):
         dataset = factories.Dataset.factory(self.name if kwargs.get('locked') else 'default', params=dataset_params, version='1.4')
         dataset.load(force=kwargs.get('dataset_reload', False))
 
-        model_params = {}
+        model_params = {
+            'kfolds': 2,
+            'nan_flag': 100000,
+            'n_targets': 1
+        }
+
         if kwargs.get('model_params') is not None:
             model_params.update(kwargs.get('model_params'))
 

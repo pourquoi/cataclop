@@ -45,7 +45,7 @@ class Command(BaseCommand):
         self.bet()
 
     def load_programs(self):
-        programs = ['2019-01-07', '2019-01-24']
+        programs = ['2019-01-07', '2019-01-24', '2019-02-04']
 
         for p in programs:
             program = factories.Program.factory(p)
