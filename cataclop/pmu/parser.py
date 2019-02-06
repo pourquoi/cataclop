@@ -11,10 +11,27 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from cataclop.core.models import *
 
+from .scrapper import UnibetScrapper
+
 import logging
 logger = logging.getLogger(__name__)
 
 class Parser:
+
+    def __init__(self, root_dir, **kwargs):
+
+        self.parsers = []
+
+        self.parsers.append(PmuParser(root_dir, **kwargs))
+        self.parsers.append(UnibetParser(root_dir, **kwargs))
+
+    def parse(self, date=None, **kwargs):
+
+        for parser in self.parsers:
+            parser.parse(date=date, **kwargs)
+
+
+class PmuParser:
 
     def __init__(self, root_dir, **kwargs):
         self.root_dir = root_dir
@@ -28,7 +45,7 @@ class Parser:
         for row in qs:
             self.parse(row['race__start_at__date'].strftime('%Y-%m-%d'))
 
-    def parse(self, date=None, with_offline=False):
+    def parse(self, date=None, with_offline=True, **kwargs):
         if date is None:
             date = datetime.date.today().isoformat()
 
@@ -369,8 +386,71 @@ class Parser:
                     p.save()
 
 
+class UnibetParser:
 
+    def __init__(self, root_dir, **kwargs):
+        self.root_dir = root_dir
 
+        self.fast = kwargs.get('fast', False)
+        self.dry_run = kwargs.get('dry_run', False)
 
+    def parse(self, date=None, **kwargs):
+        if date is None:
+            date = datetime.date.today().isoformat()
 
+        with open(os.path.join(self.root_dir, date, 'programme.{}.json'.format(UnibetScrapper.name))) as json_data:
+            sessions = json.load(json_data)
+
+        for rs in sessions:
+
+            race_session = None
+
+            try:
+                race_session = RaceSession.objects.get(num=rs['rank'], date=datetime.date.fromtimestamp(rs['date']/1000))
+            except ObjectDoesNotExist:
+                continue
+
+            for r in rs['races']:
+
+                race = None
+
+                try:
+                    race = Race.objects.get(session=race_session, start_at__date=race_session.date, num=r['rank'])
+                except ObjectDoesNotExist:
+                    continue
+
+                race_name = 'R{}C{}'.format(rs['rank'], r['rank'])
+
+                race_file = os.path.join(self.root_dir, race_session.date.isoformat(), race_name + '.' + UnibetScrapper.name + '.json')
+
+                with open(race_file) as json_data:
+                    r_details = json.load(json_data)
+
+                for n, odds in r_details['details']['probables']['5'].items():
+
+                    runner = None
+                    for p in r_details['runners']:
+                        if p['rank'] == int(n):
+                            runner = p
+                            break
+
+                    player = race.get_player( int(n) )
+
+                    if player is not None:
+                        player.final_odds_ref_unibet = odds
+                        player.save()
+
+                for n, odds in r_details['details']['probables']['6'].items():
+
+                    runner = None
+                    for p in r_details['runners']:
+                        if p['rank'] == int(n):
+                            runner = p
+                            break
+
+                    player = race.get_player( int(n) )
+
+                    if player is not None:
+                        player.final_odds_unibet = odds
+                        player.save()
 

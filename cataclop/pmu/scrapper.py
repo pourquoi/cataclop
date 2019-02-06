@@ -13,7 +13,24 @@ class Scrapper:
     def __init__(self, root_dir):
         self.root_dir = root_dir
 
-    def scrap(self, start_date=None, end_date=None, force_scrap_races=False, force_scrap_players=False, with_offline=True):
+        self.scrappers = []
+
+        self.scrappers.append(PmuScrapper(root_dir))
+        self.scrappers.append(UnibetScrapper(root_dir))
+
+    def scrap(self, start_date=None, end_date=None, force_scrap_races=False, force_scrap_players=False, **kwargs):
+
+        for scrapper in self.scrappers:
+
+            scrapper.scrap(start_date=start_date, end_date=end_date, force_scrap_races=force_scrap_races, force_scrap_players=force_scrap_players, **kwargs)
+
+
+class PmuScrapper:
+
+    def __init__(self, root_dir):
+        self.root_dir = root_dir
+
+    def scrap(self, start_date=None, end_date=None, force_scrap_races=False, force_scrap_players=False, with_offline=True, **kwargs):
         '''
         scrap races from start_date to end_date included
         '''
@@ -113,3 +130,69 @@ class Scrapper:
                                 logger.error('race request failed for race {} {} {}'.format(mode, date.strftime('%Y-%m-%d'), race_name))
 
                     logger.debug('R{} C{} in {}'.format(race['numReunion'], race['numOrdre'], (race_time - now)))
+
+
+class UnibetScrapper:
+
+    name = 'unibet'
+
+    def __init__(self, root_dir):
+        self.root_dir = root_dir
+
+    def scrap(self, start_date=None, end_date=None, force_scrap_races=False, force_scrap_players=False, **kwargs):
+
+        if start_date is None:
+            start_date = datetime.date.today()
+
+        if end_date is None:
+            end_date = datetime.date.today()
+
+        logger.info('scrapping from {} to {}'.format(start_date, end_date))
+
+        dates = pd.date_range(start=start_date, end=end_date, freq='D')
+
+        for date in dates:
+
+            url = 'https://www.unibet.fr/zones/turf/program.json'
+
+            base_dir = os.path.join(self.root_dir, date.strftime('%Y-%m-%d'))
+
+            f = os.path.join(base_dir, 'programme.{}.json'.format(self.name))
+
+            if os.path.isfile(f) and not force_scrap_races:
+                with open(f, 'r') as data_file:
+                    data = json.load(data_file)
+            else:
+                r = requests.get(url, params={'date': date.strftime('%Y-%m-%d')})
+                if r.status_code == requests.codes.ok:
+                    data = r.json()
+                else:
+                    logger.error('request failed with status {}. {}'.format(r.status_code, url))
+                    return
+
+            if not os.path.exists(os.path.dirname(f)):
+                os.makedirs(os.path.dirname(f))
+
+            with open(f, 'w') as data_file:
+                json.dump(data, data_file)
+
+            for session in data:
+                for race in session['races']:
+
+                    race_name = 'R{}C{}'.format(session['rank'], race['rank'])
+
+                    url = 'https://www.unibet.fr/zones/turf/race.json'
+                    
+                    race_file = os.path.join(base_dir, race_name + '.' + self.name + '.json')
+                    
+                    if not os.path.isfile(race_file) or force_scrap_players:
+
+                        r = requests.get(url, {'raceId': race['zeturfId']})
+
+                        if r.status_code == requests.codes.ok:
+
+                            with open(race_file, 'w') as f:
+                                json.dump(r.json(), f)
+
+                        else:
+                            logger.error('race request failed for race {} {} {}'.format(mode, date.strftime('%Y-%m-%d'), race_name))
