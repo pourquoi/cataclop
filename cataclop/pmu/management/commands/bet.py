@@ -142,7 +142,16 @@ class Command(BaseCommand):
                     num = getattr(row, 'num')
                     amount = getattr(row, 'bet')
 
+                    odds_pmu = getattr(row, 'odds_final', None)
+                    odds_unibet = getattr(row, 'odds_final_unibet', None)
+
+                    provider = 'pmu'
+
+                    #if odds_pmu is not None and odds_unibet is not None and odds_unibet > odds_pmu:
+                    #    provider = 'unibet'
+
                     bets.append({
+                        'provider': provider,
                         'num': num,
                         'amount': amount,
                         'program': str(program)

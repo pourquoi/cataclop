@@ -1,8 +1,17 @@
 {
-    "user_id": "1234567890",
-    "user_dob_day": "01",
-    "user_dob_month": "01",
-    "user_dob_year": "1976",
-    "user_password": "123456",
+    "pmu": {
+        "user_id": "1234567890",
+        "user_dob_day": "01",
+        "user_dob_month": "01",
+        "user_dob_year": "1976",
+        "user_password": "123456"
+    },
+    "unibet": {
+        "user_id": "1234567890",
+        "user_dob_day": "01",
+        "user_dob_month": "01",
+        "user_dob_year": "1976",
+        "user_password": "123456"
+    },
     "headless": false
 }

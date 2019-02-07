@@ -192,7 +192,9 @@ class Model(factories.Model):
 
         #df['target_pos'] = np.clip(df['position'].fillna(df['declared_player_count']), 1, 2)
 
-        df['target_pos'] = df.apply(lambda p: 1 if p['position'] >= 1 and p['position'] <= 2 else 2 if p['position'] > 2 and p['position'] <= 4 else 3, axis=1)
+        df['target_pos'] = 0
+        if train:
+            df['target_pos'] = df.apply(lambda p: 1 if p['position'] >= 1 and p['position'] <= 2 else 2 if p['position'] > 2 and p['position'] <= 4 else 3, axis=1)
 
         #df['target_pos'] = df['position'].fillna(df['declared_player_count']) / df['declared_player_count']
 

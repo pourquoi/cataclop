@@ -52,16 +52,16 @@ async function play() {
     console.log('login');
 
     await mainTab.evaluate(function (config) {
-        $('#numeroExterne').val(config.user_id);
+        $('#numeroExterne').val(config.pmu.user_id);
 
         $('button.session-btn--submit').click();
 
-        $('#numclient').val(config.user_id);
-        $('#day.form-input-day').val(config.user_dob_day);
-        $('#month.form-input-month').val(config.user_dob_month);
-        $('#year.form-input-year').val(config.user_dob_year);
+        $('#numclient').val(config.pmu.user_id);
+        $('#day.form-input-day').val(config.pmu.user_dob_day);
+        $('#month.form-input-month').val(config.pmu.user_dob_month);
+        $('#year.form-input-year').val(config.pmu.user_dob_year);
         $('.button.button--gridnum').click();
-        $('#code.form-input-code').val(config.user_password);
+        $('#code.form-input-code').val(config.pmu.user_password);
     }, config)
 
     await mainTab.wait(1000);
@@ -123,10 +123,6 @@ async function play() {
         else 
             await mainTab.wait(1000);
     }
-
-
-    await mainTab.resizeFullScreen()
-    await mainTab.saveScreenshot('/tmp/cap1')
 
     await browser.close()
 

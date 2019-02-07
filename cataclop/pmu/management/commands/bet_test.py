@@ -14,6 +14,7 @@ class Command(BaseCommand):
         parser.add_argument('session_num', type=int)
         parser.add_argument('race_num', type=int)
         parser.add_argument('bets', type=str)
+        parser.add_argument('provider', type=str, default='pmu')
 
     def handle(self, *args, **options):
         better = Better(NODE_PATH, BET_SCRIPT_PATH)
@@ -25,6 +26,7 @@ class Command(BaseCommand):
         for ss in s:
             sss = ss.split(':')
             bets.append({
+                'provider': options.get('provider'),
                 'num': sss[0],
                 'amount': sss[1],
                 'program': 'test'
