@@ -89,9 +89,11 @@ async function play() {
         $('a#turf_betslip_place')[0].click()
     })
 
-    await mainTab.evaluate(function() {
-        $('#turf_betslip_confirm')[0].click()
-    })
+    if (!simulation) {
+        await mainTab.evaluate(function() {
+            $('#turf_betslip_confirm')[0].click()
+        })
+    }
     
     await browser.close()
 
