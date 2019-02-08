@@ -156,11 +156,11 @@ class Command(BaseCommand):
 
                     provider = 'pmu'
 
-                    if self.provider:
-                        provider = self.provider
-
                     if odds_pmu is not None and odds_unibet is not None and odds_unibet > odds_pmu:
                         provider = 'unibet'
+
+                    if self.provider:
+                        provider = self.provider
 
                     bets.append({
                         'provider': provider,

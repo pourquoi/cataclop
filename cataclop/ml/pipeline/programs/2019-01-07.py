@@ -156,7 +156,7 @@ class Program(factories.Program):
 
                     profit = player['winner_dividend']/100.0 * bet - bet
 
-                    row = [id, player['start_at'], player['num'], player['position'], n, odds, player['final_odds'], target, player[target], r[target].std(), bet, profit]
+                    row = [id, player['start_at'], player['num'], player['position'], n, odds, player['final_odds'], player['final_odds_unibet'], target, player[target], r[target].std(), bet, profit]
 
                     for nn in range(1,4):
                         if n+nn < len(r):
@@ -180,7 +180,7 @@ class Program(factories.Program):
             #    bets += candidate_bets
             bets += candidate_bets
 
-        cols = ['id', 'date', 'num', 'pos', 'nb', 'odds_ref', 'odds_final', 'target', 'pred', 'pred_std', 'bet', 'profit']
+        cols = ['id', 'date', 'num', 'pos', 'nb', 'odds_ref', 'odds_final', 'odds_final_unibet', 'target', 'pred', 'pred_std', 'bet', 'profit']
 
         for nn in range(1,4):
             cols.append('next_pred_{}'.format(nn))
