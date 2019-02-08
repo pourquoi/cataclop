@@ -27,6 +27,8 @@ class Command(BaseCommand):
         parser.add_argument('--immediate', action='store_true')
         parser.add_argument('--skip-scrap', action='store_true')
         parser.add_argument('--loop', action='store_true')
+        parser.add_argument('--dummy', action='store_true')
+        parser.add_argument('--provider', type=str)
 
     def handle(self, *args, **options):
 
@@ -37,7 +39,11 @@ class Command(BaseCommand):
         self.skip_scrap = options.get('skip_scrap')
         self.immediate = options.get('immediate')
         self.loop = options.get('loop')
+        self.dummy = options.get('dummy')
+        self.provider = options.get('provider', None)
         self.programs = []
+
+        print(options)
 
         self.wait_until_minutes = 3
 
@@ -45,7 +51,10 @@ class Command(BaseCommand):
         self.bet()
 
     def load_programs(self):
-        programs = ['2019-01-07', '2019-01-24', '2019-02-04']
+        if self.dummy:
+            programs = ['dummy']
+        else:
+            programs = ['2019-01-07', '2019-01-24', '2019-02-04']
 
         for p in programs:
             program = factories.Program.factory(p)
@@ -147,8 +156,11 @@ class Command(BaseCommand):
 
                     provider = 'pmu'
 
-                    #if odds_pmu is not None and odds_unibet is not None and odds_unibet > odds_pmu:
-                    #    provider = 'unibet'
+                    if self.provider:
+                        provider = self.provider
+
+                    if odds_pmu is not None and odds_unibet is not None and odds_unibet > odds_pmu:
+                        provider = 'unibet'
 
                     bets.append({
                         'provider': provider,

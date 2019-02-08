@@ -89,12 +89,13 @@ async function play() {
         $('a#turf_betslip_place')[0].click()
     })
 
+    await mainTab.evaluate(function() {
+        $('#turf_betslip_confirm')[0].click()
+    })
+    
+    await browser.close()
 
-
-
-    //await browser.close()
-
-    //process.exit(0);
+    process.exit(0);
 }
 
 if (process.argv.length != 6) {

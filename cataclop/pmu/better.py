@@ -61,6 +61,8 @@ class Better:
                     'amount': b['amount']
                 })
 
+        bet_logs = []
+
         for provider in players_bet.keys():
 
             url = urls[provider]
@@ -78,8 +80,6 @@ class Better:
                 'gagnant',
                 '1' if simulation else '0'
             ]
-
-            bet_logs = []
 
             for b in bets:
 
