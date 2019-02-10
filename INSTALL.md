@@ -18,6 +18,7 @@ vim scripts/bet_config.json
 ```console
 vim my.cnf
 ```
+### INSTALL
 
 ```conf
 [client]
@@ -37,3 +38,28 @@ GRANT ALL PRIVILEGES ON `cataclop-django`.* TO 'cataclop'@'localhost';
 pipenv shell
 python manage.py migrate
 ```
+
+### BETTING
+
+```console
+pipenv run python manage.py bet --loop
+```
+
+### WORKFLOW
+
+edit a program/model/dataset in cataclop.ml.pipeline
+
+start jupyter
+```console
+pipenv shell
+python manage.py shell_plus --notebook
+```
+
+open the train.ipynb notebook
+load and train the program
+simulate the bets
+lock the program (and eventually transfer the model repository a remote machine)
+
+
+do final edits of the created program and model python files
+add the program name to the bet command

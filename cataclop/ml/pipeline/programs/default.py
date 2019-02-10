@@ -60,7 +60,7 @@ class Program(factories.Program):
         if kwargs.get('model_params') is not None:
             model_params.update(kwargs.get('model_params'))
 
-        self.model = factories.Model.factory(self.name if kwargs.get('locked') else 'stacked', params=model_params, dataset=dataset, version='1.0')
+        self.model = factories.Model.factory(self.name if kwargs.get('locked') else 'default', params=model_params, dataset=dataset, version='1.0')
 
         if mode == 'train':
             self.df = self.model.train(dataset)

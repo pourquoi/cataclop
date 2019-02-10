@@ -54,7 +54,7 @@ class Model(factories.Model):
 
     @property
     def features(self):
-        features = ['prize', 'declared_player_count']
+        features = ['prize', 'declared_player_count', 'final_odds_ref', 'final_odds_ref_unibet']
 
         features += ['odds_{:d}'.format(i) for i in range(10)]
 
@@ -131,7 +131,7 @@ class Model(factories.Model):
 
         self.models = []
 
-        for n in [100]:
+        for n in [30]:
             self.models.append(
                 {
                     'name': 'xgb_{}'.format(n),
@@ -140,6 +140,7 @@ class Model(factories.Model):
                 }
             )
         
+        '''
         for a in [1]:
             self.models.append(
                 {
@@ -163,8 +164,9 @@ class Model(factories.Model):
             'steps': [RobustScaler(), svm.LinearSVR()],
             'estimators': []
         })
+        '''
 
-        for n in [5, 10, 20, 30, 100]:
+        for n in [1, 2, 5, 10]:
 
             self.models.append(
                 {
@@ -173,6 +175,8 @@ class Model(factories.Model):
                     'estimators': []
                 }
             )
+
+        
 
         for n in [1, 10, 30, 100]:
             self.models.append(
@@ -183,6 +187,7 @@ class Model(factories.Model):
                 }
             )
 
+        '''
         for n in [10, 20, 30, 40, 100]:
             self.models.append(
                 {
@@ -200,7 +205,7 @@ class Model(factories.Model):
                     'estimators': []
                 }
             )
-        
+        '''
 
         df = self.prepare_data(dataset)
 
@@ -223,9 +228,10 @@ class Model(factories.Model):
                 X_train = pd.concat([X_train, preprocessing.get_dummy_values(df.iloc[train_index], dummies)], axis=1)
 
                 #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['category'] != 'CfOURSE_A_CONDITIONS') & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 3) | (df.iloc[train_index]['position'] == self.params['nan_flag'])) 
-                idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 30) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 2))
+                #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 30) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] == 2))
                 #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds_ref'] < 20) & ((df.iloc[train_index]['position'] == 1) | (df.iloc[train_index]['position'] > 3) | (df.iloc[train_index]['position'] == self.params['nan_flag']) )
-                #idx = (df.iloc[train_index]['target'] != self.params['nan_flag']) 
+
+                idx = (df.iloc[train_index]['target'] != self.params['nan_flag'])
                 X_train = X_train[ idx ]
                 y_train = df['target'].iloc[train_index][ idx ]
 

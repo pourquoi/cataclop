@@ -22,7 +22,7 @@ class Parser:
 
         self.parsers = []
 
-        self.parsers.append(PmuParser(root_dir, **kwargs))
+        #self.parsers.append(PmuParser(root_dir, **kwargs))
         self.parsers.append(UnibetParser(root_dir, **kwargs))
 
     def parse(self, date=None, **kwargs):

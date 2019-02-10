@@ -121,7 +121,7 @@ class Dataset(factories.Dataset):
 
         df = pd.DataFrame.from_records(players, index='id')
 
-        df =  df.join(races_df, on="race_id", lsuffix="_player", rsuffix="_race")
+        df = df.join(races_df, on="race_id", lsuffix="_player", rsuffix="_race")
 
         df.reset_index(inplace=True)
         df.set_index(['id'], inplace=True)
@@ -146,6 +146,7 @@ class Dataset(factories.Dataset):
         df['year_earnings'] = np.log(1+df['year_earnings'].fillna(0))
         df['handicap_distance'] = df['handicap_distance'].fillna(0.0)
         df['handicap_weight'] = df['handicap_weight'].fillna(0.0)
+        df['prize'] = np.log(df['prize'].fillna(0)+1)
 
         # append last odds inverse, equivalent to the estimated probability of winning 
         df['final_odds_ref_inv'] = (1. / df['final_odds_ref']).fillna(0.)

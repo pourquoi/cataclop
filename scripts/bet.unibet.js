@@ -89,11 +89,15 @@ async function play() {
         $('a#turf_betslip_place')[0].click()
     })
 
-    if (!simulation) {
-        await mainTab.evaluate(function() {
+    await mainTab.evaluate(function(simulation) {
+        console.log('bet validate button exists', $('#turf_betslip_confirm').attr('class'));
+
+        if( !simulation ) {
             $('#turf_betslip_confirm')[0].click()
-        })
-    }
+        }
+    }, simulation)
+
+    await mainTab.wait(1000);
     
     await browser.close()
 
