@@ -27,4 +27,4 @@ class Command(BaseCommand):
 
         with_offline = True
 
-        scrapper.scrap(start, end, False, False, with_offline=with_offline)
+        scrapper.scrap(start, end, True, True, with_offline=with_offline)
