@@ -22,29 +22,7 @@ class Program(factories.Program):
         return {}
 
     def lock(self, key=None):
-        """Make a copy of the program, model and dataset.
-        """
-
-        if self.dataset is None:
-            raise ValueError('The program\'s dataset is required before locking')
-
-        if self.model is None:
-            raise ValueError('The program\'s model is required before locking')
-
-        if key is None:
-            key = datetime.datetime.now().strftime('%Y-%m-%d')
-
-        pipeline_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-        shutil.copy( os.path.join(pipeline_path, 'datasets', self.dataset.name + '.py'), os.path.join(pipeline_path, 'datasets', key + '.py') )
-        shutil.copy( os.path.join(pipeline_path, 'models', self.model.name + '.py'), os.path.join(pipeline_path, 'models', key + '.py') )
-        shutil.copy( os.path.join(pipeline_path, 'programs', self.name + '.py'), os.path.join(pipeline_path, 'programs', key + '.py') )
-
-        self.dataset.name = key
-        self.model.name = key
-
-        self.dataset.save()
-        self.model.save()
+        pass
 
     def run(self, mode='predict', **kwargs):
 
@@ -57,14 +35,14 @@ class Program(factories.Program):
         dataset.load(force=kwargs.get('dataset_reload', False))
 
         model_params = {
-            'kfolds': 3,
+            'kfolds': 2,
             'nan_flag': 100000,
-            'n_targets': 2
+            'n_targets': 1
         }
         if kwargs.get('model_params') is not None:
             model_params.update(kwargs.get('model_params'))
 
-        self.model = factories.Model.factory(self.name if kwargs.get('locked') else 'stacked', params=model_params, dataset=dataset, version='1.0')
+        self.model = factories.Model.factory('2019-02-12', params=model_params, dataset=dataset, version='1.0')
 
         if mode == 'train':
             self.df = self.model.train(dataset)
@@ -83,22 +61,21 @@ class Program(factories.Program):
         return self.run('predict', **kwargs)
 
     def check_race(self, race):
-        return race.category == 'ATTELE' and race.sub_category == 'AUTOSTART'
+        return race.category == 'PLAT' and race.sub_category == 'HANDICAP'
 
     def bet(self):
 
         max_odds = None
         break_on_bet = False
         break_on_odds = False
-        N = 3
-
-        targets = ['pred_stacked_{}_1'.format(model['name']) for model in self.model.stacked_models]
+        N = 2
+        targets = ['final_odds_ref']
 
         features = self.model.features
         categorical_features = self.model.categorical_features
 
         if targets is None:
-            targets = ['pred_{}_1'.format(model['name']) for model in self.model.models] + ['pred_sum']
+            targets = ['pred_{}_1'.format(model['name']) for model in self.model.models]
 
         df = self.df
         races = df.sort_values('start_at').groupby('race_id')
@@ -113,7 +90,7 @@ class Program(factories.Program):
 
             for target in targets:
 
-                r = race.sort_values(by=target, ascending=False)
+                r = race.sort_values(by=target, ascending=True)
 
                 if len(r) <= N:
                     break
@@ -189,7 +166,7 @@ class Program(factories.Program):
         bets['bets'] = bets['bet'].cumsum()
         bets['stash'] = bets['profit'].cumsum()
 
-        bb = bets[ (bets['pred_std'] != 0) & (bets['sub_category']=='AUTOSTART') & (bets['nb']==2) & (bets['target']=='pred_stacked_mlp_relu_1') & (bets['odds_ref']<8) & (bets['odds_ref']>3) & (bets['pred']<=1) ].copy()
+        bb = bets[(bets['pred_std'] != 0) & (bets['nb']==1) & (bets['odds_ref'] > 1) & ((bets['odds_ref'] > bets['final_odds_ref_unibet'])) & (bets['final_odds_ref_unibet'] < 40) & (bets['sub_category']=='HANDICAP') & (bets['pred'] > 10) & (bets['pred'] < 500) & (bets['target']=='final_odds_ref') ].copy()
 
         self.bets = bb
 

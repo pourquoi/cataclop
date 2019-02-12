@@ -192,7 +192,7 @@ class Program(factories.Program):
         bets['bets'] = bets['bet'].cumsum()
         bets['stash'] = bets['profit'].cumsum()
 
-        bb = bets[(bets['nb']==1) & (bets['odds_ref'] > 3) & (bets['odds_ref'] > bets['final_odds_ref_offline']) & (bets['odds_ref'] < 20) & (bets['sub_category']=='HANDICAP') & (bets['pred'] > 2) & (bets['pred'] < 200) & (bets['target']=='pred_knn_2_1') ].copy()
+        bb = bets[(bets['nb']==1) & (bets['odds_ref'] > 3) & (bets['odds_ref'] > bets['final_odds_ref_offline']) & (bets['pred_std'] != 0) & (bets['odds_ref'] < 20) & (bets['sub_category']=='HANDICAP') & (bets['pred'] > 2) & (bets['pred'] < 200) & (bets['target']=='pred_knn_2_1') ].copy()
 
         self.bets = bb
 

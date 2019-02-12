@@ -54,7 +54,7 @@ class Command(BaseCommand):
         if self.dummy:
             programs = ['dummy']
         else:
-            programs = ['2019-01-07', '2019-01-24', '2019-02-04']
+            programs = ['2019-01-07', '2019-01-24', '2019-02-04', '2019-02-12']
 
         for p in programs:
             program = factories.Program.factory(p)
