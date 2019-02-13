@@ -102,9 +102,9 @@ async function play() {
 
     await mainTab.wait(1000);
     
-    //await browser.close()
+    await browser.close()
 
-    //process.exit(0);
+    process.exit(0);
 }
 
 if (process.argv.length != 6) {
