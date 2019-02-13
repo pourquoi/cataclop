@@ -111,9 +111,10 @@ async function play() {
             $('.pari-mise-input').val(b);
             $('.pari-mise-input').change();
 
+            console.log('pari total', $('.pari-total').text());
+            console.log('bet validate button exists', $('#pari-validate').attr('class'));
+            
             if (!simulation) {
-                console.log('pari total', $('.pari-total').text());
-                console.log('bet validate button exists', $('#pari-validate').attr('class'));
                 $('#pari-validate').click();
             }
         }, num, bet, typebet, simulation)

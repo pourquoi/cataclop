@@ -89,19 +89,22 @@ async function play() {
         $('a#turf_betslip_place')[0].click()
     })
 
+    await mainTab.wait(1000);
+
     await mainTab.evaluate(function(simulation) {
         console.log('bet validate button exists', $('#turf_betslip_confirm').attr('class'));
 
         if( !simulation ) {
+            console.log('betting');
             $('#turf_betslip_confirm')[0].click()
         }
     }, simulation)
 
     await mainTab.wait(1000);
     
-    await browser.close()
+    //await browser.close()
 
-    process.exit(0);
+    //process.exit(0);
 }
 
 if (process.argv.length != 6) {
