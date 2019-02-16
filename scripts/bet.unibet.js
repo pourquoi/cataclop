@@ -11,7 +11,7 @@ const browser = new HeadlessChrome({
     headless: !!config.headless, // If you turn this off, you can actually see the browser navigate with your instructions
     // see above if using remote interface
     chrome: {
-        flags: ['--disable-gpu', '--window-size=1280,1696', '--enable-logging'],
+        flags: ['--disable-gpu', '--window-size=1440,900', '--enable-logging'],
         //flags: ['--headless', '--disable-gpu', '--window-size=1280,1696', '--enable-logging'],
         noSandbox: true
     },
@@ -33,7 +33,7 @@ async function play() {
     console.log('open new tab');
 
     const mainTab = await browser.newTab({ privateTab: false })
-    await mainTab.resizeFullScreen()
+    //await mainTab.resizeFullScreen()
 
     mainTab.onConsole(function (msg) {
         console.log(msg)
@@ -58,11 +58,37 @@ async function play() {
 
     await mainTab.wait(3000);
 
+    console.log('logout')
+
+    await mainTab.evaluate(function() {
+        $('.ui-action-logout')[0].click()
+    })
+
+    await mainTab.wait(2000);
+
+
+    console.log('login');
+
+    await mainTab.evaluate(function (config) {
+
+        $('.login-input[name="username"]')[0].value = config.unibet.user_id
+        $('.login-input[name="password"]')[0].value = config.unibet.user_password
+        $('.form-dob[name="form-dob"]')[0].value = config.unibet.user_dob_day + ' / ' + config.unibet.user_dob_month + ' / ' + config.pmu.user_dob_year;
+
+        $('input.button-login[type="submit"]')[0].click()
+        
+    }, config)
+
+    await mainTab.wait(3000);
+
+
     const loginPopup = await mainTab.evaluate(function () {
         return $('#modal-arjel-confirm').is(':visible')
     })
 
-    if (loginPopup) {
+    console.log(loginPopup.result.value)
+
+    if (loginPopup.result.value) {
         await mainTab.evaluate(function () {
             $('#modal-arjel-confirm')[0].click()
         })
@@ -72,6 +98,8 @@ async function play() {
     await mainTab.evaluate(function() {
         $('a[data-turf-category="SIMPLE"]')[0].click()
     })
+
+    await mainTab.wait(3000);
 
     var b_idx = 0;
     for(;b_idx<bets.length;b_idx++) {
@@ -85,11 +113,13 @@ async function play() {
 
     }
 
+    await mainTab.wait(3000);
+
     await mainTab.evaluate(function() {
         $('a#turf_betslip_place')[0].click()
     })
 
-    await mainTab.wait(1000);
+    await mainTab.wait(30000);
 
     await mainTab.evaluate(function(simulation) {
         console.log('bet validate button exists', $('#turf_betslip_confirm').attr('class'));

@@ -97,7 +97,7 @@ class Better:
                 bet = Bet(player=player, url=url, amount=Decimal('{}'.format(b['amount'])), simulation=simulation, program=b['program'])
                 bet_logs.append(bet)
 
-            p = subprocess.run(args, timeout=60, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.run(args, timeout=90, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print(p)
 
         for bet in bet_logs:

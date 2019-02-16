@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
         print(options)
 
-        self.wait_until_minutes = 3
+        self.wait_until_minutes = 5
 
         self.load_programs()
         self.bet()
