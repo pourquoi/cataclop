@@ -1,5 +1,6 @@
 # editor
 .vscode
+.DS_Store
 
 # libs
 node_modules

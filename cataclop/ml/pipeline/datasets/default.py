@@ -78,7 +78,7 @@ class Dataset(factories.Dataset):
     def create_dataframe(self):
         NAN_FLAG = self.params['nan_flag']
 
-        races = models.Race.objects.all().prefetch_related('player_set', 'session')
+        races = models.Race.objects.all().prefetch_related('player_set', 'session', 'session__hippodrome')
         if self.params.get('from') is not None:
             races = races.filter(start_at__gte=self.params.get('from'))
         if self.params.get('to') is not None:
@@ -89,6 +89,8 @@ class Dataset(factories.Dataset):
             races = races.filter(category__in=self.params.get('categories'))
         if self.params.get('sub_categories') is not None:
             races = races.filter(sub_category__in=self.params.get('sub_categories'))
+        if self.params.get('countries') is not None:
+            races = races.filter(session__hippodrome__country__in=self.params.get('countries'))
 
         hippos = models.Hippodrome.objects.all()
 

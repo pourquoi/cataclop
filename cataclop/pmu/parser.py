@@ -397,8 +397,13 @@ class UnibetParser:
     def parse(self, date=None, **kwargs):
         if date is None:
             date = datetime.date.today().isoformat()
+        
+        path = os.path.join(self.root_dir, date, 'programme.{}.json'.format(UnibetScrapper.name))
 
-        with open(os.path.join(self.root_dir, date, 'programme.{}.json'.format(UnibetScrapper.name))) as json_data:
+        if not os.path.isfile(path):
+            return
+
+        with open(path) as json_data:
             sessions = json.load(json_data)
 
         for rs in sessions:
@@ -408,6 +413,9 @@ class UnibetParser:
             try:
                 race_session = RaceSession.objects.get(num=rs['rank'], date=datetime.date.fromtimestamp(rs['date']/1000))
             except ObjectDoesNotExist:
+                continue
+            except Exception as err:
+                logger.error(err)
                 continue
 
             for r in rs['races']:
@@ -422,6 +430,9 @@ class UnibetParser:
                 race_name = 'R{}C{}'.format(rs['rank'], r['rank'])
 
                 race_file = os.path.join(self.root_dir, race_session.date.isoformat(), race_name + '.' + UnibetScrapper.name + '.json')
+
+                if not os.path.isfile(race_file):
+                    continue
 
                 with open(race_file) as json_data:
                     r_details = json.load(json_data)

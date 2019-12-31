@@ -54,15 +54,19 @@ class Model(factories.Model):
 
     @property
     def features(self):
-        features = ['prize', 'declared_player_count', 'final_odds_ref', 'final_odds_ref_unibet']
+        #features = ['prize', 'declared_player_count', 'final_odds_ref', 'final_odds_ref_unibet']
+        features = ['prize', 'declared_player_count']
 
         features += ['odds_{:d}'.format(i) for i in range(10)]
 
         features += ['hist_{}_pos'.format(i+1) for i in range(6)]
 
-        features += self.dataset.agg_features
+        #features += self.dataset.agg_features
 
         for f in self.dataset.agg_features:
+            #if f.startswith('final_odds'):
+            #    continue
+            features.append(f)
             features.append('{}_r'.format(f))
             for s in self.dataset.agg_features_funcs:
                 features.append('{}_{}'.format(f, s[0]))
@@ -116,7 +120,7 @@ class Model(factories.Model):
 
         df['target'] = df['position'].fillna(self.params['nan_flag'])
 
-        df['target'] = df['target_returns']
+        df['target'] = np.log(1.+df['target_returns'])
 
         for model in self.models:
             for i in range(self.params['n_targets']):
@@ -131,7 +135,7 @@ class Model(factories.Model):
 
         self.models = []
 
-        for n in [30]:
+        for n in [10, 100]:
             self.models.append(
                 {
                     'name': 'xgb_{}'.format(n),
@@ -140,8 +144,8 @@ class Model(factories.Model):
                 }
             )
         
-        '''
-        for a in [1]:
+        
+        for a in [0.1, 1]:
             self.models.append(
                 {
                     'name': 'ridge_{}'.format(a),
@@ -150,7 +154,7 @@ class Model(factories.Model):
                 }
             )
 
-        for a in [1]:
+        for a in [0.1, 1]:
             self.models.append(
                 {
                     'name': 'lasso_{}'.format(a),
@@ -159,13 +163,15 @@ class Model(factories.Model):
                 }
             )
 
+        
         self.models.append({
             'name': 'svr',
             'steps': [RobustScaler(), svm.LinearSVR()],
             'estimators': []
         })
-        '''
+        
 
+        
         for n in [1, 2, 5, 10]:
 
             self.models.append(
@@ -175,9 +181,9 @@ class Model(factories.Model):
                     'estimators': []
                 }
             )
-
         
 
+        
         for n in [1, 10, 30, 100]:
             self.models.append(
                 {
@@ -186,6 +192,7 @@ class Model(factories.Model):
                     'estimators': []
                 }
             )
+        
 
         '''
         for n in [10, 20, 30, 40, 100]:
@@ -196,8 +203,9 @@ class Model(factories.Model):
                     'estimators': []
                 }
             )
+        '''
 
-        for n in [100]:
+        for n in [10, 100]:
             self.models.append(
                 {
                     'name': 'rf_{}'.format(n),
@@ -205,7 +213,7 @@ class Model(factories.Model):
                     'estimators': []
                 }
             )
-        '''
+        
 
         df = self.prepare_data(dataset)
 
