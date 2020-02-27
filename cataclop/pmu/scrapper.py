@@ -195,4 +195,4 @@ class UnibetScrapper:
                                 json.dump(r.json(), f)
 
                         else:
-                            logger.error('race request failed for race {} {} {}'.format(mode, date.strftime('%Y-%m-%d'), race_name))
+                            logger.error('race request failed for race {} {}'.format(date.strftime('%Y-%m-%d'), race_name))
