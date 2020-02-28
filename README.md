@@ -2,6 +2,10 @@
 
 horse race supervised learning and autonomous betting
 
+### EXPLORATION
+
+[notebook](notebooks/exploration.ipynb)
+
 ### INSTALL
 
 ```console
