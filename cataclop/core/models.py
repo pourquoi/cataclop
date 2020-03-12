@@ -1,6 +1,7 @@
 from django.db import models
 from . import managers
 
+
 class Race(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
@@ -26,7 +27,7 @@ class Race(models.Model):
 
     def get_player(self, num: int):
         """
-        Get a race player by a his number
+        Get a race player by his number
         """
         player = None
         try:
@@ -114,6 +115,7 @@ class Player(models.Model):
     def __str__(self):
         return '#{} ({}) - {}'.format(self.num, self.final_odds_ref, self.horse)
 
+
 class Odds(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
     
@@ -133,6 +135,7 @@ class Odds(models.Model):
 
     class Meta():
         verbose_name_plural = 'odds'
+
 
 class BetResult(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
@@ -180,7 +183,6 @@ class Herder(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class Owner(models.Model):

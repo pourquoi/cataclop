@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+
     {% block head %}
-    <link rel="stylesheet" href="{% static %}style.css" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
     <title>{% block title %}{% endblock %} - Cataclop</title>
     {% endblock %}
 </head>

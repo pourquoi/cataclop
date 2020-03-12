@@ -24,36 +24,19 @@ from xgboost import XGBRegressor, XGBClassifier
 from cataclop.ml.exploration import random_race
 from cataclop.ml import preprocessing
 from cataclop.ml.pipeline import factories
+from .default import Model as DefaultModel
 
-
-class Model(factories.Model):
+class Model(DefaultModel):
 
     def __init__(self, name, params=None, version=None, dataset=None):
-        super().__init__(name=name, params=params, version=version)
-
-        if dataset is None:
-            raise ValueError('this model requires a dataset to initialise the features')
-
-        self.dataset = dataset
-        self.params['features'] = self.features
-        self.params['categorical_features'] = self.categorical_features
-
-        # this will be filled in train or load methods
-        self.models = []
+        super().__init__(name=name, params=params, version=version, dataset=dataset)
 
         self.stacked_models = []
 
-        self.logger = logging.getLogger(__name__)
 
     @property
     def defaults(self):
-        return {
-            'seed': 1234,
-            'kfolds': 2,
-            'n_targets': 1,
-            'n_targets_stacked': 1,
-            'nan_flag': +10000
-        }
+        return {**(super().defaults), 'n_targets_stacked': 1}
 
     @property
     def features(self):
@@ -134,6 +117,7 @@ class Model(factories.Model):
 
         races = df.groupby('race_id')
 
+        '''
         strats = [
             [1, 1, 0, 0, 0],
             [1, 0, 1, 0, 0],
@@ -176,6 +160,7 @@ class Model(factories.Model):
         strat_df = pd.DataFrame(strat_df)
 
         df = pd.merge(left=df, right=strat_df, on='race_id', how='left')
+        '''
 
         df.loc[:, features] = df.loc[:, features].fillna(self.params['nan_flag'])
 
@@ -195,7 +180,7 @@ class Model(factories.Model):
 
         df['target_odds'] = df['final_odds'].fillna(self.params['nan_flag'])
 
-        df['target'] = df['target_returns']
+        df['target'] = np.log(1.+df['target_returns'])
 
         for model in self.models:
             for i in range(self.params['n_targets']):
