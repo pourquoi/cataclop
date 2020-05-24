@@ -50,13 +50,25 @@ class Program(factories.Program):
 
         dataset_params = {}
 
+        if mode == 'train':
+            dataset_params = {
+                'from': '2017-01-01',
+                'to': '2020-03-01',
+                'hippodrome': ['CAGNES/MER']
+            }
+
         if kwargs.get('dataset_params') is not None:
             dataset_params.update(kwargs.get('dataset_params'))
 
         dataset = factories.Dataset.factory(self.name if kwargs.get('locked') else kwargs.get('dataset', 'default'), params=dataset_params, version='1.4')
         dataset.load(force=kwargs.get('dataset_reload', False))
 
-        model_params = {}
+        model_params = {
+            'kfolds': 3,
+            'nan_flag': 10000,
+            'n_targets': 1
+        }
+
         if kwargs.get('model_params') is not None:
             model_params.update(kwargs.get('model_params'))
 
@@ -78,7 +90,7 @@ class Program(factories.Program):
     def predict(self, **kwargs):
         return self.run('predict', **kwargs)
 
-    def bet(self, targets=None, N=1, max_odds=20, break_on_bet=True, break_on_odds=False):
+    def bet(self, targets=None, N=1, max_odds=30, break_on_bet=True, break_on_odds=False):
 
         features = self.model.features
         categorical_features = self.model.categorical_features
@@ -163,7 +175,9 @@ class Program(factories.Program):
         bets['bets'] = bets['bet'].cumsum()
         bets['stash'] = bets['profit'].cumsum()
 
-        self.bets = bets
+        bb = bets[ (bets['target']=='pred_mlp_30_1') & (bets['pred'] < 0.5) ]
+
+        self.bets = bb
         return self.bets
 
 

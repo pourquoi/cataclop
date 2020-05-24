@@ -22,7 +22,7 @@ from cataclop.api import urls as api_urls
 from cataclop.front import urls as front_urls
 
 urlpatterns = [
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(api_urls)),
     path('admin/', admin.site.urls),
     url('', include(front_urls))

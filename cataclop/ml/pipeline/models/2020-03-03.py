@@ -137,81 +137,7 @@ class Model(factories.Model):
 
         self.models = []
 
-        '''
-        X_tmp = df[features].iloc[0:10].copy()
-        dummies = preprocessing.get_dummies(df, categorical_features)
-        df_dummies = preprocessing.get_dummy_values(df.iloc[0:100], dummies)
-        X_tmp = pd.concat([X_tmp, df_dummies], axis=1)
-
-        from keras.wrappers.scikit_learn import KerasRegressor
-        from keras.models import Sequential
-        from keras.layers import Dense
-
-        def baseline_regressor():
-            model = Sequential()
-            model.add(Dense(100, input_dim=X_tmp.shape[1], activation='sigmoid'))
-            model.add(Dense(1))
-            model.compile(loss='mean_squared_error', optimizer='adam')
-            return model
-        
-        self.models.append(
-            {
-                'name': 'nn',
-                'steps': [RobustScaler(), KerasRegressor(build_fn=baseline_regressor, nb_epoch=100, batch_size=100, verbose=True)],
-                'estimators': []
-            }
-        )
-        '''
-
-        for n in [10, 100]:
-            self.models.append(
-                {
-                    'name': 'xgb_{}'.format(n),
-                    'steps': [XGBRegressor(n_estimators=n, missing=self.params['nan_flag'], random_state=self.params['seed'])],
-                    'estimators': []
-                }
-            )
-        
-        for a in [0.1, 1]:
-            self.models.append(
-                {
-                    'name': 'ridge_{}'.format(a),
-                    'steps': [RobustScaler(), Ridge(alpha=a)],
-                    'estimators': []
-                }
-            )
-
-        for a in [0.1, 1]:
-            self.models.append(
-                {
-                    'name': 'lasso_{}'.format(a),
-                    'steps': [RobustScaler(), Lasso(alpha=a)],
-                    'estimators': []
-                }
-            )
-
-        
-        self.models.append({
-            'name': 'svr',
-            'steps': [RobustScaler(), svm.LinearSVR()],
-            'estimators': []
-        })
-        
-
-        
-        for n in [1, 2, 5, 10]:
-
-            self.models.append(
-                {
-                    'name': 'knn_{}'.format(n),
-                    'steps': [RobustScaler(), KNeighborsRegressor(n_neighbors=n)],
-                    'estimators': []
-                }
-            )
-        
-
-        
-        for n in [1, 10, 30, 100]:
+        for n in [30]:
             self.models.append(
                 {
                     'name': 'mlp_{}'.format(n),
@@ -220,28 +146,6 @@ class Model(factories.Model):
                 }
             )
         
-        
-
-        '''
-        for n in [10, 20, 30, 40, 100]:
-            self.models.append(
-                {
-                    'name': 'gbr_{}'.format(n),
-                    'steps': [GradientBoostingRegressor(n_estimators=n)],
-                    'estimators': []
-                }
-            )
-        '''
-
-        for n in [10, 100]:
-            self.models.append(
-                {
-                    'name': 'rf_{}'.format(n),
-                    'steps': [RandomForestRegressor(n_estimators=n, random_state=self.params['seed'])],
-                    'estimators': []
-                }
-            )
-
         groups = df['race_id'].values
 
         group_kfold = GroupKFold(n_splits=self.params['kfolds'])
