@@ -69,6 +69,7 @@ class Command(BaseCommand):
 
                 now = datetime.datetime.now()
 
+                ''' done in crontab..
                 if now.hour == 23 and now.minute == 30:
                     self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
                     self.parser.parse()
@@ -80,6 +81,7 @@ class Command(BaseCommand):
                     self.parser.parse()
 
                     time.sleep(60)
+                '''
         else:
             self._bet()
 
@@ -156,8 +158,8 @@ class Command(BaseCommand):
 
                     provider = 'pmu'
 
-                    if odds_pmu is not None and odds_unibet is not None and odds_unibet > odds_pmu:
-                        provider = 'unibet'
+                    #if odds_pmu is not None and odds_unibet is not None and odds_unibet > odds_pmu:
+                    #    provider = 'unibet'
 
                     if self.provider:
                         provider = self.provider
