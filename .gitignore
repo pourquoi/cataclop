@@ -22,3 +22,5 @@ var/data/*
 var/models/*
 !var/models/.gitkeep
 var/next_race
+var/logs/*
+var/scrap/*
