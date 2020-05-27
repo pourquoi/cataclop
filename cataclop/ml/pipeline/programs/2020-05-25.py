@@ -89,7 +89,9 @@ class Program(factories.Program):
     def check_race(self, race):
         return race.category == 'PLAT' and race.sub_category in ['HANDICAP', 'HANDICAP_DIVISE']
 
-    def bet(self, df):
+    def bet(self):
+
+        df = self.df
 
         models = [{"name":'mlp_30'}]
         
@@ -123,8 +125,8 @@ class Program(factories.Program):
             m = model['name']
             #dd['profit_{}'.format(m)] = np.clip(dd['pred_{}_1'.format(m)], a_min=0., a_max=10.) * 1.0 * (dd['target_returns']-1.0)
             #dd['profit_{}'.format(m)] = 1.0 * (dd['target_returns']-1.0)
-            df['bet_{}'.format(m)] = np.ceil(0.1 * np.clip((df['pred_{}_1'.format(m)]/10.), a_min=0., a_max=10.) * np.log(dd['n_odds_{}'.format(m)]+1.) )
-            df['profit_{}'.format(m)] = df['bet_{}'.format(m)] * 1.0 * (dd['target_returns']-1.0)
+            df['bet_{}'.format(m)] = np.ceil(0.1 * np.clip((df['pred_{}_1'.format(m)]), a_min=0., a_max=10.) * np.log(df['n_odds_{}'.format(m)]+1.) )
+            df['profit_{}'.format(m)] = df['bet_{}'.format(m)] * 1.0 * (df['target_returns']-1.0)
 
         df['bet'] = df[['bet_{}'.format(model['name']) for model in models]].sum(axis=1)
         df['profit'] = df[['profit_{}'.format(model['name']) for model in models]].sum(axis=1)
