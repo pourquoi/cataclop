@@ -7,7 +7,7 @@ from pytz import timezone
 
 from django.db import transaction
 
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 from cataclop.core.models import *
 
@@ -234,6 +234,9 @@ class PmuParser:
             horse = Horse.objects.get(name=p['nom'].upper(), sex=p['sexe'].upper(), breed=p['race'].upper())
         except ObjectDoesNotExist:
             horse = Horse(name=p['nom'].upper(), sex=p['sexe'].upper(), breed=p['race'].upper())
+        # BC fix
+        except MultipleObjectsReturned:
+            horse = Horse.objects.filter(name=p['nom'].upper(), sex=p['sexe'].upper(), breed=p['race'].upper())[0]
 
             if p.get('nomPere'):
                 horse.father = p['nomPere']
@@ -254,6 +257,9 @@ class PmuParser:
                 owner = Owner(name=p['proprietaire'].upper())
                 if not self.dry_run:
                     owner.save()
+            # BC fix
+            except MultipleObjectsReturned:
+                owner = Owner.objects.filter(name=p['proprietaire'].upper())[0]
 
         try:
             jockey = Jockey.objects.get(name=p['driver'].upper())
@@ -261,6 +267,9 @@ class PmuParser:
             jockey = Jockey(name=p['driver'].upper())
             if not self.dry_run:
                 jockey.save()
+        # BC fix
+        except MultipleObjectsReturned:
+            jockey = Jockey.objects.filter(name=p['driver'].upper())[0]
 
         try:
             trainer = Trainer.objects.get(name=p['entraineur'].upper())
@@ -268,6 +277,9 @@ class PmuParser:
             trainer = Trainer(name=p['entraineur'].upper())
             if not self.dry_run:
                 trainer.save()
+        # BC fix
+        except MultipleObjectsReturned:
+            trainer = Trainer.objects.get(name=p['entraineur'].upper())[0]
 
         if not p.get('eleveur'):
             herder = None
