@@ -149,6 +149,9 @@ class Command(BaseCommand):
                     logger.error('program bet failed for race: {}'.format(race.id))
                     continue
 
+                if program.bets is None:
+                    continue
+
                 for row in program.bets.itertuples(index=True, name='Pandas'):
                     num = getattr(row, 'num')
                     amount = getattr(row, 'bet')

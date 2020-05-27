@@ -119,6 +119,11 @@ class Program(factories.Program):
             return r
         
         df = df[(df['country']=='FRA') & (df['sub_category'].isin(['HANDICAP', 'HANDICAP_DIVISE']))].copy()
+        
+        if len(df) == 0:
+            self.bets = None
+            return None
+
         df = df.groupby('race_id').apply(fast_bet)
 
         for model in models:
