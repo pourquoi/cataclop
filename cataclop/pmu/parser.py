@@ -238,15 +238,15 @@ class PmuParser:
         except MultipleObjectsReturned:
             horse = Horse.objects.filter(name=p['nom'].upper(), sex=p['sexe'].upper(), breed=p['race'].upper())[0]
 
-            if p.get('nomPere'):
-                horse.father = p['nomPere']
-            if p.get('nomMere'):
-                horse.mother = p['nomMere']
-            if p.get('nomPereMere'):
-                horse.mother_father = p['nomPereMere']
+        if p.get('nomPere'):
+            horse.father = p['nomPere']
+        if p.get('nomMere'):
+            horse.mother = p['nomMere']
+        if p.get('nomPereMere'):
+            horse.mother_father = p['nomPereMere']
 
-            if not self.dry_run:
-                horse.save()
+        if not self.dry_run:
+            horse.save()
 
         if not p.get('proprietaire'):
             owner = None
