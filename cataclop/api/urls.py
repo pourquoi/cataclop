@@ -10,7 +10,8 @@ router.register(r'races', api_views.RaceViewSet)
 router.register(r'bets', api_views.BetViewSet)
 
 urlpatterns = [
-    url(r'^login', api_views.AuthToken.as_view())
+    url(r'^login', api_views.AuthToken.as_view()),
+    url(r'^predict', api_views.predict)
 ]
 
 urlpatterns += router.urls

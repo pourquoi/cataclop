@@ -1,7 +1,7 @@
 import datetime
 from .serializers import UserSerializer, RaceSerializer, BetSerializer
 from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -11,6 +11,7 @@ from django.db.models import Count, Avg, Sum
 from cataclop.users.models import User
 from cataclop.core.models import Race
 from cataclop.pmu.models import Bet
+from cataclop.ml.pipeline import factories
 
 class AuthToken(ObtainAuthToken):
 
@@ -38,7 +39,6 @@ class RaceViewSet(viewsets.ModelViewSet):
     serializer_class = RaceSerializer
 
     def get_queryset(self):
-        q = self.queryset
 
         q = self.queryset.order_by('-start_at')
 
@@ -66,3 +66,25 @@ class BetViewSet(viewsets.ModelViewSet):
             q = q.filter(created_at__date = date.date())
 
         return q
+
+
+@api_view(['get'])
+def predict(request):
+    now = datetime.datetime.now()
+    date = request.query_params.get('date', now.strftime('%Y-%m-%d'))
+    R = request.query_params.get('R')
+    C = request.query_params.get('C')
+    p = request.query_params.get('program', '2020-05-25')
+
+    race = Race.objects.get(start_at__date=date, session__num=R, num=C)
+    program = factories.Program.factory(p)
+
+    print(race)
+
+    program.predict(dataset_params = {
+        'race_id': race.id
+    }, locked=True, dataset_reload=True)
+
+    bets = program.bet()
+    print(bets)
+    return Response(bets.to_dict(orient='records'))

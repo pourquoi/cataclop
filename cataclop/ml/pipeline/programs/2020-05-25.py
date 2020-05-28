@@ -137,7 +137,7 @@ class Program(factories.Program):
         df['profit'] = df[['profit_{}'.format(model['name']) for model in models]].sum(axis=1)
         df['target'] = 'mlp_30_1'
         
-        bets = df[(df['pred_mlp_30_1'] >= 13.6) & (df['final_odds_ref_offline']>df['final_odds_offline']) & (df['final_odds_ref'] > 20) & (df['final_odds_ref']<50)][['race_id', 'start_at', 'bet', 'category', 'sub_category', 'country', 'profit', 'num', 'race_id', 'position', 'final_odds_ref', 'final_odds', 'profit_{}'.format(m), 'bet_{}'.format(m), 'pred_{}_1'.format(m)]].copy()
+        bets = df[(df['pred_mlp_30_1'] >= 13.6) & (df['final_odds_ref_offline']>df['final_odds_offline']) & (df['final_odds_ref'] > 20) & (df['final_odds_ref']<50)][['race_id', 'start_at', 'bet', 'category', 'sub_category', 'country', 'profit', 'num', 'position', 'final_odds_ref', 'final_odds', 'profit_{}'.format(m), 'bet_{}'.format(m), 'pred_{}_1'.format(m)]].copy()
         bets['date'] = pd.to_datetime(bets['start_at'])
 
         self.bets = bets
