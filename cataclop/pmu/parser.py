@@ -231,12 +231,12 @@ class PmuParser:
     def importPlayer(self, p, race):
 
         try:
-            horse = Horse.objects.get(name=p['nom'].upper(), sex=p['sexe'].upper(), breed=p['race'].upper())
+            horse = Horse.objects.get(name=p['nom'].upper(), sex=p['sexe'].upper())
         except ObjectDoesNotExist:
             horse = Horse(name=p['nom'].upper(), sex=p['sexe'].upper(), breed=p['race'].upper())
         # BC fix
         except MultipleObjectsReturned:
-            horse = Horse.objects.filter(name=p['nom'].upper(), sex=p['sexe'].upper(), breed=p['race'].upper())[0]
+            horse = Horse.objects.filter(name=p['nom'].upper(), sex=p['sexe'].upper())[0]
 
         if p.get('nomPere'):
             horse.father = p['nomPere']

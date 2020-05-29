@@ -38,7 +38,7 @@ class Race(models.Model):
         return player
 
     def __str__(self):
-        return '{} R{}C{} {}'.format(self.start_at.strftime('%Y-%m-%d'), self.session.num, self.num, self.start_at.strftime('%H:%M'))
+        return u'{} R{}C{} {}'.format(self.start_at.strftime('%Y-%m-%d'), self.session.num, self.num, self.start_at.strftime('%H:%M'))
 
 
 class RaceSession(models.Model):
@@ -52,7 +52,7 @@ class RaceSession(models.Model):
     objects = managers.RaceSessionQuerySet.as_manager()
 
     def __str__(self):
-        return '{} R{} {}'.format(self.date, self.num, self.hippodrome)
+        return u'{} R{} {}'.format(self.date, self.num, self.hippodrome)
 
 
 class Player(models.Model):
@@ -113,7 +113,7 @@ class Player(models.Model):
     owner = models.ForeignKey('Owner', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return '#{} ({}) - {}'.format(self.num, self.final_odds_ref, self.horse)
+        return u'#{} ({}) - {}'.format(self.num, self.final_odds_ref, self.horse)
 
 
 class Odds(models.Model):
@@ -131,7 +131,7 @@ class Odds(models.Model):
     player = models.ForeignKey('Player', on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{:f}".format(self.value)
+        return u"{:f}".format(self.value)
 
     class Meta():
         verbose_name_plural = 'odds'
@@ -155,7 +155,7 @@ class Hippodrome(models.Model):
     country = models.CharField(max_length=3, db_index=True)
 
     def __str__(self):
-        return '{} ({})'.format(self.name, self.country)
+        return u'{} ({})'.format(self.name, self.country)
 
 
 class Jockey(models.Model):
@@ -164,7 +164,7 @@ class Jockey(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
-        return self.name
+        return u"{}".format(self.name)
 
 
 class Trainer(models.Model):
@@ -173,7 +173,7 @@ class Trainer(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
-        return self.name
+        return u"{}".format(self.name)
 
 
 class Herder(models.Model):
@@ -182,7 +182,7 @@ class Herder(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
-        return self.name
+        return u"{}".format(self.name)
 
 
 class Owner(models.Model):
@@ -191,7 +191,7 @@ class Owner(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
-        return self.name
+        return u"{}".format(self.name)
 
 
 class Horse(models.Model):
@@ -206,4 +206,4 @@ class Horse(models.Model):
     mother_father = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return self.name
+        return u"{}".format(self.name)
