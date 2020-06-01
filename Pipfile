@@ -31,6 +31,8 @@ keras = "*"
 theano = "*"
 scikit-optimize = "*"
 gunicorn = "*"
+djangorestframework-simplejwt = "*"
+django-filter = "*"
 
 [dev-packages]
 

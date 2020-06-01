@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from rest_framework.authentication import TokenAuthentication as DRFTokenAuthentication
+from rest_framework.permissions import BasePermission
 
 class EmailBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
@@ -16,3 +17,7 @@ class EmailBackend(ModelBackend):
 
 class TokenAuthentication(DRFTokenAuthentication):
     pass
+
+class IsAdmin(BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.is_superuser

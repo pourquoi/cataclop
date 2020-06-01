@@ -1,17 +1,35 @@
 import datetime
-from .serializers import UserSerializer, RaceSerializer, BetSerializer
+
 from rest_framework import viewsets
-from rest_framework.decorators import action, api_view
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 from django.db.models import Count, Avg, Sum
 
+from .serializers import (
+    UserSerializer, RaceSerializer, BetSerializer, RaceSessionSerializer,
+    HippodromeSerializer, HorseSerializer, OwnerSerializer, HerderSerializer, JockeySerializer,
+    TrainerSerializer, PlayerSerializer
+)
+from .auth import IsAdmin
 from cataclop.users.models import User
-from cataclop.core.models import Race
+from cataclop.core.models import RaceSession, Race, Player, Hippodrome, Horse, Trainer, Herder, Owner, Jockey
 from cataclop.pmu.models import Bet
 from cataclop.ml.pipeline import factories
+
+
+class BaseView(viewsets.ModelViewSet):
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAdmin]
+        return [permission() for permission in permission_classes]
 
 class AuthToken(ObtainAuthToken):
 
@@ -27,19 +45,34 @@ class AuthToken(ObtainAuthToken):
             'email': user.email
         })
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(BaseView):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
-class RaceViewSet(viewsets.ModelViewSet):
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+
+        if pk == "current":
+            return self.request.user
+
+        return super(UserViewSet, self).get_object()
+
+class RaceSessionViewSet(BaseView):
+    queryset = RaceSession.objects.all()
+    serializer_class = RaceSessionSerializer
+
+    def get_queryset(self):
+        q = self.queryset.order_by('-date', 'num')
+        return q
+
+class RaceViewSet(BaseView):
     queryset = Race.objects.all()
     serializer_class = RaceSerializer
 
     def get_queryset(self):
-
         q = self.queryset.order_by('-start_at')
 
         if self.request.query_params.get('date'):
@@ -48,15 +81,36 @@ class RaceViewSet(viewsets.ModelViewSet):
 
         return q
 
-class BetViewSet(viewsets.ModelViewSet):
+class PlayerViewSet(BaseView):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+
+    def get_queryset(self):
+        q = self.queryset.order_by('num')
+
+class HorseViewSet(BaseView):
+    queryset = Horse.objects.all()
+    serializer_class = HorseSerializer
+
+class TrainerViewSet(BaseView):
+    queryset = Trainer.objects.all()
+    serializer_class = TrainerSerializer
+
+class JockeyViewSet(BaseView):
+    queryset = Jockey.objects.all()
+    serializer_class = JockeySerializer
+
+class OwnerViewSet(BaseView):
+    queryset = Owner.objects.all()
+    serializer_class = OwnerSerializer
+
+class HerderViewSet(BaseView):
+    queryset = Herder.objects.all()
+    serializer_class = HerderSerializer
+
+class BetViewSet(BaseView):
     queryset = Bet.objects.all()
     serializer_class = BetSerializer
-
-    @action(methods=['get'], detail=False)
-    def stats(self, request, pk=None):
-        stats = Bet.objects.filter(simulation=False, player__isnull=False).values('program')\
-            .annotate(pcount=Count('program'), win=Sum('player__winner_dividend'))
-        return Response(stats)
 
     def get_queryset(self):
         q = self.queryset.order_by('-created_at')
@@ -67,8 +121,8 @@ class BetViewSet(viewsets.ModelViewSet):
 
         return q
 
-
 @api_view(['get'])
+@permission_classes([IsAdmin])
 def predict(request):
     now = datetime.datetime.now()
     date = request.query_params.get('date', now.strftime('%Y-%m-%d'))
@@ -79,12 +133,19 @@ def predict(request):
     race = Race.objects.get(start_at__date=date, session__num=R, num=C)
     program = factories.Program.factory(p)
 
-    print(race)
-
     program.predict(dataset_params = {
         'race_id': race.id
     }, locked=True, dataset_reload=True)
 
     bets = program.bet()
-    print(bets)
-    return Response(bets.to_dict(orient='records'))
+
+    if bets:
+        return Response(bets.to_dict(orient='records'))
+    return Response()
+
+
+@api_view(['get'])
+def stats(self, request, pk=None):
+    stats = Bet.objects.filter(simulation=False, player__isnull=False).values('program')\
+        .annotate(pcount=Count('program'), win=Sum('player__winner_dividend'))
+    return Response(stats)
