@@ -1,5 +1,6 @@
 from cataclop.core.models import BetResult, Herder, Hippodrome, Horse, Jockey, Odds, Owner, Player, Race, RaceSession, Trainer
-from django.db.models import Avg, Case, Count
+from django.db.models import Avg, Case, Count, Sum
+from datetime import timedelta
 
 def deduplicate():
 

@@ -69,6 +69,8 @@ class Player(models.Model):
     is_racing = models.BooleanField(default=True)
     is_first_timer = models.BooleanField(default=False)
 
+    jockey_change = models.BooleanField(default=False)
+
     race_count = models.SmallIntegerField()
 
     victory_count = models.SmallIntegerField()
@@ -90,7 +92,14 @@ class Player(models.Model):
     handicap_weight = models.SmallIntegerField(null=True)
     handicap_distance = models.IntegerField(null=True)
 
+    trueskill_mu = models.FloatField(null=True)
+    trueskill_sigma = models.FloatField(null=True)
+
     time = models.IntegerField(null=True)
+
+    hist_1_days = models.IntegerField(null=True)
+    hist_2_days = models.IntegerField(null=True)
+    hist_3_days = models.IntegerField(null=True)
 
     winner_dividend = models.IntegerField(null=True)
     winner_dividend_offline = models.IntegerField(null=True)
@@ -105,6 +114,15 @@ class Player(models.Model):
     final_odds_ref = models.FloatField(null=True)
     final_odds_ref_offline = models.FloatField(null=True)
     final_odds_ref_unibet = models.FloatField(null=True)
+
+    trainer_winning_rate = models.FloatField(null=True)
+    trainer_avg_winning_dividend = models.FloatField(null=True)
+
+    jockey_winning_rate = models.FloatField(null=True)
+    jockey_avg_winning_dividend = models.FloatField(null=True)
+    
+    herder_winning_rate = models.FloatField(null=True)
+    herder_avg_winning_dividend = models.FloatField(null=True)
 
     horse = models.ForeignKey('Horse', on_delete=models.CASCADE)
     trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE)

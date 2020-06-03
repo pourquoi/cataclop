@@ -33,6 +33,7 @@ scikit-optimize = "*"
 gunicorn = "*"
 djangorestframework-simplejwt = "*"
 django-filter = "*"
+trueskill = "*"
 
 [dev-packages]
 
