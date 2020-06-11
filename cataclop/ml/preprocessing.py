@@ -37,6 +37,7 @@ def parse_music(music, length):
             pos = c
             cat = None
             positions[i] = pos if pos.isdigit() else 0
+            if positions[i] == 0: positions[i] = 10
             continue
         
         if cat is None:

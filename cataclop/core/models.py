@@ -124,6 +124,8 @@ class Player(models.Model):
     herder_winning_rate = models.FloatField(null=True)
     herder_avg_winning_dividend = models.FloatField(null=True)
 
+    position_prediction = models.FloatField(null=True)
+
     horse = models.ForeignKey('Horse', on_delete=models.CASCADE)
     trainer = models.ForeignKey('Trainer', on_delete=models.CASCADE)
     jockey = models.ForeignKey('Jockey', on_delete=models.CASCADE)

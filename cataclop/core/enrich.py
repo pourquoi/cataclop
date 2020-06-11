@@ -8,7 +8,10 @@ def compute_players_stats():
     for p in players:
         compute_player_stats(p)
 
-def compute_player_stats(p):
+def compute_player_stats(p, force=False):
+    if p.trainer_winning_rate is not None and not force:
+        return
+
     same_trainer_players = Player.objects.filter(trainer=p.trainer, imported_at__lt=p.imported_at).exclude(horse=p.horse) 
     stats = same_trainer_players.aggregate(winner_dividend=Sum('winner_dividend'), c=Count('id'), wins=Count('winner_dividend'))
 
@@ -24,11 +27,11 @@ def compute_player_stats(p):
 
     history = list(Player.objects.filter(horse=p.horse, imported_at__lt=p.imported_at).order_by('-imported_at')[0:5])
     if len(history):
-        p.hist_1_days = (p.race.starts_at - history[0].race.starts_at).days
+        p.hist_1_days = (p.race.start_at - history[0].race.start_at).days
     if len(history) > 1:
-        p.hist_2_days = (p.race.starts_at - history[1].race.starts_at).days
+        p.hist_2_days = (p.race.start_at - history[1].race.start_at).days
     if len(history) > 2:
-        p.hist_3_days = (p.race.starts_at - history[2].race.starts_at).days
+        p.hist_3_days = (p.race.start_at - history[2].race.start_at).days
 
     if len(history):
         p.jockey_change = p.jockey != history[0].jockey
@@ -36,12 +39,33 @@ def compute_player_stats(p):
     p.save()
 
 # https://trueskill.org/
-def compute_races_trueskill():
-    races = Race.objects.all()
-    for race in races:
-        compute_race_trueskill(race)
+def compute_races_trueskill(force=False, **kwargs):
+    from cataclop.core.paginator import CursorPaginator
+    print(kwargs)
+    page_size = 100
+    if len(kwargs):
+        qs = Race.objects.filter(**kwargs)
+    else:
+        qs = Race.objects.all()
 
-def compute_race_trueskill(race):
+    paginator = CursorPaginator(qs, ordering=('id', ))
+    after = None
+
+    while True:
+        page = paginator.page(after=after, first=page_size)
+        if page:
+            for race in page.items:
+                print(race.start_at)
+                compute_race_trueskill(race, force=force)
+        else:
+            return
+
+        if not page.has_next:
+            break
+
+        after = paginator.cursor(instance=page[-1])
+
+def compute_race_trueskill(race, force=False):
     from trueskill import Rating, quality, rate
 
     ratings = {}
@@ -49,11 +73,14 @@ def compute_race_trueskill(race):
     races_seen = []
 
     for p in race.player_set.all():
+
+        if p.trueskill_mu is not None and not force:
+            return
         
         if p.horse.id not in ratings:
             ratings[p.horse.id] = Rating()
 
-        history = list(Player.objects.filter(horse=p.horse, imported_at__lt=p.imported_at).order_by('-imported_at')[0:10])
+        history = reversed(list(Player.objects.filter(horse=p.horse, imported_at__lt=p.imported_at).order_by('-imported_at')[0:10]))
 
         for h in history:
             if h.race.id in races_seen:
@@ -69,6 +96,9 @@ def compute_race_trueskill(race):
                 teams.append((ratings[hp.horse.id], ))
                 rank = hp.position if hp.position and (hp.position < 10 and hp.position > 0) else 10
                 ranks.append(rank)
+
+            if len(teams) < 2:
+                continue
 
             res = rate(teams, ranks)
 

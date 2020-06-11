@@ -38,6 +38,7 @@ class PmuParser:
 
         self.fast = kwargs.get('fast', False)
         self.dry_run = kwargs.get('dry_run', False)
+        self.predict = kwargs.get('predict', False)
 
     def parseMissingDividend(self):
         qs = Player.objects.filter(position=1, winner_dividend__isnull=True).prefetch_related('race').values('race__start_at__date').distinct()
@@ -224,6 +225,26 @@ class PmuParser:
                         self.importBetResult(r, race)
             except FileNotFoundError:
                 pass
+
+        from cataclop.core.enrich import compute_race_trueskill, compute_player_stats
+        compute_race_trueskill(race)
+
+        for p in race.player_set.all():
+            compute_player_stats(p)
+
+        if self.predict:
+            from cataclop.ml.pipeline import factories
+        
+            program = factories.Program.factory('position_prediction')
+            program.predict(dataset_params = {
+                'race_id': race.id
+            }, locked=True, dataset_reload=True)
+
+            program.df.set_index('id', drop=False, inplace=True)
+
+            for p in race.player_set.all():
+                p.position_prediction = program.df.loc[p.id, 'pred']
+                p.save()
 
         return race
 

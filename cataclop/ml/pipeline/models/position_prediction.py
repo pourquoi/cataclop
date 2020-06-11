@@ -579,7 +579,9 @@ class Model(factories.Model):
                 else:
                     df['pred_stacked_{}_1'.format(model['name'])] /= n_estimators
 
-
+        df['pred'] = df[['pred_stacked_{}_1'.format(model['name']) for model in self.stacked_models]].sum(axis=1)
+        df['pred'] /= len(self.stacked_models)
+        
         return df
 
 
