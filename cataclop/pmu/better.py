@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from datetime import datetime
+import datetime
 from decimal import Decimal
 
 from .models import Bet
@@ -51,15 +51,12 @@ class Better:
             provider = b.get('provider', 'pmu')
 
             for bb in players_bet[provider]:
-                if( bb['num'] == b['num'] ):
+                if bb['num'] == b['num']:
                     bb['amount'] += b['amount']
                     exists = True
             
             if not exists:
-                players_bet[provider].append({
-                    'num': b['num'],
-                    'amount': b['amount']
-                })
+                players_bet[provider].append(b)
 
         bet_logs = []
 
@@ -81,10 +78,7 @@ class Better:
                 '1' if simulation else '0'
             ]
 
-            for b in bets:
-
-                if b['provider'] != provider:
-                    continue
+            for b in players_bet[provider]:
 
                 logger.info('betting on {} in race R{}C{}'.format(b['num'], session_num, race_num))
 
@@ -95,10 +89,19 @@ class Better:
                     player = None
 
                 bet = Bet(player=player, url=url, amount=Decimal('{}'.format(b['amount'])), simulation=simulation, program=b['program'])
+                bet.stats_prediction_time = b.get('prediction_time', None)
+                bet.stats_scrap_time = b.get('scrap_time', None)
+                bet.provider = provider
                 bet_logs.append(bet)
 
+            t1 = datetime.datetime.now()
             p = subprocess.run(args, timeout=90, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            print(p)
+            t2 = datetime.datetime.now()
+            bet_time = (t2 - t1).total_seconds()
+
+            for b in bet_logs:
+                if b.provider == provider:
+                    b.stats_bet_time = bet_time
 
         for bet in bet_logs:
             bet.returncode = p.returncode

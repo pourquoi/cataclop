@@ -116,9 +116,15 @@ class Command(BaseCommand):
 
         # final scrap
 
+        scrap_time = 0
+
         if not self.skip_scrap:
+            t1 = datetime.datetime.now()
             self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
             self.parser.parse()
+            t2 = datetime.datetime.now()
+
+            scrap_time = (t2 - t1).total_seconds()
 
         # race might have been delayed
         race.refresh_from_db()
@@ -134,6 +140,10 @@ class Command(BaseCommand):
             time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
 
             if time_remaining > 60:
+
+                run_time = 0
+
+                t1 = datetime.datetime.now()
                 
                 try:
                     program.predict(dataset_params = {
@@ -148,6 +158,9 @@ class Command(BaseCommand):
                 except:
                     logger.error('program bet failed for race: {}'.format(race.id))
                     continue
+
+                t2 = datetime.datetime.now()
+                prediction_time = (t2 - t1).total_seconds()
 
                 if program.bets is None:
                     continue
@@ -171,14 +184,16 @@ class Command(BaseCommand):
                         'provider': provider,
                         'num': num,
                         'amount': amount,
-                        'program': str(program)
+                        'program': str(program),
+                        'scrap_time': scrap_time,
+                        'prediction_time': prediction_time
                     })
 
         if len(bets) > 0:
-            try:
-                self.better.bet(date=race.start_at, session_num=race.session.num, race_num=race.num, bets=bets, simulation=self.simulation)
-            except:
-                logger.error('bet failed: {}'.format(sys.exc_info()[0]))
+            #try:
+            self.better.bet(date=race.start_at, session_num=race.session.num, race_num=race.num, bets=bets, simulation=self.simulation)
+            #except:
+            #logger.error('bet failed: {}'.format(sys.exc_info()[0]))
 
 
     def get_next_race(self, exclude=None):

@@ -1,25 +1,11 @@
-const
-    HeadlessChrome = require('simple-headless-chrome')
-process = require('process')
-fs = require('fs')
+const 
+    puppeteer = require('puppeteer')
+    process = require('process')
+    fs = require('fs')
     ;
 
 
 var config = JSON.parse(fs.readFileSync('./scripts/bet_config.json', 'utf8'));
-
-const browser = new HeadlessChrome({
-    headless: !!config.headless, // If you turn this off, you can actually see the browser navigate with your instructions
-    // see above if using remote interface
-    chrome: {
-        flags: ['--disable-gpu', '--window-size=1440,900', '--enable-logging'],
-        //flags: ['--headless', '--disable-gpu', '--window-size=1280,1696', '--enable-logging'],
-        noSandbox: true
-    },
-    deviceMetrics: {
-        //fitWindow: true
-    }
-})
-
 
 var address, bet, bets, num, typebet, simulation = false;
 
@@ -28,25 +14,24 @@ var debug = 1;
 async function play() {
     console.log('init browser');
 
-    await browser.init();
+    const browser = await puppeteer.launch({headless: !!config.headless});
 
     console.log('open new tab');
 
-    const mainTab = await browser.newTab({ privateTab: false })
-    //await mainTab.resizeFullScreen()
-
-    mainTab.onConsole(function (msg) {
+    const page = await browser.newPage();
+    
+    page.on('console', function (msg) {
         console.log(msg)
     })
 
     console.log('open address');
 
-    await mainTab.goTo(address);
-    await mainTab.wait(2000);
+    await page.goto(address);
+    await page.waitFor(2000);
 
     console.log('login');
 
-    await mainTab.evaluate(function (config) {
+    await page.evaluate(function (config) {
 
         $('.login-input[name="username"]')[0].value = config.unibet.user_id
         $('.login-input[name="password"]')[0].value = config.unibet.user_password
@@ -56,20 +41,20 @@ async function play() {
         
     }, config)
 
-    await mainTab.wait(3000);
+    await page.waitFor(3000);
 
     console.log('logout')
 
-    await mainTab.evaluate(function() {
+    await page.evaluate(function() {
         $('.ui-action-logout')[0].click()
     })
 
-    await mainTab.wait(2000);
+    await page.waitFor(2000);
 
 
     console.log('login');
 
-    await mainTab.evaluate(function (config) {
+    await page.evaluate(function (config) {
 
         $('.login-input[name="username"]')[0].value = config.unibet.user_id
         $('.login-input[name="password"]')[0].value = config.unibet.user_password
@@ -79,27 +64,30 @@ async function play() {
         
     }, config)
 
-    await mainTab.wait(3000);
+    await page.waitFor(3000);
 
 
-    const loginPopup = await mainTab.evaluate(function () {
+    const loginPopup = await page.evaluate(function () {
         return $('#modal-arjel-confirm').is(':visible')
     })
 
-    console.log(loginPopup.result.value)
+    console.log(loginPopup)
 
-    if (loginPopup.result.value) {
-        await mainTab.evaluate(function () {
+    if (loginPopup) {
+        await page.evaluate(function () {
+            if($('#arjel_terms_checkbox').length) {
+                $('#arjel_terms_checkbox')[0].click()
+            }
             $('#modal-arjel-confirm')[0].click()
         })
-        await mainTab.wait(2000);
+        await page.waitFor(2000);
     }
 
-    await mainTab.evaluate(function() {
+    await page.evaluate(function() {
         $('a[data-turf-category="SIMPLE"]')[0].click()
     })
 
-    await mainTab.wait(3000);
+    await page.waitFor(3000);
 
     var b_idx = 0;
     for(;b_idx<bets.length;b_idx++) {
@@ -107,21 +95,21 @@ async function play() {
         num = bets[b_idx][0]
         bet = bets[b_idx][1]
 
-        await mainTab.evaluate(function(num) {
+        await page.evaluate(function(num) {
             $('li[data-runner-rank="' + num + '"] i.bet[data-turf-bettype-id="1"]')[0].click()
         }, num)
 
     }
 
-    await mainTab.wait(3000);
+    await page.waitFor(3000);
 
-    await mainTab.evaluate(function() {
+    await page.evaluate(function() {
         $('a#turf_betslip_place')[0].click()
     })
 
-    await mainTab.wait(30000);
+    await page.waitFor(30000);
 
-    await mainTab.evaluate(function(simulation) {
+    await page.evaluate(function(simulation) {
         console.log('bet validate button exists', $('#turf_betslip_confirm').attr('class'));
 
         if( !simulation ) {
@@ -130,7 +118,7 @@ async function play() {
         }
     }, simulation)
 
-    await mainTab.wait(1000);
+    await page.waitFor(1000);
     
     await browser.close()
 
@@ -156,7 +144,6 @@ if (process.argv.length != 6) {
         new Promise(function (_, reject) { setTimeout(function () { reject(new Error('timeout')) }, 60000) })
     ]).catch(function (err) {
         console.log(err);
-        browser.close();
         process.exit(1);
     })
 }

@@ -1,24 +1,10 @@
 const
-    HeadlessChrome = require('simple-headless-chrome')
-process = require('process')
-fs = require('fs')
+    puppeteer = require('puppeteer')
+    process = require('process')
+    fs = require('fs')
     ;
 
-
 var config = JSON.parse(fs.readFileSync('./scripts/bet_config.json', 'utf8'));
-
-const browser = new HeadlessChrome({
-    headless: !!config.headless, // If you turn this off, you can actually see the browser navigate with your instructions
-    // see above if using remote interface
-    chrome: {
-        flags: ['--disable-gpu', '--window-size=1280,1696', '--enable-logging'],
-        //flags: ['--headless', '--disable-gpu', '--window-size=1280,1696', '--enable-logging'],
-        noSandbox: true
-    },
-    deviceMetrics: {
-        //fitWindow: true
-    }
-})
 
 var address, bet, bets, num, typebet, simulation = false;
 
@@ -27,31 +13,30 @@ var debug = 1;
 async function play() {
     console.log('init browser');
 
-    await browser.init();
+    const browser = await puppeteer.launch({headless: !!config.headless});
 
     console.log('open new tab');
 
-    const mainTab = await browser.newTab({ privateTab: false })
-    await mainTab.resizeFullScreen()
-
-    mainTab.onConsole(function (msg) {
+    const page = await browser.newPage();
+    
+    page.on('console', function (msg) {
         console.log(msg)
     })
 
     console.log('open address');
 
-    await mainTab.goTo(address);
-    await mainTab.wait(2000);
+    await page.goto(address);
+    await page.waitFor(2000);
 
-    await mainTab.inject('jQuery');
+    await page.addScriptTag({url: 'https://code.jquery.com/jquery-3.2.1.min.js'})
 
-    mainTab.evaluate(function () {
+    page.evaluate(function () {
         console.log('window.screen', window.screen)
     })
 
     console.log('login');
 
-    await mainTab.evaluate(function (config) {
+    await page.evaluate(function (config) {
         $('#numeroExterne').val(config.pmu.user_id);
 
         $('button.session-btn--submit').click();
@@ -64,23 +49,23 @@ async function play() {
         $('#code.form-input-code').val(config.pmu.user_password);
     }, config)
 
-    await mainTab.wait(1000);
+    await page.waitFor(1000);
 
-    await mainTab.evaluate(function () {
+    await page.evaluate(function () {
         $('input.button--confirm').click();
     });
 
-    await mainTab.wait(1000);
+    await page.waitFor(1000);
 
-    const loginPopup = await mainTab.evaluate(function () {
+    const loginPopup = await page.evaluate(function () {
         return $('.btn.cm-confirm').is(':visible')
     })
 
     if (loginPopup) {
-        await mainTab.evaluate(function () {
+        await page.evaluate(function () {
             $('.btn.cm-confirm').click();
         })
-        await mainTab.wait(1000);
+        await page.waitFor(1000);
     }
 
     var b_idx = 0;
@@ -89,7 +74,7 @@ async function play() {
         num = bets[b_idx][0]
         bet = bets[b_idx][1]
 
-        await mainTab.evaluate(function (num, bet, typebet, simulation) {
+        await page.evaluate(function (num, bet, typebet, simulation) {
             $('a.E_SIMPLE')[0].click();
 
             console.log('num', num, 'bet', bet);
@@ -97,9 +82,9 @@ async function play() {
             $('#participant-check-' + num)[0].click();
         }, num, bet, typebet, simulation)
 
-        await mainTab.wait(1000);
+        await page.waitFor(1000);
 
-        await mainTab.evaluate(function (num, bet, typebet, simulation) {
+        await page.evaluate(function (num, bet, typebet, simulation) {
             console.log($('#pari-variant-GAGNANT').attr('class'))
 
             if (typebet == 'gagnant')
@@ -120,9 +105,9 @@ async function play() {
         }, num, bet, typebet, simulation)
 
         if( b_idx != bets.length-1 )
-            await mainTab.wait(3000);
+            await page.waitFor(3000);
         else 
-            await mainTab.wait(1000);
+            await page.waitFor(1000);
     }
 
     await browser.close()
@@ -149,7 +134,6 @@ if (process.argv.length != 6) {
         new Promise(function (_, reject) { setTimeout(function () { reject(new Error('timeout')) }, 60000) })
     ]).catch(function (err) {
         console.log(err);
-        browser.close();
         process.exit(1);
     })
 }

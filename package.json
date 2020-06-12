@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/pourquoi/cataclop#readme",
   "dependencies": {
-    "simple-headless-chrome": "^4.3.10"
+    "puppeteer": "^3.3.0"
   }
 }

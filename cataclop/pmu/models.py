@@ -21,5 +21,13 @@ class Bet(models.Model):
 
     program = models.TextField(null=True)
 
+    provider = models.TextField(null=True)
+
+    stats_scrap_time = models.IntegerField(null=True)
+
+    stats_prediction_time = models.IntegerField(null=True)
+
+    stats_bet_time = models.IntegerField(null=True)
+
     def __str__(self):
         return '{}'.format(self.url)
