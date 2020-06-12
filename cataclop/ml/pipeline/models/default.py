@@ -40,6 +40,8 @@ class Model(factories.Model):
         self.params['features'] = self.features
         self.params['categorical_features'] = self.categorical_features
 
+        self.loaded = False
+
         # this will be filled in train or load methods
         self.models = []
 
@@ -103,9 +105,12 @@ class Model(factories.Model):
         return None
         #return (df['start_at'] > '2019-06-01') & (df['start_at'] < '2019-08-01')
 
-    def load(self):
-        self.models = load(open(os.path.join(self.data_dir, 'models.joblib'), 'rb'))
-        self.stacked_models = load(open(os.path.join(self.data_dir, 'stacked_models.joblib'), 'rb'))
+    def load(self, force=False):
+        if not self.loaded or force:
+            self.models = load(open(os.path.join(self.data_dir, 'models.joblib'), 'rb'))
+            self.stacked_models = load(open(os.path.join(self.data_dir, 'stacked_models.joblib'), 'rb'))
+
+        self.loaded = True
 
     def save(self, clear=False):
 

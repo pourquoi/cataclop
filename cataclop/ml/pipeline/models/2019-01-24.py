@@ -38,6 +38,8 @@ class Model(factories.Model):
         self.params['features'] = self.features
         self.params['categorical_features'] = self.categorical_features
 
+        self.loaded = False
+
         # this will be filled in train or load methods
         self.models = []
 
@@ -93,11 +95,14 @@ class Model(factories.Model):
 
         return stacked_features
 
-    def load(self):
-        self.models = load(os.path.join(self.data_dir, 'models.joblib'))
-        stacked_models = load(os.path.join(self.data_dir, 'stacked_models.joblib'))
+    def load(self, force=False):
+        if not self.loaded or force:
+            self.models = load(os.path.join(self.data_dir, 'models.joblib'))
+            stacked_models = load(os.path.join(self.data_dir, 'stacked_models.joblib'))
 
-        self.stacked_models = [model for model in stacked_models if model['name'] == 'mlp_relu']
+            self.stacked_models = [model for model in stacked_models if model['name'] == 'mlp_relu']
+
+        self.loaded = True
 
     def save(self, clear=False):
 

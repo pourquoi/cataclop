@@ -38,6 +38,8 @@ class Model(factories.Model):
         self.params['features'] = self.features
         self.params['categorical_features'] = self.categorical_features
 
+        self.loaded = False
+
         # this will be filled in train or load methods
         self.models = [{
             'name': 'num'
@@ -80,7 +82,7 @@ class Model(factories.Model):
         return ['category', 'sub_category', 'country']
 
     def load(self):
-        pass
+        self.loaded = True
 
     def save(self, clear=False):
         pass

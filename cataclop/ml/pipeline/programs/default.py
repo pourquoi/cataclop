@@ -56,11 +56,12 @@ class Program(factories.Program):
         dataset = factories.Dataset.factory(self.name if kwargs.get('locked') else kwargs.get('dataset', 'default'), params=dataset_params, version='1.4')
         dataset.load(force=kwargs.get('dataset_reload', False))
 
-        model_params = {}
-        if kwargs.get('model_params') is not None:
-            model_params.update(kwargs.get('model_params'))
+        if self.model is None or mode != 'predict':
+            model_params = {}
+            if kwargs.get('model_params') is not None:
+                model_params.update(kwargs.get('model_params'))
 
-        self.model = factories.Model.factory(self.name if kwargs.get('locked') else kwargs.get('model', 'default'), params=model_params, dataset=dataset, version='1.0')
+            self.model = factories.Model.factory(self.name if kwargs.get('locked') else kwargs.get('model', 'default'), params=model_params, dataset=dataset, version='1.0')
 
         if mode == 'train':
             self.df = self.model.train(dataset)

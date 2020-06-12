@@ -38,6 +38,8 @@ class Model(factories.Model):
         self.params['features'] = self.features
         self.params['categorical_features'] = self.categorical_features
 
+        self.loaded = False
+
         # this will be filled in train or load methods
         self.models = []
 
@@ -77,8 +79,11 @@ class Model(factories.Model):
     def categorical_features(self):
         return ['category', 'sub_category', 'country']
 
-    def load(self):
-        self.models = load(os.path.join(self.data_dir, 'models.joblib'))
+    def load(self, force=False):
+        if not self.loaded or force:
+            self.models = load(os.path.join(self.data_dir, 'models.joblib'))
+
+        self.loaded = True
 
     def save(self, clear=False):
 
