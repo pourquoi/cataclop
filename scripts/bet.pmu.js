@@ -13,7 +13,10 @@ var debug = 1;
 async function play() {
     console.log('init browser');
 
-    const browser = await puppeteer.launch({headless: !!config.headless});
+    const browser = await puppeteer.launch({
+        headless: !!config.headless,
+        args: [`--window-size=1366,768`]
+    });
 
     console.log('open new tab');
 
@@ -65,7 +68,7 @@ async function play() {
         await page.evaluate(function () {
             $('.btn.cm-confirm').click();
         })
-        await page.waitFor(1000);
+        await page.waitFor(3000);
     }
 
     var b_idx = 0;

@@ -4,6 +4,7 @@
 
 # libs
 node_modules
+build
 
 # cache
 *.py[cod]
@@ -11,10 +12,11 @@ node_modules
 # notebooks
 .ipynb_checkpoints
 
-# secrets
+# config
 my.cnf
 cataclop/settings.py
 scripts/bet_config.json
+uwsgi.ini
 
 # data
 var/data/*
