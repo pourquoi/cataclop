@@ -5,7 +5,7 @@ from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -26,7 +26,7 @@ from cataclop.ml.pipeline import factories
 class BaseView(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action == 'list':
-            permission_classes = [IsAuthenticated]
+            permission_classes = [AllowAny]
         else:
             permission_classes = [IsAdmin]
         return [permission() for permission in permission_classes]
@@ -64,6 +64,10 @@ class RaceSessionViewSet(BaseView):
     queryset = RaceSession.objects.all()
     serializer_class = RaceSessionSerializer
 
+    permission_classes = [AllowAny]
+
+    filterset_fields = ('date', 'num')
+
     def get_queryset(self):
         q = self.queryset.order_by('-date', 'num')
         return q
@@ -71,6 +75,10 @@ class RaceSessionViewSet(BaseView):
 class RaceViewSet(BaseView):
     queryset = Race.objects.all()
     serializer_class = RaceSerializer
+
+    permission_classes = [AllowAny]
+
+    filterset_fields = ('start_at', 'num')
 
     def get_queryset(self):
         q = self.queryset.order_by('-start_at')
@@ -85,6 +93,8 @@ class PlayerViewSet(BaseView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
 
+    permission_classes = [AllowAny]
+
     def get_queryset(self):
         q = self.queryset.order_by('num')
 
@@ -96,21 +106,32 @@ class TrainerViewSet(BaseView):
     queryset = Trainer.objects.all()
     serializer_class = TrainerSerializer
 
+    permission_classes = [AllowAny]
+
 class JockeyViewSet(BaseView):
     queryset = Jockey.objects.all()
     serializer_class = JockeySerializer
+
+    permission_classes = [AllowAny]
 
 class OwnerViewSet(BaseView):
     queryset = Owner.objects.all()
     serializer_class = OwnerSerializer
 
+    permission_classes = [AllowAny]
+
 class HerderViewSet(BaseView):
     queryset = Herder.objects.all()
     serializer_class = HerderSerializer
 
+    permission_classes = [AllowAny]
+
 class BetViewSet(BaseView):
     queryset = Bet.objects.all()
     serializer_class = BetSerializer
+
+    def get_permissions(self):
+        return [IsAdmin]
 
     def get_queryset(self):
         q = self.queryset.order_by('-created_at')
@@ -145,6 +166,7 @@ def predict(request):
 
 
 @api_view(['get'])
+@permission_classes([IsAdmin])
 def stats(self, request, pk=None):
     stats = Bet.objects.filter(simulation=False, player__isnull=False).values('program')\
         .annotate(pcount=Count('program'), win=Sum('player__winner_dividend'))

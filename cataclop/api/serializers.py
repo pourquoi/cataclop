@@ -28,8 +28,14 @@ class RaceSerializer(serializers.ModelSerializer):
         model = Race
         fields = '__all__'
 
+class SimpleRaceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Race
+        fields = ('num', 'start_at', 'declared_player_count', 'sub_category', 'category', 'prize')
+
 class RaceSessionSerializer(serializers.ModelSerializer):
-    race_set = RaceSerializer(many=True)
+    race_set = SimpleRaceSerializer(many=True)
 
     class Meta:
         model = RaceSession
