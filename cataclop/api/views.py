@@ -5,16 +5,19 @@ from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 
 from django_filters.rest_framework import DjangoFilterBackend
 
 from django.db.models import Count, Avg, Sum
 
 from .serializers import (
-    UserSerializer, RaceSerializer, BetSerializer, RaceSessionSerializer,
-    HippodromeSerializer, HorseSerializer, OwnerSerializer, HerderSerializer, JockeySerializer,
-    TrainerSerializer, PlayerSerializer
+    FullUserSerializer, UserSerializer, 
+    ListRaceSerializer, SimpleRaceSerializer, RaceSerializer, 
+    RaceSessionSerializer,
+    PlayerSerializer,
+    HippodromeSerializer, HorseSerializer, OwnerSerializer, HerderSerializer, JockeySerializer, TrainerSerializer,
+    BetSerializer
 )
 from .auth import IsAdmin
 from cataclop.users.models import User
@@ -22,11 +25,39 @@ from cataclop.core.models import RaceSession, Race, Player, Hippodrome, Horse, T
 from cataclop.pmu.models import Bet
 from cataclop.ml.pipeline import factories
 
+class MultiSerializerViewSetMixin(object):
+    def get_serializer_class(self):
+        """
+        Look for serializer class in self.serializer_action_classes, which
+        should be a dict mapping action name (key) to serializer class (value),
+        i.e.:
+
+        class MyViewSet(MultiSerializerViewSetMixin, ViewSet):
+            serializer_class = MyDefaultSerializer
+            serializer_action_classes = {
+               'list': MyListSerializer,
+               'my_action': MyActionSerializer,
+            }
+
+            @action
+            def my_action:
+                ...
+
+        If there's no entry for that action then just fallback to the regular
+        get_serializer_class lookup: self.serializer_class, DefaultSerializer.
+
+        """
+        try:
+            return self.serializer_action_classes[self.action]
+        except (KeyError, AttributeError):
+            return super(MultiSerializerViewSetMixin, self).get_serializer_class()
 
 class BaseView(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action == 'list':
             permission_classes = [AllowAny]
+        elif self.action == 'retrieve':
+            permission_classes = [IsAuthenticatedOrReadOnly]
         else:
             permission_classes = [IsAdmin]
         return [permission() for permission in permission_classes]
@@ -46,11 +77,12 @@ class AuthToken(ObtainAuthToken):
         })
 
 class UserViewSet(BaseView):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return FullUserSerializer
+        return UserSerializer
 
     def get_object(self):
         pk = self.kwargs.get('pk')
@@ -72,9 +104,13 @@ class RaceSessionViewSet(BaseView):
         q = self.queryset.order_by('-date', 'num')
         return q
 
-class RaceViewSet(BaseView):
+class RaceViewSet(MultiSerializerViewSetMixin, BaseView):
     queryset = Race.objects.all()
     serializer_class = RaceSerializer
+
+    serializer_action_classes = {
+        "list": ListRaceSerializer
+    }
 
     permission_classes = [AllowAny]
 

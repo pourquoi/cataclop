@@ -49,8 +49,6 @@ class RaceSession(models.Model):
 
     hippodrome = models.ForeignKey('Hippodrome', on_delete=models.CASCADE)
 
-    objects = managers.RaceSessionQuerySet.as_manager()
-
     def __str__(self):
         return u'{} R{} {}'.format(self.date, self.num, self.hippodrome)
 
