@@ -123,6 +123,15 @@ class RaceViewSet(MultiSerializerViewSetMixin, BaseView):
             date = datetime.datetime.strptime(self.request.query_params.get('date'), '%Y-%m-%d')
             q = q.filter(start_at__date = date.date())
 
+        if self.request.query_params.get('horse'):
+            q = q.filter(player__horse__id = self.request.query_params.get('horse'))
+
+        if self.request.query_params.get('jockey'):
+            q = q.filter(player__jockey__id = self.request.query_params.get('jockey'))
+
+        if self.request.query_params.get('trainer'):
+            q = q.filter(player__trainer__id = self.request.query_params.get('trainer'))
+
         return q
 
 class PlayerViewSet(BaseView):
@@ -138,11 +147,23 @@ class HorseViewSet(BaseView):
     queryset = Horse.objects.all()
     serializer_class = HorseSerializer
 
+    def get_queryset(self):
+        q = self.queryset.order_by('name')
+        if self.request.query_params.get('q'):
+            q = q.filter(name__icontains=self.request.query_params.get('q'))
+        return q
+
 class TrainerViewSet(BaseView):
     queryset = Trainer.objects.all()
     serializer_class = TrainerSerializer
 
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        q = self.queryset.order_by('name')
+        if self.request.query_params.get('q'):
+            q = q.filter(name__icontains=self.request.query_params.get('q'))
+        return q
 
 class JockeyViewSet(BaseView):
     queryset = Jockey.objects.all()
@@ -150,17 +171,35 @@ class JockeyViewSet(BaseView):
 
     permission_classes = [AllowAny]
 
+    def get_queryset(self):
+        q = self.queryset.order_by('name')
+        if self.request.query_params.get('q'):
+            q = q.filter(name__icontains=self.request.query_params.get('q'))
+        return q
+
 class OwnerViewSet(BaseView):
     queryset = Owner.objects.all()
     serializer_class = OwnerSerializer
 
     permission_classes = [AllowAny]
 
+    def get_queryset(self):
+        q = self.queryset.order_by('name')
+        if self.request.query_params.get('q'):
+            q = q.filter(name__icontains=self.request.query_params.get('q'))
+        return q
+
 class HerderViewSet(BaseView):
     queryset = Herder.objects.all()
     serializer_class = HerderSerializer
 
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        q = self.queryset.order_by('name')
+        if self.request.query_params.get('q'):
+            q = q.filter(name__icontains=self.request.query_params.get('q'))
+        return q
 
 class BetViewSet(BaseView):
     queryset = Bet.objects.all()
