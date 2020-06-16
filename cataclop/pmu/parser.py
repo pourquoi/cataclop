@@ -235,16 +235,19 @@ class PmuParser:
         if self.predict:
             from cataclop.ml.pipeline import factories
         
-            program = factories.Program.factory('position_prediction')
-            program.predict(dataset_params = {
-                'race_id': race.id
-            }, locked=True, dataset_reload=True)
+            try:
+                program = factories.Program.factory('position_prediction')
+                program.predict(dataset_params = {
+                    'race_id': race.id
+                }, locked=True, dataset_reload=True)
 
-            program.df.set_index('id', drop=False, inplace=True)
+                program.df.set_index('id', drop=False, inplace=True)
 
-            for p in race.player_set.all():
-                p.position_prediction = program.df.loc[p.id, 'pred']
-                p.save()
+                for p in race.player_set.all():
+                    p.position_prediction = program.df.loc[p.id, 'pred']
+                    p.save()
+            except Exception as err:
+                logger.error("Parser prediction failed: {}".format(err.message))
 
         return race
 

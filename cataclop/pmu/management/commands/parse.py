@@ -31,6 +31,8 @@ parse "2018-01-*"
             pattern = datetime.date.today().isoformat()
         elif pattern == 'yesterday':
             pattern = (datetime.date.today() - datetime.timedelta(1)).isoformat()
+        elif pattern == 'tomorrow':
+            pattern = (datetime.date.today() + datetime.timedelta(1)).isoformat()
 
         patterns = pattern.split()
 
