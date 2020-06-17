@@ -108,9 +108,9 @@ class RaceViewSet(MultiSerializerViewSetMixin, BaseView):
     queryset = Race.objects.all()
     serializer_class = RaceSerializer
 
-    serializer_action_classes = {
-        "list": ListRaceSerializer
-    }
+    #serializer_action_classes = {
+    #    "list": ListRaceSerializer
+    #}
 
     permission_classes = [AllowAny]
 
