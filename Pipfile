@@ -36,6 +36,7 @@ django-filter = "*"
 trueskill = "*"
 django-cursor-pagination = "*"
 dill = "*"
+django-redis = "*"
 
 [dev-packages]
 

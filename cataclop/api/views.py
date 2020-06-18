@@ -1,5 +1,7 @@
 import datetime
 
+from django.utils.decorators import method_decorator
+from .decorators import cache_page
 from rest_framework import viewsets
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -104,6 +106,10 @@ class RaceSessionViewSet(BaseView):
         q = self.queryset.order_by('-date', 'num')
         return q
 
+    @method_decorator(cache_page(60))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 class RaceViewSet(MultiSerializerViewSetMixin, BaseView):
     queryset = Race.objects.all()
     serializer_class = RaceSerializer
@@ -134,6 +140,10 @@ class RaceViewSet(MultiSerializerViewSetMixin, BaseView):
 
         return q
 
+    @method_decorator(cache_page(60))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 class PlayerViewSet(BaseView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
@@ -152,6 +162,10 @@ class HorseViewSet(BaseView):
         if self.request.query_params.get('q'):
             q = q.filter(name__icontains=self.request.query_params.get('q'))
         return q
+
+    @method_decorator(cache_page(60))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 class TrainerViewSet(BaseView):
     queryset = Trainer.objects.all()
