@@ -60,12 +60,17 @@ class PmuScrapper:
                 with open(f, 'r') as data_file:
                     data = json.load(data_file)
             else:
-                r = requests.get(url, params={'meteo': 'true', 'specialisation': 'INTERNET'})
+                try:
+                    r = requests.get(url, params={'meteo': 'true', 'specialisation': 'INTERNET'})
+                except requests.exceptions.RequestException as err:
+                    logger.error('request exception for url {}: {}'.format(url, err))
+                    return
+
                 if r.status_code == requests.codes.ok:
                     data = r.json()
                 else:
                     logger.error('request failed with status {}. {}'.format(r.status_code, url))
-                    return
+                    continue
 
             if not os.path.exists(os.path.dirname(f)):
                 os.makedirs(os.path.dirname(f))
@@ -92,8 +97,13 @@ class PmuScrapper:
                     # if race has ended, get the final odds
                     if( time_remaining < 0 and 'rapportsDefinitifsDisponibles' in race and race['rapportsDefinitifsDisponibles'] and not os.path.isfile(odds_file) ):
                         url = race_url + 'rapports-definitifs'
-                        r = requests.get(url, {'combinaisonEnTableau': 'true', 'specialisation': 'INTERNET'})
-                        if r.status_code == requests.codes.ok:
+                        r = None
+                        try:
+                            r = requests.get(url, {'combinaisonEnTableau': 'true', 'specialisation': 'INTERNET'})
+                        except requests.exceptions.RequestException as err:
+                            logger.error('request exception for url {}: {}'.format(url, err))
+
+                        if r is not None and r.status_code == requests.codes.ok:
                             data = r.json()
                             if data:
                                 with open(odds_file, 'w') as f:
@@ -119,7 +129,11 @@ class PmuScrapper:
 
                         if not os.path.isfile(race_file) or force_scrap_players:
 
-                            r = requests.get(url, {'specialisation': mode})
+                            try:
+                                r = requests.get(url, {'specialisation': mode})
+                            except requests.exceptions.RequestException as err:
+                                logger.error('request exception for {}: {}'.format(url, err))
+                                continue
 
                             if r.status_code == requests.codes.ok:
 
@@ -163,12 +177,17 @@ class UnibetScrapper:
                 with open(f, 'r') as data_file:
                     data = json.load(data_file)
             else:
-                r = requests.get(url, params={'date': date.strftime('%Y-%m-%d')})
+                try:
+                    r = requests.get(url, params={'date': date.strftime('%Y-%m-%d')})
+                except requests.exceptions.RequestException as err:
+                    logger.error('request exception for {}: {}'.format(url, err))
+                    return
+
                 if r.status_code == requests.codes.ok:
                     data = r.json()
                 else:
                     logger.error('request failed with status {}. {}'.format(r.status_code, url))
-                    return
+                    continue
 
             if not os.path.exists(os.path.dirname(f)):
                 os.makedirs(os.path.dirname(f))
@@ -187,7 +206,11 @@ class UnibetScrapper:
                     
                     if not os.path.isfile(race_file) or force_scrap_players:
 
-                        r = requests.get(url, {'raceId': race['zeturfId']})
+                        try:
+                            r = requests.get(url, {'raceId': race['zeturfId']})
+                        except requests.exceptions.RequestException as err:
+                            logger.error('request exception for {}: {}'.format(url, err))
+                            return
 
                         if r.status_code == requests.codes.ok:
 
