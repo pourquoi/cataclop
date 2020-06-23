@@ -95,7 +95,7 @@ class UserViewSet(BaseView):
         return super(UserViewSet, self).get_object()
 
 class RaceSessionViewSet(BaseView):
-    queryset = RaceSession.objects.all()
+    queryset = RaceSession.objects.select_related('hippodrome').all()
     serializer_class = RaceSessionSerializer
 
     permission_classes = [AllowAny]
@@ -111,7 +111,9 @@ class RaceSessionViewSet(BaseView):
         return super().dispatch(request, *args, **kwargs)
 
 class RaceViewSet(MultiSerializerViewSetMixin, BaseView):
-    queryset = Race.objects.all()
+    queryset = Race.objects.select_related('session', 'session__hippodrome')\
+        .prefetch_related('player_set', 'player_set__horse', 'player_set__herder', 'player_set__trainer', 'player_set__jockey', 'player_set__owner')\
+        .all()
     serializer_class = RaceSerializer
 
     #serializer_action_classes = {

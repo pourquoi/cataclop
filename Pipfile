@@ -37,6 +37,8 @@ trueskill = "*"
 django-cursor-pagination = "*"
 dill = "*"
 django-redis = "*"
+django-debug-toolbar = "*"
+django-debug-toolbar-request-history = "*"
 
 [dev-packages]
 
