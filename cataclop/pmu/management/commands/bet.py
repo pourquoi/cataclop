@@ -1,6 +1,7 @@
 import datetime
 import time
 import sys
+import math
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Count
@@ -109,10 +110,15 @@ class Command(BaseCommand):
 
         time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
 
-        while not self.immediate and time_remaining > 60*self.wait_until_minutes:
-            time.sleep(10)
-            race.refresh_from_db()
-            time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
+        if not self.immediate:
+            while time_remaining > 60*self.wait_until_minutes:
+                if not self.skip_scrap and time_remaining > 60*self.wait_until_minutes + 300 and math.floor(time_remaining/60.0) % 5 == 0:
+                    self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
+                    self.parser.parse()
+
+                time.sleep(10)
+                race.refresh_from_db()
+                time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
 
         # final scrap
 
