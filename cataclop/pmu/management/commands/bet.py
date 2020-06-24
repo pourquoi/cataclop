@@ -93,6 +93,8 @@ class Command(BaseCommand):
 
         checked_races = []
 
+        next_race = self.get_next_race()
+
         while len(programs) == 0:
 
             race = self.get_next_race(exclude=checked_races)
@@ -109,16 +111,18 @@ class Command(BaseCommand):
         next_race_queued.send(sender=self.__class__, race=str(race))
 
         time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
+        time_to_next_race = (next_race.start_at - datetime.datetime.now()).total_seconds()
 
         if not self.immediate:
             while time_remaining > 60*self.wait_until_minutes:
-                if not self.skip_scrap and time_remaining > 60*self.wait_until_minutes + 300 and math.floor(time_remaining/60.0) % 5 == 0:
+                if not self.skip_scrap and time_to_next_race < 60*60 and time_remaining > 60*self.wait_until_minutes + 60*5 and math.floor(time_remaining/60.0) % 5 == 0:
                     self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
                     self.parser.parse()
 
                 time.sleep(10)
                 race.refresh_from_db()
                 time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
+                time_to_next_race = (next_race.start_at - datetime.datetime.now()).total_seconds()
 
         # final scrap
 
