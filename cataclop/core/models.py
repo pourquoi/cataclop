@@ -1,6 +1,58 @@
+import string
 from django.db import models
 from . import managers
 
+
+CATEGORIES = (
+    { "id": "PLAT", "label": "Plat" },
+    { "id": "STEEPLECHASE", "label": "Steeple-chase" },
+    { "id": "HAIE", "label": "Saut de Haies" },
+    { "id": "ATTELE", "label": "Trot Attelé" },
+    { "id": "MONTE", "label": "Trot Monté" },
+    { "id": "CROSS", "label": "Cross-country" }
+)
+
+SUB_CATEGORIES = (
+    { "id": "GROUPE_I", "label": "Groupe I" },
+    { "id": "GROUPE_II", "label": "Groupe II" },
+    { "id": "GROUPE_III", "label": "Groupe III" },
+    { "id": "COURSE_A_CONDITIONS", "label": "Course à conditions" },
+    { "id": "HANDICAP_DE_CATEGORIE", "label": "Handicap de catégorie" },
+    { "id": "HANDICAP_CATEGORIE_DIVISE", "label": "Handicap de catégorie divisé" },
+    { "id": "NATIONALE", "label": "Nationale" },
+    { "id": "APPRENTIS_LADS_JOCKEYS", "label": "Apprentis" },
+    { "id": "HANDICAP", "label": "Handicap" },
+    { "id": "AUTOSTART", "label": "Autostart" },
+    { "id": "EUROPEENNE_AUTOSTART", "label": "Européenne - autostart" },
+    { "id": "EUROPEENNE", "label": "Européenne" },
+    { "id": "HANDICAP_DIVISE", "label": "Handicap divisé" },
+    { "id": "NATIONALE_AUTOSTART", "label": "Nationale - autostart" },
+    { "id": "AMATEURS", "label": "Amateurs" },
+    { "id": "A_RECLAMER_AUTOSTART", "label": "A réclamer - autostart" },
+    { "id": "APPRENTIS_LADS_JOCKEYS_EUROPEENNE", "label": "Apprentis - européenne" },
+    { "id": "INTERNATIONALE", "label": "Internationale" },
+    { "id": "INTERNATIONALE_AUTOSTART", "label": "Internationale - autostart" },
+    { "id": "AMATEURS_AUTOSTART", "label": "Amateurs - autostart" },
+    { "id": "COURSE_A_CONDITION_QUALIF_HP", "label": "Course à conditions" },
+    { "id": "APPRENTIS_LADS_JOCKEYS_AUTOSTART", "label": "Apprentis - autostart" },
+    { "id": "AMATEURS_NATIONALE", "label": "Amateurs - nationale" },
+    { "id": "APPRENTIS_LADS_JOCKEYS_A_RECLAMER_AUTOSTART", "label": "Apprentis à réclamer - autostart" },
+    { "id": "QUALIFICATION_ACCAF", "label": "Qualif. ACCAF" },
+    { "id": "AMATEURS_INTERNATIONALE_AUTOSTART", "label": "Amateurs - internationale - autostart" },
+    { "id": "A_RECLAMER_APPRENTIS_LADS_JOCKEYS", "label": "A réclamer - apprentis" },
+    { "id": "FINALE_REGIONALE_ACCAF", "label": "Finale ACCAF" },
+    { "id": "COURSE_INTERNATIONALE", "label": "Internationale" },
+    { "id": "AMATEURS_EUROPEENNE_AUTOSTART", "label": "Amateurs - européenne - autostart" },
+    { "id": "AMATEURS_EUROPEENNE", "label": "Amateurs - européenne" },
+    { "id": "AMATEURS_INTERNATIONALE", "label": "Amateurs - internationale" },
+    { "id": "A_RECLAMER_AMATEURS", "label": "A réclamer" },
+    { "id": "A_RECLAMER_AMATEURS_AUTOSTART", "label": "A réclamer" },
+    { "id": "AMATEURS_PRIORITE_AUX_PROPRIETAIRES", "label": "Amateurs - propriétaires" },
+    { "id": "COURSE_AP_EUROPEENNE", "label": "" },
+    { "id": "A_RECLAMER_EUROPEENNE", "label": "A réclamer - européenne" },
+    { "id": "AMATEURS_DAMES_AUTOSTART", "label": "Amateurs - dames" },
+    { "id": "INCONNU", "label": "" }
+)
 
 class Race(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
@@ -24,6 +76,14 @@ class Race(models.Model):
     declared_player_count = models.SmallIntegerField()
 
     session = models.ForeignKey('RaceSession', on_delete=models.CASCADE)
+
+    def get_category_label(self):
+        label = [c["label"] for c in CATEGORIES if c["id"] == self.category]
+        return label[0] if len(label) else string.capwords(self.category.lower().replace('_', ' '))
+
+    def get_sub_category_label(self):
+        label = [c["label"] for c in SUB_CATEGORIES if c["id"] == self.sub_category]
+        return label[0] if len(label) else string.capwords(self.sub_category.lower().replace('_', ' '))
 
     def get_player(self, num: int):
         """

@@ -4,6 +4,15 @@ from datetime import timedelta
 
 def deduplicate():
 
+    Race.objects.all().values('num', 'session__num', 'start_at__date', 'session__hippodrome_id').annotate(cnt=Count('num')).filter(cnt__gte=2) 
+
+    for race in races: 
+         t = list(Race.objects.filter(num=race['num'], session__num=race['session__num'], start_at__date=race['start_at__date'], session__hippodrome_id=race['session__hippodrome_id'])) 
+         i = 1 
+         while i < len(t): 
+             t[i].delete() 
+             i = i + 1 
+
     horses = Horse.objects.all().values('name', 'sex').annotate(cnt=Count('name')).filter(cnt__gte=2)
 
     for horse in horses: 

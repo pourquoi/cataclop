@@ -39,6 +39,8 @@ dill = "*"
 django-redis = "*"
 django-debug-toolbar = "*"
 django-debug-toolbar-request-history = "*"
+faker = "*"
+factory-boy = "*"
 
 [dev-packages]
 
