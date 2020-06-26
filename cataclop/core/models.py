@@ -3,6 +3,34 @@ from django.db import models
 from . import managers
 
 
+CONDITIONS_AGE = (
+    { "id": "DEUX_ANS", "label": "2 ans" },
+    { "id": "TROIS_ANS", "label": "3 ans" },
+    { "id": "QUATRE_ANS", "label": "4 ans" },
+    { "id": "CINQ_ANS", "label": "5 ans" },
+    { "id": "SIX_ANS", "label": "6 ans" },
+    { "id": "DEUX_ANS_ET_PLUS", "label": "2+ ans" },
+    { "id": "TROIS_ANS_ET_PLUS", "label": "3+ ans" },
+    { "id": "QUATRE_ANS_ET_PLUS", "label": "4+ ans" },
+    { "id": "CINQ_ANS_ET_PLUS", "label": "5+ ans" },
+    { "id": "CINQ_SIX_ANS", "label": "5, 6 ans" },
+    { "id": "QUATE_CINQ_SIX_ANS", "label": "4, 5, 6 ans" },
+    { "id": "DEUX_ET_TROIS_ANS", "label": "2, 3 ans" },
+    { "id": "TROIS_QUATRE_CINQ_ANS", "label": "3, 4, 5 ans" },
+    { "id": "DEUX_TROIS_QUATRE_ANS", "label": "2, 3, 4 ans" },
+    { "id": "INCONNU", "label": ""}
+)
+
+CONDITIONS_SEX = (
+    { "id": "FEMELLES", "label": "Femelles" },
+    { "id": "FEMELLES_ET_MALES", "label": "Femelles et mâles" },
+    { "id": "TOUS_CHEVAUX", "label": "Tous" },
+    { "id": "MALES_ET_HONGRES", "label": "Mâles et hongres" },
+    { "id": "MALES", "label": "Mâles" },
+    { "id": "FEMELLES_ET_HONGRES", "label": "Femelles et hongres" },
+    { "id": "HONGRES", "label": "Hongres" }
+)
+
 CATEGORIES = (
     { "id": "PLAT", "label": "Plat" },
     { "id": "STEEPLECHASE", "label": "Steeple-chase" },
@@ -84,6 +112,18 @@ class Race(models.Model):
     def get_sub_category_label(self):
         label = [c["label"] for c in SUB_CATEGORIES if c["id"] == self.sub_category]
         return label[0] if len(label) else string.capwords(self.sub_category.lower().replace('_', ' '))
+
+    def get_condition_sex_label(self):
+        if self.condition_sex is None:
+            return None
+        label = [c["label"] for c in CONDITIONS_SEX if c["id"] == self.condition_sex]
+        return label[0] if len(label) else string.capwords(self.category.lower().replace('_', ' '))
+
+    def get_condition_age_label(self):
+        if self.condition_age is None:
+            return None
+        label = [c["label"] for c in CONDITIONS_AGE if c["id"] == self.condition_age]
+        return label[0] if len(label) else string.capwords(self.category.lower().replace('_', ' '))
 
     def get_player(self, num: int):
         """

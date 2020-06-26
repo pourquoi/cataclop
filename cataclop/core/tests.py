@@ -28,6 +28,8 @@ class RaceModelTests(TestCase):
         self.assertEqual(race.get_category_label(), 'Some Category')
         self.assertEqual(race.get_sub_category_label(), 'Some Sub Category')
 
-        race = Race(category='PLAT', sub_category='HANDICAP')
+        race = Race(category='PLAT', sub_category='HANDICAP', condition_age='DEUX_TROIS_QUATRE_ANS', condition_sex='FEMELLES_ET_MALES')
         self.assertEqual(race.get_category_label(), 'Plat')
         self.assertEqual(race.get_sub_category_label(), 'Handicap')
+        self.assertEqual(race.get_condition_sex_label(), 'Femelles et mâles')
+        self.assertEqual(race.get_condition_age_label(), '2, 3, 4 ans')

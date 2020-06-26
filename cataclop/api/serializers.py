@@ -63,12 +63,20 @@ class SimpleRaceSessionSerializer(serializers.ModelSerializer):
         fields = ('id', 'num', 'hippodrome')
 
 class SimpleRaceSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Race
         fields = ('id', 'num', 'start_at', 'declared_player_count', 'sub_category', 'category', 'prize')
+    
+    category = serializers.CharField(source='get_category_label')
+    sub_category = serializers.CharField(source='get_sub_category_label')
+    condition_sex = serializers.CharField(source='get_condition_sex_label')
+    condition_age = serializers.CharField(source='get_condition_age_label')
+
 
 class RaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Race
+        fields = '__all__'
 
     player_set = PlayerSerializer(many=True, read_only=True)
 
@@ -76,10 +84,9 @@ class RaceSerializer(serializers.ModelSerializer):
 
     category = serializers.CharField(source='get_category_label')
     sub_category = serializers.CharField(source='get_sub_category_label')
+    condition_sex = serializers.CharField(source='get_condition_sex_label')
+    condition_age = serializers.CharField(source='get_condition_age_label')
 
-    class Meta:
-        model = Race
-        fields = '__all__'
 
 class ListRaceSerializer(serializers.ModelSerializer):
     session = SimpleRaceSessionSerializer(read_only=True)
