@@ -69,3 +69,4 @@ python manage.py shell_plus --notebook
 * do final edits of the created program and model python files
 * add the program name to the bet command
 * push the code and model dir to the remote betting machine
+
