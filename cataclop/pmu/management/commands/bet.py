@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
         print(options)
 
-        self.wait_until_minutes = 5
+        self.wait_until_minutes = 2
 
         self.load_programs()
         self.bet()
@@ -55,7 +55,7 @@ class Command(BaseCommand):
         if self.dummy:
             programs = ['dummy']
         else:
-            programs = ['2019-01-07', '2019-01-24', '2019-02-04', '2019-02-12', '2020-05-25']
+            programs = ['2019-01-24', '2020-05-25']
 
         for p in programs:
             program = factories.Program.factory(p)
@@ -149,7 +149,7 @@ class Command(BaseCommand):
 
             time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
 
-            if time_remaining > 60:
+            if time_remaining > 0:
 
                 run_time = 0
 

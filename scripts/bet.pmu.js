@@ -99,6 +99,8 @@ async function play() {
             $('.pari-mise-input').val(b);
             $('.pari-mise-input').change();
 
+            $('.btn-mise-increment').click();
+
             console.log('pari total', $('.pari-total').text());
             console.log('bet validate button exists', $('#pari-validate').attr('class'));
             
