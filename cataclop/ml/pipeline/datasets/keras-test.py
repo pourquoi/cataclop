@@ -107,8 +107,6 @@ class Dataset(factories.Dataset):
             races = races.filter(session__hippodrome__name__in=self.params.get('hippodrome'))
         if self.params.get('players') is not None:
             races = races.filter(declared_player_count=self.params.get('players'))
-        if self.params.get('prize_min') is not None:
-            races = races.filter(prize__gte=self.params.get('prize_min'))
 
         hippos = models.Hippodrome.objects.all()
 

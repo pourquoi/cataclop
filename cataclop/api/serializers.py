@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from cataclop.users.models import User
-from cataclop.core.models import RaceSession, Race, Player, Hippodrome, Horse, Trainer, Herder, Owner, Jockey
+from cataclop.core.models import RaceSession, Race, Player, Odds, Hippodrome, Horse, Trainer, Herder, Owner, Jockey
 from cataclop.pmu.models import Bet
 
 
@@ -53,6 +53,20 @@ class PlayerSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Player
+        fields = '__all__'
+
+class SimplePlayerSerialize(serializers.ModelSerializer):
+    horse = serializers.StringRelatedField(read_only=True)
+    
+    class Meta:
+        model = Player
+        fields = ('id', 'num', 'horse')
+
+class OddsSerializer(serializers.ModelSerializer):
+    player = SimplePlayerSerialize(read_only=True)
+
+    class Meta:
+        model = Odds
         fields = '__all__'
 
 class SimpleRaceSessionSerializer(serializers.ModelSerializer):

@@ -1,8 +1,9 @@
 import datetime
 
 from django.utils.decorators import method_decorator
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from .decorators import cache_page
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -18,14 +19,16 @@ from .serializers import (
     ListRaceSerializer, SimpleRaceSerializer, RaceSerializer, 
     RaceSessionSerializer,
     PlayerSerializer,
+    OddsSerializer,
     HippodromeSerializer, HorseSerializer, OwnerSerializer, HerderSerializer, JockeySerializer, TrainerSerializer,
     BetSerializer
 )
 from .auth import IsAdmin
 from cataclop.users.models import User
-from cataclop.core.models import RaceSession, Race, Player, Hippodrome, Horse, Trainer, Herder, Owner, Jockey
+from cataclop.core.models import RaceSession, Race, Player, Hippodrome, Horse, Trainer, Herder, Owner, Jockey, Odds
 from cataclop.pmu.models import Bet
 from cataclop.ml.pipeline import factories
+
 
 class MultiSerializerViewSetMixin(object):
     def get_serializer_class(self):
@@ -154,6 +157,23 @@ class PlayerViewSet(BaseView):
 
     def get_queryset(self):
         q = self.queryset.order_by('num')
+        return q
+
+class OddsViewSet(BaseView):
+    queryset = Odds.objects.prefetch_related('player').all()
+
+    serializer_class = OddsSerializer
+
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        q = self.queryset.order_by('-date')
+
+        if self.request.query_params.get('race'):
+            race_id = self.request.query_params.get('race')
+            q = q.filter(player__race__id=race_id)
+
+        return q
 
 class HorseViewSet(BaseView):
     queryset = Horse.objects.all()
@@ -221,8 +241,7 @@ class BetViewSet(BaseView):
     queryset = Bet.objects.all()
     serializer_class = BetSerializer
 
-    def get_permissions(self):
-        return [IsAdmin]
+    permission_classes = [IsAdmin]
 
     def get_queryset(self):
         q = self.queryset.order_by('-created_at')
@@ -232,6 +251,43 @@ class BetViewSet(BaseView):
             q = q.filter(created_at__date = date.date())
 
         return q
+
+@api_view(['post'])
+@permission_classes([IsAdmin])
+def post_live_odds(request):
+    now = datetime.datetime.now()
+    date = request.data.get('date', now.strftime('%Y-%m-%d'))
+    
+    R = request.data.get('R')
+    C = request.data.get('C')
+
+    try:
+        race = Race.objects.get(start_at__date=date, session__num=R, num=C)
+    except ObjectDoesNotExist:
+        return Response(None, status=status.HTTP_404_NOT_FOUND)
+    
+    for odds in request.data.get('odds'):
+        offline = odds.get('offline', False)
+        ts = odds.get('ts')
+        value = odds.get('value')
+        evolution = odds.get('evolution', 0)
+        player = race.get_player(odds.get('player'))
+        whale = odds.get('whale', False)
+
+        if player is None:
+            continue
+        
+        odds = Odds(value=value, is_final=False, is_final_ref=False)
+        odds.evolution = evolution
+        odds.date = datetime.datetime.fromtimestamp(ts)
+        odds.player = player
+        odds.whale = whale
+        odds.offline = offline
+
+        odds.save()
+
+    return Response()
+
 
 @api_view(['get'])
 @permission_classes([IsAdmin])
@@ -258,7 +314,7 @@ def predict(request):
 
 @api_view(['get'])
 @permission_classes([IsAdmin])
-def stats(self, request, pk=None):
+def stats(request, pk=None):
     stats = Bet.objects.filter(simulation=False, player__isnull=False).values('program')\
         .annotate(pcount=Count('program'), win=Sum('player__winner_dividend'))
     return Response(stats)

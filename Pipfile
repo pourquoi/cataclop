@@ -41,6 +41,13 @@ django-debug-toolbar = "*"
 django-debug-toolbar-request-history = "*"
 faker = "*"
 factory-boy = "*"
+jupyterlab = "*"
+tqdm = "*"
+uwsgi = "*"
+dash = "==1.19.0"
+pyjwt = "==1.7.1"
+python-dateutil = "*"
+celery = "*"
 
 [dev-packages]
 

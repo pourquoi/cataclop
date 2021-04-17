@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pourquoi/cataclop#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "puppeteer": "^3.3.0"
   }
 }

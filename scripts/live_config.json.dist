@@ -1,0 +1,5 @@
+{
+    "api_url": "http://local.cataclop:8000/api",
+    "api_email": "",
+    "api_password": ""
+}

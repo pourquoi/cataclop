@@ -175,7 +175,8 @@ class PmuParser:
                 if not player:
                     continue
 
-                player.odds_set.filter(offline=False).delete()
+                player.odds_set.filter(offline=False, is_final=True).delete()
+                player.odds_set.filter(offline=False, is_final_ref=True).delete()
 
                 if p.get('dernierRapportDirect'):
                     self.importOdds(p['dernierRapportDirect'], player, is_final=True, offline=False)
@@ -204,7 +205,8 @@ class PmuParser:
                         if not player:
                             continue
 
-                        player.odds_set.filter(offline=True).delete()
+                        player.odds_set.filter(offline=True, is_final=True).delete()
+                        player.odds_set.filter(offline=True, is_final_ref=True).delete()
 
                         if p.get('dernierRapportDirect'):
                             self.importOdds(p['dernierRapportDirect'], player, is_final=True, offline=True)

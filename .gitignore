@@ -16,7 +16,9 @@ build
 my.cnf
 cataclop/settings.py
 scripts/bet_config.json
+scripts/live_config.json
 uwsgi.ini
+docker-compose.override.yml
 
 # data
 var/data/*
