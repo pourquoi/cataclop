@@ -21,7 +21,7 @@ docker-compose up -d
 docker exec -it cataclop_app pipenv run python manage.py migrate
 ```
 
-### 2/ IMPORT DATA
+### 2/ OBTAIN THE JSON RACES FILES
 
 #### get the daily races JSON files
 * option 1 : extract an existing archive
@@ -37,13 +37,13 @@ eg. scrap all January 2021 races
 docker exec -it cataclop_app pipenv run python manage.py scrap "2021-01-01" "2021-01-31"
 ```
 
-#### then import the JSON files
+### 3/ IMPORT THE JSON FILES
 eg. import Janurary 2021 races
 ```
 docker exec -it cataclop_app pipenv run python manage.py parse "2021-01-*"
 ```
 
-### 3/ TRAIN MODELS
+### 4/ TRAIN MODELS
 ```
 docker exec -it cataclop_app pipenv run python manage.py shell_plus --notebook
 ```
