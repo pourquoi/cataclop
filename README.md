@@ -23,7 +23,6 @@ docker exec -it cataclop_app pipenv run python manage.py migrate
 
 ### 2/ OBTAIN THE JSON RACES FILES
 
-#### get the daily races JSON files
 * option 1 : extract an existing archive
 
 ```
