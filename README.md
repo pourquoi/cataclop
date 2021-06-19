@@ -24,20 +24,20 @@ docker exec -it cataclop_app pipenv run python manage.py migrate
 ### 2/ IMPORT DATA
 
 #### get the daily races JSON files
-option 1 : extract an existing archive
+* option 1 : extract an existing archive
 
 ```
 tar xzvf var/races-2021-01.tgz -C var/scrap
 ```
 
-option 2 : scrapping
+* option 2 : scrapping
 
 eg. scrap all January 2021 races
 ```
 docker exec -it cataclop_app pipenv run python manage.py scrap "2021-01-01" "2021-01-31"
 ```
 
-#### import the JSON files
+#### then import the JSON files
 eg. import Janurary 2021 races
 ```
 docker exec -it cataclop_app pipenv run python manage.py parse "2021-01-*"
@@ -47,7 +47,7 @@ docker exec -it cataclop_app pipenv run python manage.py parse "2021-01-*"
 ```
 docker exec -it cataclop_app pipenv run python manage.py shell_plus --notebook
 ```
-click on the output link to access the jupyter notebooks
+open the output link in your navigator to access the jupyter notebooks
 
 open the *exploration* notebook to get an overview of the data
 open the *onboarding* notebook for a quick start on creating models
