@@ -27,7 +27,6 @@ sentry-sdk = "==0.5.5"
 joblib = "*"
 xgboost = "~=0.9"
 seaborn = "*"
-keras = "*"
 theano = "*"
 scikit-optimize = "*"
 gunicorn = "*"
@@ -45,11 +44,12 @@ jupyterlab = "*"
 tqdm = "*"
 uwsgi = "*"
 dash = "==1.19.0"
-pyjwt = "==1.7.1"
 python-dateutil = "*"
 celery = "*"
+keras = "*"
+tensorflow = "==2.4.1"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"

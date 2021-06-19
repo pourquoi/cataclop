@@ -11,9 +11,12 @@ build
 
 # notebooks
 .ipynb_checkpoints
+.Trash-0
+notebooks/sandbox/*
+!notebooks/sandbox/.gitkeep
 
 # config
-my.cnf
+.env
 cataclop/settings.py
 scripts/bet_config.json
 scripts/live_config.json
@@ -25,6 +28,7 @@ var/data/*
 !var/data/.gitkeep
 var/models/*
 !var/models/.gitkeep
-var/next_race
-var/logs/*
 var/scrap/*
+!var/scrap/.gitkeep
+var/logs/*
+docker/data/mysql

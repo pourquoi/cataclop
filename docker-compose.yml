@@ -1,6 +1,44 @@
 version: "3.2"
 
 services:
+  app:
+    container_name: cataclop_app
+    build: .
+    command: tail -f /dev/null
+    ports:
+      - "8082:8082" # api
+      - "8888:8888" # notebook
+    volumes:
+      - .env:/app/.env
+      - ./cataclop:/app/cataclop
+      - ./var:/app/var
+      - ./notebooks:/app/notebooks
+      - ./docker/ipython_config.py:/root/.ipython/profile_default/ipython_config.py
+    networks:
+      - cataclop_internal
+    depends_on:
+      - db
+
+  db:
+    container_name: cataclop_db
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: pass1234
+      MYSQL_USER: cataclop
+      MYSQL_PASSWORD: cataclop
+    volumes:
+      - ./docker/data/mysql:/var/lib/mysql:rw
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    networks:
+      - cataclop_internal
+
   rabbit:
     container_name: cataclop_rabbit
     image: rabbitmq
+
+networks:
+  cataclop_internal: 
+    driver: bridge 
+      
+volumes:
+  cataclop_db:

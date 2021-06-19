@@ -287,25 +287,31 @@ class PmuParser:
             except MultipleObjectsReturned:
                 owner = Owner.objects.filter(name=p['proprietaire'].upper())[0]
 
-        try:
-            jockey = Jockey.objects.get(name=p['driver'].upper())
-        except ObjectDoesNotExist:
-            jockey = Jockey(name=p['driver'].upper())
-            if not self.dry_run:
-                jockey.save()
-        # BC fix
-        except MultipleObjectsReturned:
-            jockey = Jockey.objects.filter(name=p['driver'].upper())[0]
+        if not p.get('driver'):
+            jockey = None
+        else:
+            try:
+                jockey = Jockey.objects.get(name=p['driver'].upper())
+            except ObjectDoesNotExist:
+                jockey = Jockey(name=p['driver'].upper())
+                if not self.dry_run:
+                    jockey.save()
+            # BC fix
+            except MultipleObjectsReturned:
+                jockey = Jockey.objects.filter(name=p['driver'].upper())[0]
 
-        try:
-            trainer = Trainer.objects.get(name=p['entraineur'].upper())
-        except ObjectDoesNotExist:
-            trainer = Trainer(name=p['entraineur'].upper())
-            if not self.dry_run:
-                trainer.save()
-        # BC fix
-        except MultipleObjectsReturned:
-            trainer = Trainer.objects.get(name=p['entraineur'].upper())[0]
+        if not p.get('entraineur'):
+            trainer = None
+        else:
+            try:
+                trainer = Trainer.objects.get(name=p['entraineur'].upper())
+            except ObjectDoesNotExist:
+                trainer = Trainer(name=p['entraineur'].upper())
+                if not self.dry_run:
+                    trainer.save()
+            # BC fix
+            except MultipleObjectsReturned:
+                trainer = Trainer.objects.get(name=p['entraineur'].upper())[0]
 
         if not p.get('eleveur'):
             herder = None
@@ -347,18 +353,25 @@ class PmuParser:
 
         player.music = p['musique']
 
-        player.race_count = p['nombreCourses']
-        player.victory_count = p['nombreVictoires']
-        player.placed_count = p['nombrePlaces']
-        player.placed_2_count = p['nombrePlacesSecond']
-        player.placed_3_count = p['nombrePlacesTroisieme']
+        player.race_count = p.get('nombreCourses', 0)
+        player.victory_count = p.get('nombreVictoires', 0)
+        player.placed_count = p.get('nombrePlaces', 0)
+        player.placed_2_count = p.get('nombrePlacesSecond', 0)
+        player.placed_3_count = p.get('nombrePlacesTroisieme', 0)
 
-        earnings = p['gainsParticipant']
-        player.earnings = earnings.get('gainsCarriere', 0)
-        player.victory_earnings = earnings.get('gainsCarriere', 0)
-        player.placed_earnings = earnings.get('gainsPlace', 0)
-        player.year_earnings = earnings.get('gainsAnneeEnCours', 0)
-        player.prev_year_earnings = earnings.get('gainsAnneePrecedente', 0)
+        if p.get('gainsParticipant'):
+            earnings = p.get('gainsParticipant')
+            player.earnings = earnings.get('gainsCarriere', 0)
+            player.victory_earnings = earnings.get('gainsCarriere', 0)
+            player.placed_earnings = earnings.get('gainsPlace', 0)
+            player.year_earnings = earnings.get('gainsAnneeEnCours', 0)
+            player.prev_year_earnings = earnings.get('gainsAnneePrecedente', 0)
+        else:
+            player.earnings = 0
+            player.victory_earnings = 0
+            player.placed_earnings = 0
+            player.year_earnings = 0
+            player.prev_year_earnings = 0
 
         if p.get('handicapValeur'):
             player.handicap_weight = p['handicapValeur']

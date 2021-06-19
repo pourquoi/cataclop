@@ -13,17 +13,17 @@ def compute_player_stats(p, force=False):
         return
 
     same_trainer_players = Player.objects.filter(trainer=p.trainer, imported_at__lt=p.imported_at).exclude(horse=p.horse) 
-    stats = same_trainer_players.aggregate(winner_dividend=Sum('winner_dividend'), c=Count('id'), wins=Count('winner_dividend'))
+    stats = same_trainer_players.aggregate(winner_dividend_sum=Sum('winner_dividend'), c=Count('id'), wins=Count('winner_dividend'))
 
     if stats['c'] == 0:
         return
 
     if stats['wins'] is None:
         stats['wins'] = 0
-    if stats['winner_dividend'] is None:
-        stats['winner_dividend'] = 0
+    if stats['winner_dividend_sum'] is None:
+        stats['winner_dividend_sum'] = 0
     p.trainer_winning_rate = stats['wins'] / stats['c']
-    p.trainer_avg_winning_dividend = (stats['winner_dividend']/100. - stats['c']) / stats['c']
+    p.trainer_avg_winning_dividend = (stats['winner_dividend_sum']/100. - stats['c']) / stats['c']
 
     history = list(Player.objects.filter(horse=p.horse, imported_at__lt=p.imported_at).order_by('-imported_at')[0:5])
     if len(history):
