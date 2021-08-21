@@ -13,17 +13,17 @@ def compute_player_stats(p, force=False):
         return
 
     same_trainer_players = Player.objects.filter(trainer=p.trainer, imported_at__lt=p.imported_at).exclude(horse=p.horse) 
-    stats = same_trainer_players.aggregate(winner_dividend=Sum('winner_dividend'), c=Count('id'), wins=Count('winner_dividend'))
+    stats = same_trainer_players.aggregate(winner_dividend_sum=Sum('winner_dividend'), c=Count('id'), wins=Count('winner_dividend'))
 
     if stats['c'] == 0:
         return
 
     if stats['wins'] is None:
         stats['wins'] = 0
-    if stats['winner_dividend'] is None:
-        stats['winner_dividend'] = 0
+    if stats['winner_dividend_sum'] is None:
+        stats['winner_dividend_sum'] = 0
     p.trainer_winning_rate = stats['wins'] / stats['c']
-    p.trainer_avg_winning_dividend = (stats['winner_dividend']/100. - stats['c']) / stats['c']
+    p.trainer_avg_winning_dividend = (stats['winner_dividend_sum']/100. - stats['c']) / stats['c']
 
     history = list(Player.objects.filter(horse=p.horse, imported_at__lt=p.imported_at).order_by('-imported_at')[0:5])
     if len(history):
@@ -65,11 +65,23 @@ def compute_races_trueskill(force=False, **kwargs):
 
         after = paginator.cursor(instance=page[-1])
 
+def _get_related_races(race, races, depth=0, max_depth=2):
+    for p in race.player_set.all():
+        history = reversed(list(Player.objects.filter(horse=p.horse, imported_at__lt=p.imported_at).order_by('-imported_at')[0:10]))
+        for h in history:
+            races.append(h.race)
+            if depth < max_depth:
+                _get_related_races(h.race, races, depth+1)
+
+def get_related_races(race):
+    races = []
+    _get_related_races(race, races, 0, 0)
+    return races
+
 def compute_race_trueskill(race, force=False):
     from trueskill import Rating, quality, rate
 
     ratings = {}
-
     races_seen = []
 
     for p in race.player_set.all():
@@ -80,30 +92,26 @@ def compute_race_trueskill(race, force=False):
         if p.horse.id not in ratings:
             ratings[p.horse.id] = Rating()
 
-        history = reversed(list(Player.objects.filter(horse=p.horse, imported_at__lt=p.imported_at).order_by('-imported_at')[0:10]))
+    races = get_related_races(race)
 
-        for h in history:
-            if h.race.id in races_seen:
-                continue
-            races_seen.append(h.race.id)
-            hplayers = list(h.race.player_set.all())
-            teams = []
-            ranks = []
-            for hp in hplayers:
-                if hp.horse.id not in ratings:
-                    ratings[hp.horse.id] = Rating()
+    for r in races:
+        races_seen.append(r.id)
+        teams = []
+        ranks = []
+        players = list(r.player_set.all())
+        for p in players:
+            if p.horse.id not in ratings:
+                ratings[p.horse.id] = Rating()
+            teams.append((ratings[p.horse.id], ))
+            rank = p.position if p.position and (p.position < 10 and p.position > 0) else 10
+            ranks.append(rank)
 
-                teams.append((ratings[hp.horse.id], ))
-                rank = hp.position if hp.position and (hp.position < 10 and hp.position > 0) else 10
-                ranks.append(rank)
+        if len(teams) < 2:
+            continue
 
-            if len(teams) < 2:
-                continue
-
-            res = rate(teams, ranks)
-
-            for r in zip(hplayers, res):
-                ratings[r[0].horse.id] = r[1][0]
+        res = rate(teams, ranks)
+        for z in zip(players, res):
+            ratings[z[0].horse.id] = z[1][0]
 
     for p in race.player_set.all():
 
@@ -114,6 +122,6 @@ def compute_race_trueskill(race, force=False):
         p.trueskill_sigma = ratings[p.horse.id].sigma
         p.save()
 
-                
+            
 
                 

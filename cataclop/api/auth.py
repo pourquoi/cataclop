@@ -21,3 +21,13 @@ class TokenAuthentication(DRFTokenAuthentication):
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
         return request.user and request.user.is_superuser
+
+class IsLocal(BasePermission):
+    def has_permission(self, request, view):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        
+        return ip == '127.0.0.1'

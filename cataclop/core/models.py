@@ -236,15 +236,17 @@ class Player(models.Model):
 
 class Odds(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
-    
+
     value = models.FloatField()
     evolution = models.FloatField()
-    date = models.DateTimeField()
+    date = models.DateTimeField(db_index=True,)
 
-    offline = models.BooleanField(default=False)
+    whale = models.BooleanField(default=False, db_index=True,)
 
-    is_final = models.BooleanField(default=False)
-    is_final_ref = models.BooleanField(default=False)
+    offline = models.BooleanField(default=False, db_index=True,)
+
+    is_final = models.BooleanField(default=False, db_index=True,)
+    is_final_ref = models.BooleanField(default=False, db_index=True,)
 
     player = models.ForeignKey('Player', on_delete=models.CASCADE)
 

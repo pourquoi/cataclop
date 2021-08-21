@@ -107,6 +107,8 @@ class Dataset(factories.Dataset):
             races = races.filter(session__hippodrome__name__in=self.params.get('hippodrome'))
         if self.params.get('players') is not None:
             races = races.filter(declared_player_count=self.params.get('players'))
+        if self.params.get('prize_min') is not None:
+            races = races.filter(prize__gte=self.params.get('prize_min'))
 
         hippos = models.Hippodrome.objects.all()
 
@@ -115,7 +117,16 @@ class Dataset(factories.Dataset):
 
         hippos = [ model_to_dict(hippo) for hippo in hippos ]
 
-        players = [ model_to_dict(p) for race in races for p in race.player_set.all() ]
+        def player_dict(p):
+            d = model_to_dict(p)
+            d.update({
+                "horse_name": p.horse.name,
+                "horse_breed": p.horse.breed,
+                "horse_sex": p.horse.sex
+            })
+            return d
+
+        players = [ player_dict(p) for race in races for p in race.player_set.all() ]
 
         print('{} races'.format(len(races)))
         races = [ model_to_dict(race) for race in races ]
@@ -139,6 +150,9 @@ class Dataset(factories.Dataset):
         races_df.date = races_df.date.astype('str')
 
         df = pd.DataFrame.from_records(players, index='id')
+
+        df['horse_breed'] = df['horse_breed'].astype('category')
+        df['horse_sex'] = df['horse_breed'].astype('category')
 
         df = df.join(races_df, on="race_id", lsuffix="_player", rsuffix="_race")
 

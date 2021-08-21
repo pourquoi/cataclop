@@ -16,12 +16,15 @@ router.register(r'owners', api_views.OwnerViewSet)
 router.register(r'herders', api_views.HerderViewSet)
 router.register(r'jockeys', api_views.JockeyViewSet)
 router.register(r'bets', api_views.BetViewSet)
+router.register(r'odds', api_views.OddsViewSet)
 
 urlpatterns = [
     url(r'^predict', api_views.predict),
+    url(r'^live_odds', api_views.post_live_odds),
+    url(r'^stats', api_views.stats),
 
-    url(r'^token/', jwt_views.TokenObtainSlidingView.as_view(), name='token_obtain_pair'),
     url(r'^token/refresh/', jwt_views.TokenRefreshSlidingView.as_view(), name='token_refresh'),
+    url(r'^token/', jwt_views.TokenObtainSlidingView.as_view(), name='token_obtain_pair'),
 ]
 
 urlpatterns += router.urls

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from cataclop.users.models import User
-from cataclop.core.models import RaceSession, Race, Player, Hippodrome, Horse, Trainer, Herder, Owner, Jockey
+from cataclop.core.models import RaceSession, Race, Player, Odds, Hippodrome, Horse, Trainer, Herder, Owner, Jockey
 from cataclop.pmu.models import Bet
 
 
@@ -55,6 +55,20 @@ class PlayerSerializer(serializers.ModelSerializer):
         model = Player
         fields = '__all__'
 
+class SimplePlayerSerialize(serializers.ModelSerializer):
+    horse = serializers.StringRelatedField(read_only=True)
+    
+    class Meta:
+        model = Player
+        fields = ('id', 'num', 'horse')
+
+class OddsSerializer(serializers.ModelSerializer):
+    player = SimplePlayerSerialize(read_only=True)
+
+    class Meta:
+        model = Odds
+        fields = '__all__'
+
 class SimpleRaceSessionSerializer(serializers.ModelSerializer):
     hippodrome = HippodromeSerializer(read_only=True)
 
@@ -70,7 +84,6 @@ class SimpleRaceSerializer(serializers.ModelSerializer):
     category = serializers.CharField(source='get_category_label')
     sub_category = serializers.CharField(source='get_sub_category_label')
 
-
 class RaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Race
@@ -84,7 +97,6 @@ class RaceSerializer(serializers.ModelSerializer):
     sub_category = serializers.CharField(source='get_sub_category_label')
     condition_sex = serializers.CharField(source='get_condition_sex_label')
     condition_age = serializers.CharField(source='get_condition_age_label')
-
 
 class ListRaceSerializer(serializers.ModelSerializer):
     session = SimpleRaceSessionSerializer(read_only=True)

@@ -11,18 +11,25 @@ build
 
 # notebooks
 .ipynb_checkpoints
+.Trash-0
+notebooks/sandbox/*
+!notebooks/sandbox/.gitkeep
 
 # config
+.env
 my.cnf
 cataclop/settings.py
 scripts/bet_config.json
+scripts/live_config.json
 uwsgi.ini
+docker-compose.override.yml
 
 # data
 var/data/*
 !var/data/.gitkeep
 var/models/*
 !var/models/.gitkeep
-var/next_race
-var/logs/*
 var/scrap/*
+!var/scrap/.gitkeep
+var/logs/*
+docker/data/mysql

@@ -82,7 +82,7 @@ class Model(factories.Model):
 
     @property
     def stacked_features(self):
-        stacked_features = []
+        stacked_features = ['final_odds', 'final_odds_ref', 'prize', 'declared_player_count']
         if self.params['n_targets'] > 1:
             for n in range(self.params['n_targets']):
                 stacked_features = stacked_features + ['pred_{}_{}'.format(model['name'], n+1) for model in self.models]
@@ -172,7 +172,7 @@ class Model(factories.Model):
         #df['target'] = df['race_winner_dividend'] / 100.
 
         df['target'] = np.clip(df['position'].fillna(df['declared_player_count']), a_min=1, a_max=20) / df['declared_player_count']
-        df['target_stacked'] = df['target']
+        df['target_stacked'] = df['target_returns'] / 50.
 
         for model in self.models:
             for i in range(self.params['n_targets']):
@@ -333,6 +333,7 @@ class Model(factories.Model):
                 self.logger.debug('training {}'.format(model['name']))
 
                 X_train = df[features].iloc[train_index].copy()
+                X_train.fillna(self.params['nan_flag'], inplace=True)
                 y_train = df['target'].iloc[train_index]
 
                 if 'dummies' in model:
@@ -353,6 +354,7 @@ class Model(factories.Model):
                 y_train = df['target'].iloc[train_index][ idx ]
 
                 X_test = df[features].iloc[test_index].copy()
+                X_test.fillna(self.params['nan_flag'], inplace=True)
                 y_test = df['target'].iloc[test_index]
 
                 X_test = pd.concat([X_test, preprocessing.get_dummy_values(df.iloc[test_index], dummies)], axis=1)
@@ -428,6 +430,7 @@ class Model(factories.Model):
                 self.logger.debug('training {}'.format(model['name']))
 
                 X_train = df[self.stacked_features].iloc[train_index].copy()
+                X_train.fillna(self.params['nan_flag'], inplace=True)
                 y_train = df['target_stacked'].iloc[train_index]
 
                 if 'dummies' in model:
@@ -437,12 +440,13 @@ class Model(factories.Model):
 
                 X_train = pd.concat([X_train, preprocessing.get_dummy_values(df.iloc[train_index], dummies)], axis=1)
 
-                idx = (df.iloc[train_index]['target_stacked'] != self.params['nan_flag']) 
+                idx = (df.iloc[train_index]['target_stacked'] != self.params['nan_flag']) & (df.iloc[train_index]['final_odds'] < 40 )
 
                 X_train = X_train[idx]
                 y_train = y_train[idx]
 
                 X_test = df[self.stacked_features].iloc[test_index].copy()
+                X_test.fillna(self.params['nan_flag'], inplace=True)
                 y_test = df['target_stacked'].iloc[test_index]
 
                 X_test = pd.concat([X_test, preprocessing.get_dummy_values(df.iloc[test_index], dummies)], axis=1)
