@@ -149,12 +149,17 @@ class Common(Configuration):
 
     NOTEBOOK_ARGUMENTS = [
         '--notebook-dir', 'notebooks',
+        '--ip', '0.0.0.0',
+        '--allow-root',
+        '--no-browser'
     ]
 
     IPYTHON_ARGUMENTS = [
         '--ext', 'django_extensions.management.notebook_extension',
         #'--debug',
     ]
+
+    os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 class Development(Common):
     DEBUG = True

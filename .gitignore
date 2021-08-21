@@ -17,6 +17,7 @@ notebooks/sandbox/*
 
 # config
 .env
+my.cnf
 cataclop/settings.py
 scripts/bet_config.json
 scripts/live_config.json

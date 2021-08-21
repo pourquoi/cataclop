@@ -9,7 +9,7 @@ horse race supervised learning and autonomous betting
 ### 1/ INSTALL
 
 ```console
-cp cataclop/settings.dist.py cataclop/settings.py
+cp cataclop/settings.py.dist cataclop/settings.py
 cp .env.dist .env
 ```
 
@@ -18,6 +18,7 @@ docker-compose up -d
 ```
 
 ```console
+docker exec -it cataclop_app pipenv install
 docker exec -it cataclop_app pipenv run python manage.py migrate
 ```
 
@@ -46,7 +47,7 @@ docker exec -it cataclop_app pipenv run python manage.py parse "2021-01-*"
 ```
 docker exec -it cataclop_app pipenv run python manage.py shell_plus --notebook
 ```
-open the output link in your navigator to access the jupyter notebooks
+open the output link (the one starting with http://127.0.0.1:8888/) in your navigator to access the jupyter notebooks
 
 open the *exploration* notebook to get an overview of the data
 open the *onboarding* notebook for a quick start on creating models

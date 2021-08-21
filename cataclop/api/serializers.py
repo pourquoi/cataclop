@@ -84,7 +84,6 @@ class SimpleRaceSerializer(serializers.ModelSerializer):
     category = serializers.CharField(source='get_category_label')
     sub_category = serializers.CharField(source='get_sub_category_label')
 
-
 class RaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Race
@@ -98,7 +97,6 @@ class RaceSerializer(serializers.ModelSerializer):
     sub_category = serializers.CharField(source='get_sub_category_label')
     condition_sex = serializers.CharField(source='get_condition_sex_label')
     condition_age = serializers.CharField(source='get_condition_age_label')
-
 
 class ListRaceSerializer(serializers.ModelSerializer):
     session = SimpleRaceSessionSerializer(read_only=True)

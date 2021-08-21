@@ -39,6 +39,3 @@ services:
 networks:
   cataclop_internal: 
     driver: bridge 
-      
-volumes:
-  cataclop_db:
