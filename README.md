@@ -17,11 +17,6 @@ cp .env.dist .env
 docker-compose up -d
 ```
 
-```console
-docker exec -it cataclop_app pipenv install
-docker exec -it cataclop_app pipenv run python manage.py migrate
-```
-
 ### 2/ OBTAIN THE JSON RACES FILES
 
 * option 1 : extract an existing archive
@@ -52,10 +47,13 @@ open the output link (the one starting with http://127.0.0.1:8888/) in your navi
 open the *exploration* notebook to get an overview of the data
 open the *onboarding* notebook for a quick start on creating models
 
-### (optionnal) RUN REST API
+### REST API
+
+```console
+docker exec -it cataclop_app pipenv run python manage.py createsuperuser
 ```
-docker exec -it cataclop_app pipenv run python manage.py runserver_plus 0.0.0.0:8082
-```
+
+The REST API should be running on http://127.0.0.1:8082/api
 
 ### (advanced) BETTING
 

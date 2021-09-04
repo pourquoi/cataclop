@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 
 from rest_framework import routers
 from cataclop.api import urls as api_urls
@@ -13,7 +14,7 @@ urlpatterns = [
     url(r'^api/', include(api_urls)),
     path('admin/', admin.site.urls),
     url('', include(front_urls))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

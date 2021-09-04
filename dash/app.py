@@ -11,7 +11,7 @@ import plotly.express as px
 import pandas as pd
 import requests
 
-base_url = 'http://127.0.0.1:8000/api'
+base_url = 'http://127.0.0.1:8082/api'
 
 date = datetime.datetime.now()
 
@@ -64,4 +64,4 @@ def update_fig(race=None, interval=None):
 
     return fig
 
-app.run_server(debug=True)
+app.run_server(debug=False, port=8050)

@@ -5,6 +5,14 @@ from configurations import Configuration, values
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env('/app/.env')
+
 class Common(Configuration):
     
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +31,8 @@ class Common(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
-        'rest_framework'
+        'rest_framework',
+        'django_filters'
     ]
 
     PROJECT_APPS = [
@@ -80,11 +89,11 @@ class Common(Configuration):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ['DB_NAME'],
-            'USER': os.environ['DB_USER'],
-            'PASSWORD': os.environ['DB_PASS'],
-            'HOST': os.environ['DB_HOST'],
-            'PORT': os.environ['DB_PORT'],
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASS'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT'),
             'OPTIONS': {
                 'charset': 'utf8mb4',
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
@@ -141,8 +150,9 @@ class Common(Configuration):
     USE_TZ = False
 
     STATIC_URL = '/static/'
+    STATIC_ROOT = '/app/static'
 
-    PMU_SCRAP_DIR = os.environ['SCRAP_DIR']
+    PMU_SCRAP_DIR = env('SCRAP_DIR')
 
     SMSAPI_SECRET = 'bob'
     SMSAPI_SECRET = '999999'
@@ -173,7 +183,9 @@ class Production(Staging):
     def pre_setup(cls):
         super(Production, cls).pre_setup()
         
+        '''
         sentry_sdk.init(
             dsn="https://<key>@sentry.io/<project>",
             integrations=[DjangoIntegration()]
         )
+        '''

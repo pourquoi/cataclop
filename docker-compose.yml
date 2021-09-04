@@ -8,12 +8,15 @@ services:
     ports:
       - "8082:8082" # api
       - "8888:8888" # notebook
+      - "8050:8050" # dash
     volumes:
       - .env:/app/.env
       - ./cataclop:/app/cataclop
+      - ./dash:/app/dash
       - ./var:/app/var
       - ./notebooks:/app/notebooks
       - ./docker/ipython_config.py:/root/.ipython/profile_default/ipython_config.py
+      - ./docker/supervisord/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     networks:
       - cataclop_internal
     depends_on:
