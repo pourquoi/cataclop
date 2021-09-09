@@ -1,14 +1,27 @@
 version: "3.2"
 
 services:
-  app:
-    container_name: cataclop_app
-    build: .
-    command: tail -f /dev/null
+  traefik:
+    image: "traefik:v2.5"
+    container_name: traefik
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.api.address=:8082"
+      - "--entrypoints.notebook.address=:8888"
+      - "--entrypoints.dash.address=:8050"
     ports:
       - "8082:8082" # api
       - "8888:8888" # notebook
       - "8050:8050" # dash
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - cataclop_internal
+
+  app:
+    container_name: cataclop_app
+    build: .
     volumes:
       - .env:/app/.env
       - ./cataclop:/app/cataclop
@@ -16,11 +29,20 @@ services:
       - ./var:/app/var
       - ./notebooks:/app/notebooks
       - ./docker/ipython_config.py:/root/.ipython/profile_default/ipython_config.py
-      - ./docker/supervisord/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+      - ./docker/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+      - ./docker/entrypoint.sh:/app/entrypoint.sh
     networks:
       - cataclop_internal
     depends_on:
       - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.app.entrypoints=api,dash"
+      - "traefik.http.services.app.loadbalancer.server.port=8082"
+      - "traefik.http.routers.notebook.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.notebook.entrypoints=notebook"
+      - "traefik.http.services.notebook.loadbalancer.server.port=8888"
 
   db:
     container_name: cataclop_db
@@ -30,14 +52,14 @@ services:
       MYSQL_USER: cataclop
       MYSQL_PASSWORD: cataclop
     volumes:
-      - ./docker/data/mysql:/var/lib/mysql:rw
+      - ./var/mysql:/var/lib/mysql:rw
       - ./docker/initdb:/docker-entrypoint-initdb.d:ro
     networks:
       - cataclop_internal
 
-  rabbit:
-    container_name: cataclop_rabbit
-    image: rabbitmq
+#  rabbit:
+#    container_name: cataclop_rabbit
+#    image: rabbitmq
 
 networks:
   cataclop_internal: 

@@ -4,16 +4,19 @@ ENV PYTHONUNBUFFERED=1
 RUN pip install poetry
 RUN pip install supervisor
 
-COPY .env /app/.env
-COPY pyproject.toml /app/pyproject.toml
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 WORKDIR /app
 
+COPY pyproject.toml /app/pyproject.toml
 RUN poetry install
+
+COPY .env /app/.env
 RUN export $(grep -v '^#' .env | xargs -0)
 
 COPY . /app
 
-ENTRYPOINT ["/entrypoint.sh"]
+COPY docker/uwsgi.ini /app/uwsgi.ini
+
+COPY docker/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+ENTRYPOINT ["/app/entrypoint.sh"]

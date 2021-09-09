@@ -2,7 +2,7 @@
 .vscode
 .DS_Store
 
-# libs
+# generated
 node_modules
 build
 
@@ -17,19 +17,23 @@ notebooks/sandbox/*
 
 # config
 .env
-my.cnf
 cataclop/settings.py
 scripts/bet_config.json
 scripts/live_config.json
-uwsgi.ini
 docker-compose.override.yml
 
-# data
-var/data/*
-!var/data/.gitkeep
+# ML data
+var/datasets/*
+!var/datasets/.gitkeep
 var/models/*
 !var/models/.gitkeep
+var/programs/*
+!var/programs/.gitkeep
+
+# scrap files
 var/scrap/*
 !var/scrap/.gitkeep
-var/logs/*
-docker/data/mysql
+
+# db
+var/mysql/*
+!var/mysql/.gitkeep

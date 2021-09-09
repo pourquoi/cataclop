@@ -1,0 +1,29 @@
+version: "3.2"
+
+services:
+  traefik:
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.api.address=:8082"
+      - "--entrypoints.notebook.address=:8888"
+      - "--entrypoints.dash.address=:8050"
+      - "--entrypoints.whoami.address=:8055"
+    ports:
+      - "8088:8080" # traefik
+      - "8055:8055" # whoami
+
+  whoami:
+    container_name: cataclop_whoami
+    image: containous/whoami:v1.3.0
+    command:
+      - --port=8055
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.whoami.entrypoints=whoami"
+      - "traefik.http.services.whoami.loadbalancer.server.port=8055"
+    networks:
+      - cataclop_internal
