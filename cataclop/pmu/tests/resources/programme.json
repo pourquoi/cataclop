@@ -1,0 +1,5732 @@
+{
+  "programme": {
+    "cached": false,
+    "date": 1609455600000,
+    "dateProgrammeActif": 1619820000000,
+    "timezoneOffset": 3600000,
+    "reunions": [
+      {
+        "cached": false,
+        "timezoneOffset": 3600000,
+        "dateReunion": 1609455600000,
+        "numOfficiel": 1,
+        "numOfficielReunionPrecedente": null,
+        "numOfficielReunionSuivante": 2,
+        "numExterne": 1,
+        "nature": "DIURNE",
+        "hippodrome": {
+          "code": "VIN",
+          "libelleCourt": "VINCENNES",
+          "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+        },
+        "pays": {
+          "code": "FRA",
+          "libelle": "FRANCE"
+        },
+        "courses": [
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 1,
+            "numExterneReunion": 1,
+            "numOrdre": 1,
+            "numExterne": 1,
+            "heureDepart": 1609505880000,
+            "libelle": "PRIX DE CHAMBLY",
+            "libelleCourt": "DE CHAMBLY",
+            "montantPrix": 33000,
+            "parcours": "",
+            "distance": 2700,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INCONNU",
+            "conditionSexe": "MALES_ET_HONGRES",
+            "nombreDeclaresPartants": 14,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 750002,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 33000,
+            "montantOffert1er": 14850,
+            "montantOffert2eme": 8250,
+            "montantOffert3eme": 4620,
+            "montantOffert4eme": 2640,
+            "montantOffert5eme": 1650,
+            "conditions": "PRIX DE CHAMBLY Course  2 Course D 33.000. - Attel\u00e9, m\u00e2les. - 2.700 m\u00e8tres (G. P.) 14.850, 8.250, 4.620, 2.640, 1.650, 660, 330. Pour poulains entiers et hongres de 4 ans (H), n'ayant pas gagn\u00e9 34.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MULTI",
+                "typePari": "E_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 203500,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  2,
+                  3,
+                  6,
+                  9,
+                  10
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "VIN",
+              "libelleCourt": "VINCENNES",
+              "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                13
+              ],
+              [
+                7
+              ],
+              [
+                14
+              ],
+              [
+                8
+              ],
+              [
+                4
+              ],
+              [
+                12
+              ],
+              [
+                5
+              ],
+              [
+                1
+              ],
+              [
+                11
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 1,
+            "numExterneReunion": 1,
+            "numOrdre": 2,
+            "numExterne": 2,
+            "heureDepart": 1609508160000,
+            "libelle": "PRIX DE FLERS",
+            "libelleCourt": "DE FLERS",
+            "montantPrix": 38000,
+            "parcours": "",
+            "distance": 2700,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "MONTE",
+            "specialite": "TROT_MONTE",
+            "categorieParticularite": "INCONNU",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 9,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 750001,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 38000,
+            "montantOffert1er": 17100,
+            "montantOffert2eme": 9500,
+            "montantOffert3eme": 5320,
+            "montantOffert4eme": 3040,
+            "montantOffert5eme": 1900,
+            "conditions": "PRIX DE FLERS Course  1 Course C 38.000. - Mont\u00e9. - 2.700 m\u00e8tres (G. P.) 17.100, 9.500, 5.320, 3.040, 1.900, 760, 380. Pour 5 ans (G), n'ayant pas gagn\u00e9 105.000. Avantage de poids (voir Conditions G\u00e9n\u00e9rales).",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 4,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_SUPER_QUATRE",
+                "typePari": "E_SUPER_QUATRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 200030,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  3
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "VIN",
+              "libelleCourt": "VINCENNES",
+              "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                6
+              ],
+              [
+                7
+              ],
+              [
+                5
+              ],
+              [
+                8
+              ],
+              [
+                1
+              ],
+              [
+                4
+              ],
+              [
+                2
+              ],
+              [
+                9
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 1,
+            "numExterneReunion": 1,
+            "numOrdre": 3,
+            "numExterne": 3,
+            "heureDepart": 1609510500000,
+            "libelle": "PRIX DU CROISE-LAROCHE",
+            "libelleCourt": "CROISE-LAROCHE",
+            "montantPrix": 56000,
+            "parcours": "",
+            "distance": 2850,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INCONNU",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 16,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 750005,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 56000,
+            "montantOffert1er": 25200,
+            "montantOffert2eme": 14000,
+            "montantOffert3eme": 7840,
+            "montantOffert4eme": 4480,
+            "montantOffert5eme": 2800,
+            "conditions": "PRIX DU CROISE-LAROCHE Course 5 Course C 56.000. - Attel\u00e9. - 2.850 m\u00e8tres (G. P.) 25.200, 14.000, 7.840, 4.480, 2.800, 1.120, 560. Pour 8 et 9 ans (D et C), n'ayant pas gagn\u00e9 230.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MULTI",
+                "typePari": "E_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_TIERCE",
+                "typePari": "E_TIERCE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 4,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_QUARTE_PLUS",
+                "typePari": "E_QUARTE_PLUS",
+                "miseBase": 150,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 5,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  25,
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_QUINTE_PLUS",
+                "typePari": "E_QUINTE_PLUS",
+                "miseBase": 200,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false,
+                "nouveauQuinte": true
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 5,
+                "ordre": true,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_TIC_TROIS",
+                "typePari": "E_TIC_TROIS",
+                "miseBase": 450,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 210300,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  7
+                ]
+              },
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  1,
+                  4,
+                  10
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "VIN",
+              "libelleCourt": "VINCENNES",
+              "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                11
+              ],
+              [
+                12
+              ],
+              [
+                16
+              ],
+              [
+                15
+              ],
+              [
+                2
+              ],
+              [
+                14
+              ],
+              [
+                8
+              ],
+              [
+                6
+              ],
+              [
+                3
+              ],
+              [
+                13
+              ],
+              [
+                9
+              ],
+              [
+                5
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 1,
+            "numExterneReunion": 1,
+            "numOrdre": 4,
+            "numExterne": 4,
+            "heureDepart": 1609512600000,
+            "libelle": "PRIX DE CONDE",
+            "libelleCourt": "DE CONDE",
+            "montantPrix": 38000,
+            "parcours": "",
+            "distance": 2700,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INCONNU",
+            "conditionSexe": "MALES_ET_HONGRES",
+            "nombreDeclaresPartants": 11,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 750004,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 38000,
+            "montantOffert1er": 17100,
+            "montantOffert2eme": 9500,
+            "montantOffert3eme": 5320,
+            "montantOffert4eme": 3040,
+            "montantOffert5eme": 1900,
+            "conditions": "PRIX DE CONDE Course  4 Course C 38.000. - Attel\u00e9, m\u00e2les. - 2.700 m\u00e8tres (G. P.) 17.100, 9.500, 5.320, 3.040, 1.900, 760, 380. Pour chevaux entiers et hongres de 5 ans (G), n'ayant pas gagn\u00e9 85.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 5,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  25,
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_PICK5",
+                "typePari": "E_PICK5",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 200350,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  1
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "VIN",
+              "libelleCourt": "VINCENNES",
+              "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                8
+              ],
+              [
+                4
+              ],
+              [
+                9
+              ],
+              [
+                6
+              ],
+              [
+                2
+              ],
+              [
+                11
+              ],
+              [
+                3
+              ],
+              [
+                7
+              ],
+              [
+                10
+              ],
+              [
+                5
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 1,
+            "numExterneReunion": 1,
+            "numOrdre": 5,
+            "numExterne": 5,
+            "heureDepart": 1609514760000,
+            "libelle": "PRIX D'ANGOULEME",
+            "libelleCourt": "D'ANGOULEME",
+            "montantPrix": 59000,
+            "parcours": "",
+            "distance": 2100,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "EUROPEENNE_AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 13,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 750003,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 59000,
+            "montantOffert1er": 26550,
+            "montantOffert2eme": 14750,
+            "montantOffert3eme": 8260,
+            "montantOffert4eme": 4720,
+            "montantOffert5eme": 2950,
+            "conditions": "PRIX D'ANGOULEME Course  3 Course A Course Europ\u00e9enne D\u00e9part \u00e0 l'Autostart 59.000. - Attel\u00e9. - 2.100 m\u00e8tres (G. P.) 26.550, 14.750, 8.260, 4.720, 2.950, 1.180, 590. Pour 5 et 6 ans (G et F), ayant gagn\u00e9 au moins 50.000, mais pas 250.000. Sont seuls admis \u00e0 participer \u00e0 cette \u00e9preuve les chevaux n'ayant pas, dans es 12 mois pr\u00e9c\u00e9dant la course, \u00e9t\u00e9 class\u00e9s, au trot attel\u00e9, 1er, 2\u00e8me ou 3\u00e8me d'une \u00e9preuve de Groupe I.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 5,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  25,
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_PICK5",
+                "typePari": "E_PICK5",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 150280,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  6,
+                  10
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "VIN",
+              "libelleCourt": "VINCENNES",
+              "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                8
+              ],
+              [
+                2
+              ],
+              [
+                11
+              ],
+              [
+                5
+              ],
+              [
+                7
+              ],
+              [
+                3
+              ],
+              [
+                1
+              ],
+              [
+                4
+              ],
+              [
+                12
+              ],
+              [
+                9
+              ],
+              [
+                13
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 1,
+            "numExterneReunion": 1,
+            "numOrdre": 6,
+            "numExterne": 6,
+            "heureDepart": 1609516800000,
+            "libelle": "PRIX DE TOURNON",
+            "libelleCourt": "DE TOURNON",
+            "montantPrix": 43000,
+            "parcours": "",
+            "distance": 2850,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "EUROPEENNE",
+            "conditionSexe": "MALES_ET_HONGRES",
+            "nombreDeclaresPartants": 14,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 750007,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 43000,
+            "montantOffert1er": 19350,
+            "montantOffert2eme": 10750,
+            "montantOffert3eme": 6020,
+            "montantOffert4eme": 3440,
+            "montantOffert5eme": 2150,
+            "conditions": "PRIX DE TOURNON Course  7 Course C Course Europ\u00e9enne 43.000. - Attel\u00e9, m\u00e2les. - 2.850 m\u00e8tres (P. P.) 19.350, 10.750, 6.020, 3.440, 2.150, 860, 430. Pour chevaux entiers et hongres de 6 ans (F), ayant gagn\u00e9 au moins 35.000, m is pas 130.000. Sont seuls admis \u00e0 participer \u00e0 cette \u00e9preuve les chevaux n'ayant pas, dans es 12 mois pr\u00e9c\u00e9dant la course, \u00e9t\u00e9 class\u00e9s, au trot attel\u00e9, 1er, 2\u00e8me ou 3\u00e8me d'une \u00e9preuve de Groupe I ou 1er d'une \u00e9preuve de Groupe II.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MULTI",
+                "typePari": "E_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 206630,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISTANCE",
+                "numeroParticipants": [
+                  10
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "VIN",
+              "libelleCourt": "VINCENNES",
+              "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                8
+              ],
+              [
+                14
+              ],
+              [
+                12
+              ],
+              [
+                3
+              ],
+              [
+                13
+              ],
+              [
+                4
+              ],
+              [
+                6
+              ],
+              [
+                11
+              ],
+              [
+                9
+              ],
+              [
+                2
+              ],
+              [
+                5
+              ],
+              [
+                7
+              ],
+              [
+                1
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 1,
+            "numExterneReunion": 1,
+            "numOrdre": 7,
+            "numExterne": 7,
+            "heureDepart": 1609519080000,
+            "libelle": "PRIX DE CHATELLERAULT",
+            "libelleCourt": "CHATELLERAULT",
+            "montantPrix": 44000,
+            "parcours": "",
+            "distance": 2850,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INCONNU",
+            "conditionSexe": "FEMELLES",
+            "nombreDeclaresPartants": 9,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 750006,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 44000,
+            "montantOffert1er": 19800,
+            "montantOffert2eme": 11000,
+            "montantOffert3eme": 6160,
+            "montantOffert4eme": 3520,
+            "montantOffert5eme": 2200,
+            "conditions": "PRIX DE CHATELLERAULT Course  6 Course A 44.000. - Attel\u00e9, femelles. - 2.850 m\u00e8tres (P. P.) 19.800, 11.000, 6.160, 3.520, 2.200, 880, 440. Pour pouliches de 3 ans (I), n'ayant pas gagn\u00e9 35.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 4,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_SUPER_QUATRE",
+                "typePari": "E_SUPER_QUATRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 222320,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  9
+                ]
+              },
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  1,
+                  3
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "VIN",
+              "libelleCourt": "VINCENNES",
+              "libelleLong": "HIPPODROME DE PARIS-VINCENNES"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                5
+              ],
+              [
+                7
+              ],
+              [
+                8
+              ],
+              [
+                6
+              ],
+              [
+                4
+              ],
+              [
+                2
+              ]
+            ]
+          }
+        ],
+        "audience": "NATIONAL",
+        "statut": "TERMINEE",
+        "disciplinesMere": [
+          "TROT"
+        ],
+        "specialites": [
+          "TROT_ATTELE",
+          "TROT_MONTE"
+        ],
+        "derniereReunion": false,
+        "parisEvenement": [
+          {
+            "codePari": "E_QUINTE_PLUS",
+            "course": {
+              "dateProgramme": 1609455600000,
+              "numReunion": 1,
+              "numOrdre": 3
+            }
+          },
+          {
+            "codePari": "E_PICK5",
+            "course": {
+              "dateProgramme": 1609455600000,
+              "numReunion": 1,
+              "numOrdre": 4
+            }
+          },
+          {
+            "codePari": "E_PICK5",
+            "course": {
+              "dateProgramme": 1609455600000,
+              "numReunion": 1,
+              "numOrdre": 5
+            }
+          }
+        ],
+        "meteo": {
+          "datePrevision": 1609487100000,
+          "nebulositeCode": "P5",
+          "nebulositeLibelleCourt": "Tr\u00e8s Nuageux",
+          "nebulositeLibelleLong": "Les nuages l'emporteront et les \u00e9claircies restront rares.",
+          "temperature": 4,
+          "forceVent": 3,
+          "directionVent": "NO"
+        },
+        "offresInternet": false,
+        "cagnottes": [],
+        "reportPlusFpaMax": 20
+      },
+      {
+        "cached": false,
+        "timezoneOffset": 3600000,
+        "dateReunion": 1609455600000,
+        "numOfficiel": 2,
+        "numOfficielReunionPrecedente": 1,
+        "numOfficielReunionSuivante": 3,
+        "numExterne": 2,
+        "nature": "DIURNE",
+        "hippodrome": {
+          "code": "SON",
+          "libelleCourt": "SON PARDO",
+          "libelleLong": "HIPPODROME DE SON PARDO PALMA"
+        },
+        "pays": {
+          "code": "ESP",
+          "libelle": "Espagne"
+        },
+        "courses": [
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 2,
+            "numExterneReunion": 2,
+            "numOrdre": 2,
+            "numExterne": 2,
+            "heureDepart": 1609498200000,
+            "libelle": "PREMI QUINTA                            ESPAGNE",
+            "libelleCourt": "QUINTA",
+            "montantPrix": 4000,
+            "parcours": "",
+            "distance": 2150,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 7,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 974302,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 4000,
+            "montantOffert1er": 1840,
+            "montantOffert2eme": 920,
+            "montantOffert3eme": 480,
+            "montantOffert4eme": 280,
+            "montantOffert5eme": 200,
+            "conditions": "PREMI QUINTA Course 02 D\u00e9part \u00e0 l'Autostart 4.000 - Attel\u00e9. - 2.150 m\u00e8tres. 1.840, 920, 480, 280, 200, 160, 120. Pour 6 \u00e0 12 ans ayant gagn\u00e9 au moins 500, mais pas 6.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": true,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_ORDRE",
+                "typePari": "E_COUPLE_ORDRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": true,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO_ORDRE",
+                "typePari": "E_TRIO_ORDRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 4,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_SUPER_QUATRE",
+                "typePari": "E_SUPER_QUATRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "SABLE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 169200,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  2,
+                  4,
+                  6
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "SON",
+              "libelleCourt": "SON PARDO",
+              "libelleLong": "HIPPODROME DE SON PARDO PALMA"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                7
+              ],
+              [
+                5
+              ],
+              [
+                3
+              ],
+              [
+                1
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 2,
+            "numExterneReunion": 2,
+            "numOrdre": 3,
+            "numExterne": 3,
+            "heureDepart": 1609500000000,
+            "libelle": "PREMI CHATEAUBRIANT                     ESPAGNE",
+            "libelleCourt": "CHATEAUBRIANT",
+            "montantPrix": 3500,
+            "parcours": "",
+            "distance": 2650,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 16,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 974303,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 3500,
+            "montantOffert1er": 1610,
+            "montantOffert2eme": 806,
+            "montantOffert3eme": 420,
+            "montantOffert4eme": 244,
+            "montantOffert5eme": 176,
+            "conditions": "PREMI CHATEAUBRIANT Course 03 D\u00e9part \u00e0 l'Autostart 3.500 - Attel\u00e9. - 2.650 m\u00e8tres. 1.610, 806, 420, 244, 176, 140, 104. Pour 3 \u00e0 10 ans n'ayant pas gagn\u00e9 40.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MULTI",
+                "typePari": "E_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "SABLE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 205700,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  3,
+                  16
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "SON",
+              "libelleCourt": "SON PARDO",
+              "libelleLong": "HIPPODROME DE SON PARDO PALMA"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                10
+              ],
+              [
+                5
+              ],
+              [
+                11
+              ],
+              [
+                2
+              ],
+              [
+                15
+              ],
+              [
+                8
+              ],
+              [
+                1
+              ],
+              [
+                14
+              ],
+              [
+                12
+              ],
+              [
+                6
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 2,
+            "numExterneReunion": 2,
+            "numOrdre": 4,
+            "numExterne": 4,
+            "heureDepart": 1609501800000,
+            "libelle": "PREMI HURACAN QUITO                     ESPAGNE",
+            "libelleCourt": "HURACAN QUITO",
+            "montantPrix": 5000,
+            "parcours": "",
+            "distance": 2650,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 12,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 974304,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 5000,
+            "montantOffert1er": 2300,
+            "montantOffert2eme": 1150,
+            "montantOffert3eme": 600,
+            "montantOffert4eme": 350,
+            "montantOffert5eme": 250,
+            "conditions": "PREMI HURACAN QUITO Course 04 D\u00e9part \u00e0 l'Autostart 5.000 - Attel\u00e9. - 2.650 m\u00e8tres. 2.300, 1.150, 600, 350, 250, 200, 150. Pour 4 \u00e0 9 ans ayant gagn\u00e9 au moins 18.000, mais pas 35.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "SABLE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 208600,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  1
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "SON",
+              "libelleCourt": "SON PARDO",
+              "libelleLong": "HIPPODROME DE SON PARDO PALMA"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                2
+              ],
+              [
+                4
+              ],
+              [
+                10
+              ],
+              [
+                3
+              ],
+              [
+                6
+              ],
+              [
+                9
+              ],
+              [
+                12
+              ],
+              [
+                5
+              ],
+              [
+                8
+              ],
+              [
+                7
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 2,
+            "numExterneReunion": 2,
+            "numOrdre": 5,
+            "numExterne": 5,
+            "heureDepart": 1609503780000,
+            "libelle": "PREMI NANTES                            ESPAGNE",
+            "libelleCourt": "NANTES",
+            "montantPrix": 4000,
+            "parcours": "",
+            "distance": 2650,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_GAUCHE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 16,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 974305,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 4000,
+            "montantOffert1er": 1840,
+            "montantOffert2eme": 920,
+            "montantOffert3eme": 480,
+            "montantOffert4eme": 280,
+            "montantOffert5eme": 200,
+            "conditions": "PREMI NANTES Course 05 D\u00e9part \u00e0 l'Autostart 4.000 - Attel\u00e9. - 2.650 m\u00e8tres. 1.840, 920, 480, 280, 200, 160, 120. Pour 3 \u00e0 10 ans ayant gagn\u00e9 au moins 40.000, mais pas 80.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MULTI",
+                "typePari": "E_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "SABLE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 205000,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  4,
+                  5,
+                  15
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "SON",
+              "libelleCourt": "SON PARDO",
+              "libelleLong": "HIPPODROME DE SON PARDO PALMA"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                10
+              ],
+              [
+                6
+              ],
+              [
+                2
+              ],
+              [
+                16
+              ],
+              [
+                12
+              ],
+              [
+                1
+              ],
+              [
+                11
+              ],
+              [
+                7
+              ],
+              [
+                3
+              ],
+              [
+                14
+              ]
+            ]
+          }
+        ],
+        "audience": "NATIONAL",
+        "statut": "TERMINEE",
+        "disciplinesMere": [
+          "TROT"
+        ],
+        "specialites": [
+          "TROT_ATTELE"
+        ],
+        "derniereReunion": false,
+        "parisEvenement": [],
+        "meteo": {
+          "datePrevision": 1609487100000,
+          "nebulositeCode": "P5",
+          "nebulositeLibelleCourt": "Tr\u00e8s Nuageux",
+          "nebulositeLibelleLong": "Les nuages l'emporteront et les \u00e9claircies restront rares.",
+          "temperature": 11,
+          "forceVent": 22,
+          "directionVent": "NO"
+        },
+        "offresInternet": false,
+        "cagnottes": [],
+        "reportPlusFpaMax": 20
+      },
+      {
+        "cached": false,
+        "timezoneOffset": 3600000,
+        "dateReunion": 1609455600000,
+        "numOfficiel": 3,
+        "numOfficielReunionPrecedente": 2,
+        "numOfficielReunionSuivante": 4,
+        "numExterne": 3,
+        "nature": "DIURNE",
+        "hippodrome": {
+          "code": "CAG",
+          "libelleCourt": "CAGNES/MER",
+          "libelleLong": "HIPPODROME DE CAGNES/MER"
+        },
+        "pays": {
+          "code": "FRA",
+          "libelle": "FRANCE"
+        },
+        "courses": [
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 3,
+            "numExterneReunion": 3,
+            "numOrdre": 1,
+            "numExterne": 1,
+            "heureDepart": 1609499100000,
+            "libelle": "PRIX FRAGONARD",
+            "libelleCourt": "FRAGONARD",
+            "montantPrix": 17000,
+            "parcours": "09",
+            "distance": 3400,
+            "distanceUnit": "METRE",
+            "discipline": "HAIE",
+            "specialite": "OBSTACLE",
+            "categorieParticularite": "A_RECLAMER",
+            "conditionAge": "QUATRE_ANS",
+            "conditionSexe": "MALES_ET_HONGRES",
+            "nombreDeclaresPartants": 9,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 3000,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 17000,
+            "montantOffert1er": 7820,
+            "montantOffert2eme": 3910,
+            "montantOffert3eme": 2210,
+            "montantOffert4eme": 1530,
+            "montantOffert5eme": 765,
+            "conditions": "Pour poulains entiers et hongres de 4  ans (n\u00e9s en 2017), mis \u00e0 r\u00e9clamer au minimum pour 11.000, avec prix de r\u00e9 clamation sup\u00e9rieurs de 2.000 en 2.00 0 et n'ayant pas gagn\u00e9 trois courses de haies, depuis le 1er d\u00e9cembre de l 'ann\u00e9e derni\u00e8re inclus. Poids : 67 k.  Surcharges accumul\u00e9es : 1 k. par 2.0 00 pour les prix de r\u00e9clamation sup\u00e9r ieurs \u00e0 11.000. En outre, tout gagnan t, d'une course de haies, depuis le 1 er d\u00e9cembre de l'ann\u00e9e derni\u00e8re inclu s, portera 2 k. ; de plusieurs, 4 k.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 4,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_SUPER_QUATRE",
+                "typePari": "E_SUPER_QUATRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "HERBE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 262830,
+            "participants": [],
+            "ecuries": [],
+            "penetrometre": {
+              "valeurMesure": "5,2",
+              "heureMesure": "2021-01-01T10:30",
+              "intitule": "Tr\u00ef\u00bf\u00bds lourd",
+              "commentaire": ""
+            },
+            "incidents": [
+              {
+                "type": "ARRETE",
+                "numeroParticipants": [
+                  5,
+                  6,
+                  9
+                ]
+              },
+              {
+                "type": "TOMBE",
+                "numeroParticipants": [
+                  4
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "CAG",
+              "libelleCourt": "CAGNES/MER",
+              "libelleLong": "HIPPODROME DE CAGNES/MER"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                3
+              ],
+              [
+                1
+              ],
+              [
+                8
+              ],
+              [
+                2
+              ],
+              [
+                7
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 3,
+            "numExterneReunion": 3,
+            "numOrdre": 2,
+            "numExterne": 2,
+            "heureDepart": 1609500900000,
+            "libelle": "PRIX DES ILES D'OR",
+            "libelleCourt": "ILES D'OR",
+            "montantPrix": 16000,
+            "parcours": "",
+            "distance": 3800,
+            "distanceUnit": "METRE",
+            "discipline": "STEEPLECHASE",
+            "specialite": "OBSTACLE",
+            "categorieParticularite": "A_RECLAMER",
+            "conditionAge": "SIX_ANS_ET_PLUS",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 9,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 3005,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 16000,
+            "montantOffert1er": 7680,
+            "montantOffert2eme": 3840,
+            "montantOffert3eme": 2240,
+            "montantOffert4eme": 1520,
+            "montantOffert5eme": 720,
+            "conditions": "Pour tous chevaux de 6 ans et au-dess us (n\u00e9s en 2015 et ant\u00e9rieurement), m is \u00e0 r\u00e9clamer au minimum pour 8.000, avec prix de r\u00e9clamation sup\u00e9rieurs d e 2.000 en 2.000 et n'ayant pas, depu is le 1er d\u00e9cembre de l'ann\u00e9e derni\u00e8r e inclus, gagn\u00e9 deux steeple-chases. Poids : 68 k. Surcharges accumul\u00e9es : 1 k. par 2.000 pour les prix de r\u00e9cl amation sup\u00e9rieurs \u00e0 8.000. En outre, tout cheval ayant, depuis le 1er d\u00e9c embre de l'ann\u00e9e derni\u00e8re inclus, gag n\u00e9 un steeple-chase portera 2 k.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 4,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_SUPER_QUATRE",
+                "typePari": "E_SUPER_QUATRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "HERBE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 302680,
+            "participants": [],
+            "ecuries": [],
+            "penetrometre": {
+              "valeurMesure": "5,2",
+              "heureMesure": "2021-01-01T10:30",
+              "intitule": "Tr\u00ef\u00bf\u00bds lourd",
+              "commentaire": ""
+            },
+            "incidents": [
+              {
+                "type": "ARRETE",
+                "numeroParticipants": [
+                  5,
+                  6
+                ]
+              },
+              {
+                "type": "TOMBE",
+                "numeroParticipants": [
+                  7
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "CAG",
+              "libelleCourt": "CAGNES/MER",
+              "libelleLong": "HIPPODROME DE CAGNES/MER"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                4
+              ],
+              [
+                3
+              ],
+              [
+                9
+              ],
+              [
+                8
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 3,
+            "numExterneReunion": 3,
+            "numOrdre": 3,
+            "numExterne": 3,
+            "heureDepart": 1609502700000,
+            "libelle": "PRIX DE L'ESTERON",
+            "libelleCourt": "DE L'ESTERON",
+            "montantPrix": 24000,
+            "parcours": "",
+            "distance": 4000,
+            "distanceUnit": "METRE",
+            "discipline": "HAIE",
+            "specialite": "OBSTACLE",
+            "categorieParticularite": "COURSE_A_CONDITIONS",
+            "conditionAge": "CINQ_ANS_ET_PLUS",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 11,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 3002,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 24000,
+            "montantOffert1er": 11520,
+            "montantOffert2eme": 5760,
+            "montantOffert3eme": 3360,
+            "montantOffert4eme": 2280,
+            "montantOffert5eme": 1080,
+            "conditions": "Pour tous chevaux de 5 ans et au-dess us (n\u00e9s en 2016 et ant\u00e9rieurement), n 'ayant, en courses \u00e0 obstacles, depui s le 1er d\u00e9cembre de l'ann\u00e9e derni\u00e8re inclus, ni gagn\u00e9, ni re\u00e7u deux alloc ations. Poids : 5 ans, 66 k. ; 6 ans et au-dessus, 68 k. Surcharges accumu l\u00e9es pour les sommes re\u00e7ues en course s de haies (victoires et places) : 1 k. par 3.000 depuis le 1er janvier de l'ann\u00e9e derni\u00e8re inclus.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "HERBE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 323040,
+            "participants": [],
+            "ecuries": [],
+            "penetrometre": {
+              "valeurMesure": "5,2",
+              "heureMesure": "2021-01-01T10:30",
+              "intitule": "Tr\u00ef\u00bf\u00bds lourd",
+              "commentaire": ""
+            },
+            "incidents": [
+              {
+                "type": "ARRETE",
+                "numeroParticipants": [
+                  1,
+                  4,
+                  5,
+                  6,
+                  7,
+                  10
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "CAG",
+              "libelleCourt": "CAGNES/MER",
+              "libelleLong": "HIPPODROME DE CAGNES/MER"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                2
+              ],
+              [
+                11
+              ],
+              [
+                9
+              ],
+              [
+                8
+              ],
+              [
+                3
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 3,
+            "numExterneReunion": 3,
+            "numOrdre": 4,
+            "numExterne": 4,
+            "heureDepart": 1609504800000,
+            "libelle": "PRIX DE L'AUVERGNE",
+            "libelleCourt": "DE L'AUVERGNE",
+            "montantPrix": 16000,
+            "parcours": "",
+            "distance": 3800,
+            "distanceUnit": "METRE",
+            "discipline": "STEEPLECHASE",
+            "specialite": "OBSTACLE",
+            "categorieParticularite": "A_RECLAMER",
+            "conditionAge": "CINQ_ANS",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 11,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 3004,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 16000,
+            "montantOffert1er": 7680,
+            "montantOffert2eme": 3840,
+            "montantOffert3eme": 2240,
+            "montantOffert4eme": 1520,
+            "montantOffert5eme": 720,
+            "conditions": "Pour tous chevaux de 5 ans (n\u00e9s en 20 16), mis \u00e0 r\u00e9clamer au minimum pour 8 .000, avec prix de r\u00e9clamation sup\u00e9ri eurs de 2.000 en 2.000 et n'ayant pas gagn\u00e9 deux steeple-chases depuis le 1er d\u00e9cembre de l'ann\u00e9e derni\u00e8re incl us. Poids : 68 k. Surcharges accumul\u00e9 es: 1k. par 2.000 pour les prix de r\u00e9 clamation sup\u00e9rieurs \u00e0 8.000. En outr e, tout gagnant, en steeple-chase, de puis le 1er d\u00e9cembre de l'ann\u00e9e derni \u00e8re inclus, portera 2 k. \u00e9 quarante courses recevront 3 k.; ce ux n'ayant pas gagn\u00e9 soixante-dix cou rses recevront, 1 k.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "HERBE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "indicateurEvenementArriveeProvisoire": "ENQUETE",
+            "detailsIndicateurEvenementArriveeProvisoire": "TERMINEE SANS MODIFICATION",
+            "dureeCourse": 306970,
+            "participants": [],
+            "ecuries": [],
+            "penetrometre": {
+              "valeurMesure": "5,2",
+              "heureMesure": "2021-01-01T10:30",
+              "intitule": "Tr\u00ef\u00bf\u00bds lourd",
+              "commentaire": ""
+            },
+            "incidents": [
+              {
+                "type": "ARRETE",
+                "numeroParticipants": [
+                  1,
+                  6,
+                  9
+                ]
+              },
+              {
+                "type": "TOMBE",
+                "numeroParticipants": [
+                  10,
+                  11
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "CAG",
+              "libelleCourt": "CAGNES/MER",
+              "libelleLong": "HIPPODROME DE CAGNES/MER"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                5
+              ],
+              [
+                2
+              ],
+              [
+                7
+              ],
+              [
+                4
+              ],
+              [
+                3
+              ],
+              [
+                8
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 3,
+            "numExterneReunion": 3,
+            "numOrdre": 5,
+            "numExterne": 5,
+            "heureDepart": 1609506900000,
+            "libelle": "PRIX DE L'ARTOIS",
+            "libelleCourt": "ARTOIS",
+            "montantPrix": 24000,
+            "parcours": "09",
+            "distance": 3500,
+            "distanceUnit": "METRE",
+            "discipline": "HAIE",
+            "specialite": "OBSTACLE",
+            "categorieParticularite": "COURSE_A_CONDITIONS",
+            "conditionAge": "CINQ_ANS_ET_PLUS",
+            "conditionSexe": "FEMELLES",
+            "nombreDeclaresPartants": 13,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 3003,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 24000,
+            "montantOffert1er": 11520,
+            "montantOffert2eme": 5760,
+            "montantOffert3eme": 3360,
+            "montantOffert4eme": 2280,
+            "montantOffert5eme": 1080,
+            "conditions": "Pour juments de 5 ans et au-dessus (n \u00e9es en 2016 et ant\u00e9rieurement), n'aya nt, depuis le 1 er janvier de l'ann\u00e9e  derni\u00e8re inclus, en courses de haies , ni re\u00e7u une allocation de 10.000, n i re\u00e7u 20.000 (victoires et places). Poids : 5 ans, 65 k. ; 6 ans et au-de ssus, 67 k. Surcharges accumul\u00e9es pou r les sommes re\u00e7ues en courses de hai es (victoires et places) : 1 k. par 4 .000 depuis le 1er janvier de l'ann\u00e9e  derni\u00e8re inclus. En outre, toute gag nante d'une course de haies, depuis l e 1er d\u00e9cembre de l'ann\u00e9e derni\u00e8re in clus, portera 2 k. 'ayant pas gagn\u00e9 quarante courses rec evront 3 k.; ceux n'ayant pas gagn\u00e9 s oixante-dix courses recevront, 1 k.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "HERBE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 270620,
+            "participants": [],
+            "ecuries": [],
+            "penetrometre": {
+              "valeurMesure": "5,2",
+              "heureMesure": "2021-01-01T10:30",
+              "intitule": "Tr\u00ef\u00bf\u00bds lourd",
+              "commentaire": ""
+            },
+            "incidents": [
+              {
+                "type": "ARRETE",
+                "numeroParticipants": [
+                  2,
+                  3,
+                  4,
+                  6,
+                  7,
+                  8,
+                  10,
+                  12
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "CAG",
+              "libelleCourt": "CAGNES/MER",
+              "libelleLong": "HIPPODROME DE CAGNES/MER"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                13
+              ],
+              [
+                1
+              ],
+              [
+                5
+              ],
+              [
+                9
+              ],
+              [
+                11
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 3,
+            "numExterneReunion": 3,
+            "numOrdre": 6,
+            "numExterne": 6,
+            "heureDepart": 1609509120000,
+            "libelle": "PRIX DU LIMOUSIN",
+            "libelleCourt": "LIMOUSIN",
+            "montantPrix": 25000,
+            "parcours": "09",
+            "distance": 3400,
+            "distanceUnit": "METRE",
+            "discipline": "HAIE",
+            "specialite": "OBSTACLE",
+            "categorieParticularite": "COURSE_A_CONDITIONS",
+            "conditionAge": "QUATRE_ANS",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 10,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 3001,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 25000,
+            "montantOffert1er": 11500,
+            "montantOffert2eme": 5750,
+            "montantOffert3eme": 3250,
+            "montantOffert4eme": 2250,
+            "montantOffert5eme": 1125,
+            "conditions": "Pour tous poulains et pouliches de 4 ans (n\u00e9s en 2017), n'ayant, en course s \u00e0 obstacles, ni re\u00e7u 3.000 (victoir es et places), ni re\u00e7u deux allocatio ns. Poids : 67 k. Les poulains et les  pouliches ayant re\u00e7u 2.000 en course s de haies (victoires et places) port eront 2 k. Les Jockeys n'ayant pas ga gn\u00e9 quarante courses recevront 3 k.; ceux n'ayant pas gagn\u00e9 soixante-dix c ourses recevront, 1 k.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "HERBE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 266330,
+            "participants": [],
+            "ecuries": [],
+            "penetrometre": {
+              "valeurMesure": "5,2",
+              "heureMesure": "2021-01-01T10:30",
+              "intitule": "Tr\u00ef\u00bf\u00bds lourd",
+              "commentaire": ""
+            },
+            "incidents": [
+              {
+                "type": "ARRETE",
+                "numeroParticipants": [
+                  4,
+                  7,
+                  10
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "CAG",
+              "libelleCourt": "CAGNES/MER",
+              "libelleLong": "HIPPODROME DE CAGNES/MER"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                5
+              ],
+              [
+                2
+              ],
+              [
+                3
+              ],
+              [
+                1
+              ],
+              [
+                8
+              ],
+              [
+                9
+              ],
+              [
+                6
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 3,
+            "numExterneReunion": 3,
+            "numOrdre": 7,
+            "numExterne": 7,
+            "heureDepart": 1609511520000,
+            "libelle": "PRIX MICHEL LINARES",
+            "libelleCourt": "LINARES",
+            "montantPrix": 26000,
+            "parcours": "",
+            "distance": 4200,
+            "distanceUnit": "METRE",
+            "discipline": "STEEPLECHASE",
+            "specialite": "OBSTACLE",
+            "categorieParticularite": "COURSE_A_CONDITIONS",
+            "conditionAge": "SIX_ANS_ET_PLUS",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 8,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 3006,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 26000,
+            "montantOffert1er": 12480,
+            "montantOffert2eme": 6240,
+            "montantOffert3eme": 3640,
+            "montantOffert4eme": 2470,
+            "montantOffert5eme": 1170,
+            "conditions": "Pour tous chevaux de 6 ans et au-dess us (n\u00e9s en 2015 et ant\u00e9rieurement), n 'ayant, en steeple-chase, depuis le 1 er d\u00e9cembre de l'ann\u00e9e derni\u00e8re inclu s, ni gagn\u00e9 (\u00e0 r\u00e9clamer except\u00e9), ni re\u00e7u 8.000 (victoires et places). Poi ds : 67 k. Surcharges accumul\u00e9es pour  les sommes re\u00e7ues en steeple-chases (victoires et places) : 1 k. par 3.00 0 depuis le 1 janvier de l'ann\u00e9e dern i\u00e8re inclus et par 8.000 du 1er juill et 2019 inclus au 31 d\u00e9cembre 2019 in clus. n\u00e9 quarante courses recevront 3 k.; c eux n'ayant pas gagn\u00e9 soixante-dix co urses recevront, 1 k.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 4,
+                "ordre": true,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_SUPER_QUATRE",
+                "typePari": "E_SUPER_QUATRE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "typePiste": "HERBE",
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 341780,
+            "participants": [],
+            "ecuries": [],
+            "penetrometre": {
+              "valeurMesure": "5,2",
+              "heureMesure": "2021-01-01T10:30",
+              "intitule": "Tr\u00ef\u00bf\u00bds lourd",
+              "commentaire": ""
+            },
+            "incidents": [
+              {
+                "type": "ARRETE",
+                "numeroParticipants": [
+                  2,
+                  8
+                ]
+              },
+              {
+                "type": "TOMBE",
+                "numeroParticipants": [
+                  4
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": true,
+            "hippodrome": {
+              "codeHippodrome": "CAG",
+              "libelleCourt": "CAGNES/MER",
+              "libelleLong": "HIPPODROME DE CAGNES/MER"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                5
+              ],
+              [
+                6
+              ],
+              [
+                1
+              ],
+              [
+                7
+              ],
+              [
+                3
+              ]
+            ]
+          }
+        ],
+        "audience": "NATIONAL",
+        "statut": "TERMINEE",
+        "disciplinesMere": [
+          "OBSTACLE"
+        ],
+        "specialites": [
+          "OBSTACLE"
+        ],
+        "derniereReunion": false,
+        "parisEvenement": [],
+        "meteo": {
+          "datePrevision": 1609487100000,
+          "nebulositeCode": "P8c",
+          "nebulositeLibelleCourt": "Pluie faible",
+          "nebulositeLibelleLong": "Le ciel sera charg\u00e9 et s'accompagnera de pluies de faible intensit\u00e9.",
+          "temperature": 6,
+          "forceVent": 9,
+          "directionVent": "N"
+        },
+        "offresInternet": false,
+        "regionHippique": "REGION_SUD",
+        "cagnottes": [],
+        "reportPlusFpaMax": 20
+      },
+      {
+        "cached": false,
+        "timezoneOffset": 3600000,
+        "dateReunion": 1609455600000,
+        "numOfficiel": 4,
+        "numOfficielReunionPrecedente": 3,
+        "numOfficielReunionSuivante": null,
+        "numExterne": 4,
+        "nature": "SEMINOCTURNE",
+        "hippodrome": {
+          "code": "GEL",
+          "libelleCourt": "GELSENKIRCHEN",
+          "libelleLong": "HIPPODROME GELSENKIRCHEN ALL"
+        },
+        "pays": {
+          "code": "DEU",
+          "libelle": "ALLEMAGNE"
+        },
+        "courses": [
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 4,
+            "numExterneReunion": 4,
+            "numOrdre": 3,
+            "numExterne": 3,
+            "heureDepart": 1609513620000,
+            "libelle": "PRIX GLUCKAUF 2021                      ALLEMAGNE",
+            "libelleCourt": "GLUCKAUF 2021",
+            "montantPrix": 3500,
+            "parcours": "",
+            "distance": 2000,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_DROITE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INTERNATIONALE_AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 12,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 994503,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 3500,
+            "montantOffert1er": 1400,
+            "montantOffert2eme": 700,
+            "montantOffert3eme": 500,
+            "montantOffert4eme": 300,
+            "montantOffert5eme": 150,
+            "conditions": "PRIX GLUCKAUF 2021 Course 03 Course Internationale D\u00e9part \u00e0 l'Autostart 3.500 - Attel\u00e9. - 2.000 m\u00e8tres. 1.400, 700, 500, 300, 150. - 450 au fonds d'\u00e9levage. Pour 3 \u00e0 14 ans n'ayant pas gagn\u00e9 8.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 152600,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  1
+                ]
+              },
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  3
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "GEL",
+              "libelleCourt": "GELSENKIRCHEN",
+              "libelleLong": "HIPPODROME GELSENKIRCHEN ALL"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                10
+              ],
+              [
+                7
+              ],
+              [
+                4
+              ],
+              [
+                9
+              ],
+              [
+                11
+              ],
+              [
+                5
+              ],
+              [
+                2
+              ],
+              [
+                6
+              ],
+              [
+                12
+              ],
+              [
+                8
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 4,
+            "numExterneReunion": 4,
+            "numOrdre": 4,
+            "numExterne": 4,
+            "heureDepart": 1609515720000,
+            "libelle": "PRIX DER JAHRESWENDE                    ALLEMAGNE",
+            "libelleCourt": "JAHRESWENDE",
+            "montantPrix": 4000,
+            "parcours": "",
+            "distance": 2000,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_DROITE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INTERNATIONALE_AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 10,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 994504,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 4000,
+            "montantOffert1er": 1600,
+            "montantOffert2eme": 750,
+            "montantOffert3eme": 500,
+            "montantOffert4eme": 350,
+            "montantOffert5eme": 200,
+            "conditions": "PRIX DER JAHRESWENDE Course 04 Course Internationale D\u00e9part \u00e0 l'Autostart 4.000 - Attel\u00e9. - 2.000 m\u00e8tres. 1.600, 750, 500, 350, 200. - 600 au fonds d'\u00e9levages. Pour 3 \u00e0 14 ans n'ayant pas gagn\u00e9 17.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 152000,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  8
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "GEL",
+              "libelleCourt": "GELSENKIRCHEN",
+              "libelleLong": "HIPPODROME GELSENKIRCHEN ALL"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                10
+              ],
+              [
+                5
+              ],
+              [
+                7
+              ],
+              [
+                6
+              ],
+              [
+                4
+              ],
+              [
+                2
+              ],
+              [
+                1
+              ],
+              [
+                9
+              ],
+              [
+                3
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 4,
+            "numExterneReunion": 4,
+            "numOrdre": 5,
+            "numExterne": 5,
+            "heureDepart": 1609517820000,
+            "libelle": "PRIX WWW.WETTSTAR-PFERDEWETTEN          ALLEMAGNE",
+            "libelleCourt": "WWW.WETTSTAR",
+            "montantPrix": 5000,
+            "parcours": "",
+            "distance": 2000,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_DROITE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INTERNATIONALE_AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 13,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 994505,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 5000,
+            "montantOffert1er": 2000,
+            "montantOffert2eme": 1000,
+            "montantOffert3eme": 600,
+            "montantOffert4eme": 400,
+            "montantOffert5eme": 250,
+            "conditions": "PRIX WWW.WETTSTAR-PFERDEWETTEN Course 05 Course Internationale D\u00e9part \u00e0 l'Autostart 5.000 - Attel\u00e9. - 2.000 m\u00e8tres. 2.000, 1.000, 600, 400, 250. - 750 au fonds d'\u00e9levage. Pour 3 \u00e0 14 ans n'ayant pas gagn\u00e9 366.500.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 148400,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  1,
+                  6
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "GEL",
+              "libelleCourt": "GELSENKIRCHEN",
+              "libelleLong": "HIPPODROME GELSENKIRCHEN ALL"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                4
+              ],
+              [
+                11
+              ],
+              [
+                13
+              ],
+              [
+                8
+              ],
+              [
+                10
+              ],
+              [
+                9
+              ],
+              [
+                3
+              ],
+              [
+                7
+              ],
+              [
+                5
+              ],
+              [
+                12
+              ],
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 4,
+            "numExterneReunion": 4,
+            "numOrdre": 6,
+            "numExterne": 6,
+            "heureDepart": 1609519920000,
+            "libelle": "PRIX WETTSTAR-NEUJAHRS-PREIS            ALLEMAGNE",
+            "libelleCourt": "WETTSTAR-NEUJA.",
+            "montantPrix": 6000,
+            "parcours": "",
+            "distance": 2000,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_DROITE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INTERNATIONALE_AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 11,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 994506,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 6000,
+            "montantOffert1er": 2500,
+            "montantOffert2eme": 1100,
+            "montantOffert3eme": 800,
+            "montantOffert4eme": 500,
+            "montantOffert5eme": 350,
+            "conditions": "PRIX WETTSTAR-NEUJAHRS-PREIS Course 06 Course Internationale D\u00e9part \u00e0 l'Autostart 6.000 - Attel\u00e9. - 2.000 m\u00e8tres. 2.500, 1.100, 800, 500, 350. - 750 au fonds d'\u00e9levage. Pour 3 \u00e0 14 ans n'ayant pas gagn\u00e9 11.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 150200,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  9,
+                  11
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "GEL",
+              "libelleCourt": "GELSENKIRCHEN",
+              "libelleLong": "HIPPODROME GELSENKIRCHEN ALL"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                6
+              ],
+              [
+                7
+              ],
+              [
+                3
+              ],
+              [
+                4
+              ],
+              [
+                1
+              ],
+              [
+                8
+              ],
+              [
+                2
+              ],
+              [
+                5
+              ],
+              [
+                10
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 4,
+            "numExterneReunion": 4,
+            "numOrdre": 7,
+            "numExterne": 7,
+            "heureDepart": 1609522020000,
+            "libelle": "PRIX CHAMPAGNER-RENNEN                  ALLEMAGNE",
+            "libelleCourt": "CHAMPAGNER",
+            "montantPrix": 4000,
+            "parcours": "",
+            "distance": 2000,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_DROITE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INTERNATIONALE_AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 10,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 994507,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 4000,
+            "montantOffert1er": 1600,
+            "montantOffert2eme": 750,
+            "montantOffert3eme": 500,
+            "montantOffert4eme": 350,
+            "montantOffert5eme": 200,
+            "conditions": "PRIX CHAMPAGNER-RENNEN Course 07 Course Internationale D\u00e9part \u00e0 l'Autostart 4.000 - Attel\u00e9. - 2.000 m\u00e8tres. 1.600, 750, 500, 350, 200. - 600 au fonds d'\u00e9levage. Pour 3 \u00e0 14 ans n'ayant pas gagn\u00e9 32.000.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 152400,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  10
+                ]
+              },
+              {
+                "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                "numeroParticipants": [
+                  5
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "GEL",
+              "libelleCourt": "GELSENKIRCHEN",
+              "libelleLong": "HIPPODROME GELSENKIRCHEN ALL"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                4
+              ],
+              [
+                2
+              ],
+              [
+                9
+              ],
+              [
+                6
+              ],
+              [
+                8
+              ],
+              [
+                7
+              ],
+              [
+                1
+              ],
+              [
+                3
+              ]
+            ]
+          },
+          {
+            "cached": false,
+            "arriveeDefinitive": true,
+            "departImminent": false,
+            "timezoneOffset": 3600000,
+            "numReunion": 4,
+            "numExterneReunion": 4,
+            "numOrdre": 8,
+            "numExterne": 8,
+            "heureDepart": 1609523400000,
+            "libelle": "PRIX GLUCKSSCHWEIN-RENNEN               ALLEMAGNE",
+            "libelleCourt": "GLUCKSSCHWEIN",
+            "montantPrix": 1500,
+            "parcours": "",
+            "distance": 2000,
+            "distanceUnit": "METRE",
+            "corde": "CORDE_DROITE",
+            "discipline": "ATTELE",
+            "specialite": "TROT_ATTELE",
+            "categorieParticularite": "INTERNATIONALE_AUTOSTART",
+            "conditionSexe": "TOUS_CHEVAUX",
+            "nombreDeclaresPartants": 10,
+            "grandPrixNationalTrot": false,
+            "numSocieteMere": 994508,
+            "pariMultiCourses": false,
+            "pariSpecial": false,
+            "montantTotalOffert": 1500,
+            "montantOffert1er": 750,
+            "montantOffert2eme": 350,
+            "montantOffert3eme": 200,
+            "montantOffert4eme": 120,
+            "montantOffert5eme": 80,
+            "conditions": "PRIX GLUCKSSCHWEIN-RENNEN Course 08 Course Internationale D\u00e9part \u00e0 l'Autostart 1.500 - Attel\u00e9. - 2.000 m\u00e8tres. 750, 350, 200, 120, 80. Pour 3 \u00e0 14 ans n'ayant pas gagn\u00e9 1.500.",
+            "numCourseDedoublee": 0,
+            "paris": [
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_GAGNANT",
+                "typePari": "E_SIMPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_SIMPLE_PLACE",
+                "typePari": "E_SIMPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 150,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 3
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 1,
+                "ordre": false,
+                "combine": false,
+                "spotAutorise": false,
+                "codePari": "E_REPORT_PLUS",
+                "typePari": "E_REPORT_PLUS",
+                "enVente": false,
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_GAGNANT",
+                "typePari": "E_COUPLE_GAGNANT",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_COUPLE_PLACE",
+                "typePari": "E_COUPLE_PLACE",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 3,
+                "ordre": false,
+                "combine": true,
+                "spotAutorise": true,
+                "codePari": "E_TRIO",
+                "typePari": "E_TRIO",
+                "miseBase": 100,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              },
+              {
+                "complement": true,
+                "nbChevauxReglementaire": 2,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "spotAutorise": true,
+                "codePari": "E_DEUX_SUR_QUATRE",
+                "typePari": "E_DEUX_SUR_QUATRE",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": true,
+                "infosJackpot": {
+                  "miseBase": 400,
+                  "tauxContribution": {
+                    "numerateur": 1,
+                    "denominateur": 4
+                  }
+                }
+              },
+              {
+                "complement": false,
+                "nbChevauxReglementaire": 4,
+                "ordre": false,
+                "combine": true,
+                "valeursFlexiAutorisees": [
+                  50
+                ],
+                "valeursRisqueAutorisees": [
+                  4,
+                  5,
+                  6
+                ],
+                "spotAutorise": true,
+                "codePari": "E_MINI_MULTI",
+                "typePari": "E_MINI_MULTI",
+                "miseBase": 300,
+                "enVente": false,
+                "audience": "NATIONAL",
+                "reportable": false
+              }
+            ],
+            "statut": "FIN_COURSE",
+            "categorieStatut": "ARRIVEE",
+            "dureeCourse": 152900,
+            "participants": [],
+            "ecuries": [],
+            "incidents": [
+              {
+                "type": "NON_PARTANT",
+                "numeroParticipants": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "rapportsDefinitifsDisponibles": true,
+            "isArriveeDefinitive": true,
+            "isDepartImminent": false,
+            "isDepartAJPlusUn": false,
+            "cagnottes": [],
+            "pronosticsExpires": true,
+            "replayDisponible": false,
+            "hippodrome": {
+              "codeHippodrome": "GEL",
+              "libelleCourt": "GELSENKIRCHEN",
+              "libelleLong": "HIPPODROME GELSENKIRCHEN ALL"
+            },
+            "epcPourTousParis": true,
+            "courseTrackee": false,
+            "courseExclusiveInternet": false,
+            "formuleChampLibreIndisponible": false,
+            "hasEParis": true,
+            "ordreArrivee": [
+              [
+                10
+              ],
+              [
+                8
+              ],
+              [
+                5
+              ],
+              [
+                9
+              ],
+              [
+                6
+              ],
+              [
+                1
+              ],
+              [
+                7
+              ],
+              [
+                4
+              ]
+            ]
+          }
+        ],
+        "audience": "NATIONAL",
+        "statut": "TERMINEE",
+        "disciplinesMere": [
+          "TROT"
+        ],
+        "specialites": [
+          "TROT_ATTELE"
+        ],
+        "derniereReunion": false,
+        "parisEvenement": [],
+        "meteo": {
+          "datePrevision": 1609487100000,
+          "nebulositeCode": "P5",
+          "nebulositeLibelleCourt": "Tr\u00e8s Nuageux",
+          "nebulositeLibelleLong": "Les nuages l'emporteront et les \u00e9claircies restront rares.",
+          "temperature": 3,
+          "forceVent": 7,
+          "directionVent": "SO"
+        },
+        "offresInternet": false,
+        "cagnottes": [],
+        "reportPlusFpaMax": 20
+      }
+    ],
+    "prochainesCoursesAPartir": [],
+    "datesProgrammesDisponibles": [
+      "01052021",
+      "02052021",
+      "03052021",
+      "04052021",
+      "05052021"
+    ]
+  },
+  "timestampPMU": {
+    "timestamp": 1619859449429,
+    "timezoneOffset": 7200000
+  }
+}

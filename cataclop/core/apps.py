@@ -6,4 +6,4 @@ class CoreConfig(AppConfig):
     verbose_name = 'Core Application'
 
     def ready(self):
-        import cataclop.core.signals
+        import cataclop.core.receivers # noqa

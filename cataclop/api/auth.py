@@ -3,6 +3,7 @@ from django.contrib.auth.backends import ModelBackend
 from rest_framework.authentication import TokenAuthentication as DRFTokenAuthentication
 from rest_framework.permissions import BasePermission
 
+
 class EmailBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
@@ -15,12 +16,15 @@ class EmailBackend(ModelBackend):
                 return user
         return None
 
+
 class TokenAuthentication(DRFTokenAuthentication):
     pass
+
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
         return request.user and request.user.is_superuser
+
 
 class IsLocal(BasePermission):
     def has_permission(self, request, view):

@@ -22,26 +22,24 @@ services:
   app:
     container_name: cataclop_app
     build: .
+    command: "supervisord -n -c /etc/supervisor/supervisord.conf"
     volumes:
       - .env:/app/.env
-      - ./cataclop:/app/cataclop
-      - ./dash:/app/dash
       - ./var:/app/var
       - ./notebooks:/app/notebooks
-      - ./docker/ipython_config.py:/root/.ipython/profile_default/ipython_config.py
-      - ./docker/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
-      - ./docker/entrypoint.sh:/app/entrypoint.sh
     networks:
       - cataclop_internal
     depends_on:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.app.rule=Host(`${HOST}`)"
       - "traefik.http.routers.app.entrypoints=api,dash"
+      - "traefik.http.routers.app.service=app"
       - "traefik.http.services.app.loadbalancer.server.port=8082"
-      - "traefik.http.routers.notebook.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.notebook.rule=Host(`${HOST}`)"
       - "traefik.http.routers.notebook.entrypoints=notebook"
+      - "traefik.http.routers.notebook.service=notebook"
       - "traefik.http.services.notebook.loadbalancer.server.port=8888"
 
   db:

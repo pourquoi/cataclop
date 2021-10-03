@@ -1,6 +1,6 @@
 #!/bin/sh
 cd /home/cataclop/cataclop
-pipenv run python manage.py scrap
-pipenv run python manage.py parse --predict
-pipenv run python manage.py scrap tomorrow tomorrow
-pipenv run python manage.py parse tomorrow --predict
+python manage.py scrap
+python manage.py parse --predict
+python manage.py scrap tomorrow tomorrow
+python manage.py parse tomorrow --predict

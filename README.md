@@ -4,7 +4,8 @@ horse race supervised learning and autonomous betting
 
 ### EXPLORATION
 
-[notebook](notebooks/exploration.ipynb)
+- [exploration](notebooks/exploration.ipynb)
+- [onboarding](notebooks/onboarding.ipynb)
 
 ### 1/ INSTALL
 
@@ -29,7 +30,7 @@ tar xzvf var/races-2021-01.tgz -C var/scrap
 
 eg. scrap all January 2021 races
 ```
-docker exec -it cataclop_app pipenv run python manage.py scrap "2021-01-01" "2021-01-31"
+docker exec -it cataclop_app python manage.py scrap "2021-01-01" "2021-01-31"
 ```
 
 ### 3/ IMPORT THE JSON FILES
@@ -40,7 +41,7 @@ docker exec -it cataclop_app pipenv run python manage.py parse "2021-01-*"
 
 ### 4/ TRAIN MODELS
 ```
-docker exec -it cataclop_app pipenv run python manage.py shell_plus --notebook
+docker exec -it cataclop_app python manage.py shell_plus --notebook
 ```
 open the output link (the one starting with http://127.0.0.1:8888/) in your navigator to access the jupyter notebooks
 
@@ -50,10 +51,10 @@ open the *onboarding* notebook for a quick start on creating models
 ### REST API
 
 ```console
-docker exec -it cataclop_app pipenv run python manage.py createsuperuser
+docker exec -it cataclop_app python manage.py createsuperuser
 ```
 
-The REST API should be running on http://127.0.0.1:8082/api
+The REST API should be running on http://127.0.0.1:8082/api and admin dashboard on http://127.0.0.1:8082/admin
 
 ### (advanced) BETTING
 
@@ -63,5 +64,10 @@ vim scripts/bet_config.json
 ```
 
 ```console
-pipenv run python manage.py bet --loop
+docker exec -it cataclop_app python manage.py bet --loop
+```
+
+### Tests
+```console
+docker exec -it cataclop_app python manage.py test --exclude-tag=integration
 ```

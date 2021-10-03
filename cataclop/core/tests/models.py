@@ -1,10 +1,8 @@
 from django.test import TestCase
-from faker import Faker
-from datetime import datetime
 
-from .fixtures import factories
+from cataclop.core.tests.utils import factories
+from cataclop.core.models import Race, Player, RaceSession, Horse
 
-from .models import Race, Player, RaceSession, Horse
 
 class RaceModelTests(TestCase):
 

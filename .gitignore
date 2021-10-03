@@ -1,6 +1,7 @@
 # editor
 .vscode
 .DS_Store
+.idea
 
 # generated
 node_modules

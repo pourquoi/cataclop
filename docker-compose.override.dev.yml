@@ -13,17 +13,14 @@ services:
       - "--entrypoints.whoami.address=:8055"
     ports:
       - "8088:8080" # traefik
-      - "8055:8055" # whoami
 
-  whoami:
-    container_name: cataclop_whoami
-    image: containous/whoami:v1.3.0
-    command:
-      - --port=8055
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.whoami.entrypoints=whoami"
-      - "traefik.http.services.whoami.loadbalancer.server.port=8055"
-    networks:
-      - cataclop_internal
+  app:
+    volumes:
+      - .env:/app/.env
+      - ./var:/app/var
+      - ./notebooks:/app/notebooks
+      - ./cataclop:/app/cataclop
+      - ./dash:/app/dash
+      - ./docker/ipython_config.py:/root/.ipython/profile_default/ipython_config.py
+      - ./docker/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+      - ./docker/docker-entrypoint.sh:/docker-entrypoint.sh

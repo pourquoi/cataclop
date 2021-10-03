@@ -4,6 +4,7 @@ from faker import Faker
 
 fake = Faker()
 
+
 class HorseFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'core.Horse'
@@ -11,11 +12,13 @@ class HorseFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: 'horse%s' % n)
     sex = 'MALE'
 
+
 class OwnerFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'core.Owner'
-    
+
     name = factory.Sequence(lambda n: 'horse%s' % n)
+
 
 class HerderFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -23,17 +26,20 @@ class HerderFactory(factory.django.DjangoModelFactory):
 
     name = factory.Sequence(lambda n: 'horse%s' % n)
 
+
 class JockeyFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'core.Jockey'
-    
+
     name = factory.Sequence(lambda n: 'horse%s' % n)
+
 
 class TrainerFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'core.Trainer'
 
     name = factory.Sequence(lambda n: 'horse%s' % n)
+
 
 class HippodromeFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -43,6 +49,7 @@ class HippodromeFactory(factory.django.DjangoModelFactory):
     name = 'CHANTILLY'
     country = 'FRA'
 
+
 class RaceSessionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'core.RaceSession'
@@ -50,7 +57,8 @@ class RaceSessionFactory(factory.django.DjangoModelFactory):
     num = 1
     date = datetime.date.today()
     hippodrome = factory.SubFactory(HippodromeFactory)
-    
+
+
 class RaceFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'core.Race'
@@ -67,6 +75,7 @@ class RaceFactory(factory.django.DjangoModelFactory):
     distance = 2500
 
     declared_player_count = 10
+
 
 class PlayerFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -96,4 +105,3 @@ class PlayerFactory(factory.django.DjangoModelFactory):
     prev_year_earnings = 100
 
     post_position = 1
-

@@ -9,18 +9,19 @@ next_race_queued = django.dispatch.Signal(providing_args=["race"])
 
 bet_placed = django.dispatch.Signal(providing_args=["race", "horse", "amount"])
 
+
 @receiver(bet_placed)
 def bet_sms_notification(sender, **kwargs):
-
     try:
         msg = '{}: bet {}€ on {}'.format(kwargs.get('race'), kwargs.get('amount'), kwargs.get('horse'))
-        requests.get('https://smsapi.free-mobile.fr/sendmsg', params={'user': SMSAPI_USER, 'pass': SMSAPI_SECRET, 'msg': msg})
+        requests.get('https://smsapi.free-mobile.fr/sendmsg',
+                     params={'user': SMSAPI_USER, 'pass': SMSAPI_SECRET, 'msg': msg})
     except:
         pass
 
+
 @receiver(next_race_queued)
 def log_next_race(sender, **kwargs):
-
     try:
         with open(NEXT_RACE_LOG_FILE, 'w') as f:
             f.write(kwargs.get('race'))

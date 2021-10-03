@@ -1,7 +1,7 @@
 from django.urls import path
 
-from cataclop.front.views import dashboard
+from cataclop.front.views import home
 
 urlpatterns = [
-    path('', dashboard, name='dashboard')
+    path('', home, name='home')
 ]

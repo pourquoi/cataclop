@@ -1,7 +1,6 @@
 import json
 import hashlib
 import importlib
-import inspect
 import os
 
 from abc import ABC, abstractmethod
@@ -76,6 +75,9 @@ class Program(PipelineEntity):
     @classmethod
     def get_data_base_dir(cls):
         return PROGRAM_DIR
+
+    def defaults(self):
+        pass
 
     def run(self, **kwargs):
         pass

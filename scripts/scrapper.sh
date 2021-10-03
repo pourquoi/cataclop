@@ -1,4 +1,4 @@
 #!/bin/sh
 cd /home/cataclop/cataclop
-pipenv run python manage.py scrap
-pipenv run python manage.py parse
+python manage.py scrap
+python manage.py parse

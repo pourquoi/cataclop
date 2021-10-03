@@ -10,7 +10,9 @@ from cataclop.core.models import Player
 from .signals import bet_placed
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 class Better:
 
@@ -36,7 +38,8 @@ class Better:
 
         urls = {
             'pmu': 'https://www.pmu.fr/turf/{}/R{}/C{}'.format(date.strftime('%d%m%Y'), session_num, race_num),
-            'unibet': 'https://www.unibet.fr/turf/race/{}-R{}-C{}-t.html'.format(date.strftime('%d-%m-%Y'), session_num, race_num)
+            'unibet': 'https://www.unibet.fr/turf/race/{}-R{}-C{}-t.html'.format(date.strftime('%d-%m-%Y'), session_num,
+                                                                                 race_num)
         }
 
         # group bets by player
@@ -54,7 +57,7 @@ class Better:
                 if bb['num'] == b['num']:
                     bb['amount'] += b['amount']
                     exists = True
-            
+
             if not exists:
                 players_bet[provider].append(b)
 
@@ -67,11 +70,11 @@ class Better:
             if not len(players_bet[provider]):
                 continue
 
-            bet_cmd = ','.join( ['{}:{}'.format(b['num'], b['amount']) for b in players_bet[provider]] )
+            bet_cmd = ','.join(['{}:{}'.format(b['num'], b['amount']) for b in players_bet[provider]])
 
             args = [
                 self.node_path,
-                os.path.join(self.script_path,'bet.{}.js'.format(provider)),
+                os.path.join(self.script_path, 'bet.{}.js'.format(provider)),
                 url,
                 bet_cmd,
                 'gagnant',
@@ -83,12 +86,14 @@ class Better:
                 logger.info('betting on {} in race R{}C{}'.format(b['num'], session_num, race_num))
 
                 try:
-                    player = Player.objects.get(num=b['num'], race__start_at__date=date, race__num=race_num, race__session__num=session_num)
+                    player = Player.objects.get(num=b['num'], race__start_at__date=date, race__num=race_num,
+                                                race__session__num=session_num)
                 except:
                     logger.error('bet player not found')
                     player = None
 
-                bet = Bet(player=player, url=url, amount=Decimal('{}'.format(b['amount'])), simulation=simulation, program=b['program'])
+                bet = Bet(player=player, url=url, amount=Decimal('{}'.format(b['amount'])), simulation=simulation,
+                          program=b['program'])
                 bet.stats_prediction_time = b.get('prediction_time', None)
                 bet.stats_scrap_time = b.get('scrap_time', None)
                 bet.provider = provider
@@ -109,4 +114,6 @@ class Better:
             bet.stdout = p.stdout
             bet.save()
 
-            bet_placed.send(sender=self.__class__, race="{} R{}C{}".format(date.strftime('%Y-%m-%d'), session_num, race_num), horse=str(bet.player) if bet.player is not None else '?', amount=bet.amount)
+            bet_placed.send(sender=self.__class__,
+                            race="{} R{}C{}".format(date.strftime('%Y-%m-%d'), session_num, race_num),
+                            horse=str(bet.player) if bet.player is not None else '?', amount=bet.amount)
