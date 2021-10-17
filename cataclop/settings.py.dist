@@ -15,7 +15,10 @@ env = environ.Env(
     SCHEME=(str, 'http'),
     PORT=(int, None),
     CORS_ALLOW_ALL_ORIGINS=(bool, False),
-    EMAIL_RECIPIENTS=(tuple, None)
+    EMAIL_RECIPIENTS=(tuple, None),
+    PMU_CLIENT_ID=(str, None),
+    PMU_CLIENT_PASSWRD=(str, None),
+    PMU_CLIENT_DOB=(str, None)
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -161,6 +164,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/app/static'
 
 PMU_SCRAP_DIR = env('SCRAP_DIR')
+
+PMU_CLIENT_ID = env('PMU_CLIENT_ID')
+PMU_CLIENT_PASSWORD = env('PMU_CLIENT_PASSWORD')
+PMU_CLIENT_DOB = env('PMU_CLIENT_DOB')
 
 SMSAPI_USER = 'bob'
 SMSAPI_SECRET = '999999'

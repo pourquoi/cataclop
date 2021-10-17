@@ -17,7 +17,9 @@ from cataclop.ml.pipeline import factories
 from cataclop.pmu.signals import next_race_queued
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 class Command(BaseCommand):
     help = '''
@@ -64,7 +66,7 @@ class Command(BaseCommand):
     def bet(self):
 
         if self.loop:
-            while( True ): 
+            while (True):
                 self._bet()
                 time.sleep(10)
 
@@ -85,7 +87,6 @@ class Command(BaseCommand):
                 '''
         else:
             self._bet()
-
 
     def _bet(self):
 
@@ -114,8 +115,9 @@ class Command(BaseCommand):
         time_to_next_race = (next_race.start_at - datetime.datetime.now()).total_seconds()
 
         if not self.immediate:
-            while time_remaining > 60*self.wait_until_minutes:
-                if not self.skip_scrap and time_to_next_race < 60*60 and time_remaining > 60*self.wait_until_minutes + 60*5 and math.floor(time_remaining/60.0) % 5 == 0:
+            while time_remaining > 60 * self.wait_until_minutes:
+                if not self.skip_scrap and time_to_next_race < 60 * 60 and time_remaining > 60 * self.wait_until_minutes + 60 * 5 and math.floor(
+                        time_remaining / 60.0) % 5 == 0:
                     self.scrapper.scrap(force_scrap_races=True, force_scrap_players=True)
                     self.parser.parse()
 
@@ -139,7 +141,7 @@ class Command(BaseCommand):
         # race might have been delayed
         race.refresh_from_db()
         time_remaining = (race.start_at - datetime.datetime.now()).total_seconds()
-        if not self.immediate and time_remaining > 60*self.wait_until_minutes:
+        if not self.immediate and time_remaining > 60 * self.wait_until_minutes:
             logger.info('race {} delayed'.format(str(race)))
             return
 
@@ -154,9 +156,9 @@ class Command(BaseCommand):
                 run_time = 0
 
                 t1 = datetime.datetime.now()
-                
+
                 try:
-                    program.predict(dataset_params = {
+                    program.predict(dataset_params={
                         'race_id': race.id
                     }, locked=True, dataset_reload=True)
                 except:
@@ -179,16 +181,7 @@ class Command(BaseCommand):
                     num = getattr(row, 'num')
                     amount = getattr(row, 'bet')
 
-                    odds_pmu = getattr(row, 'odds_final', None)
-                    odds_unibet = getattr(row, 'odds_final_unibet', None)
-
-                    provider = 'pmu'
-
-                    #if odds_pmu is not None and odds_unibet is not None and odds_unibet > odds_pmu:
-                    #    provider = 'unibet'
-
-                    if self.provider:
-                        provider = self.provider
+                    provider = self.provider if self.provider else 'pmu'
 
                     bets.append({
                         'provider': provider,
@@ -200,18 +193,19 @@ class Command(BaseCommand):
                     })
 
         if len(bets) > 0:
-            #try:
-            self.better.bet(date=race.start_at, session_num=race.session.num, race_num=race.num, bets=bets, simulation=self.simulation)
-            #except:
-            #logger.error('bet failed: {}'.format(sys.exc_info()[0]))
-
+            # try:
+            bets_processed = self.better.bet(date=race.start_at, session_num=race.session.num, race_num=race.num, bets=bets,
+                            simulation=self.simulation)
+            logger.info(bets_processed)
+            # except:
+            # logger.error('bet failed: {}'.format(sys.exc_info()[0]))
 
     def get_next_race(self, exclude=None):
 
-        #races = models.Race.objects.filter(start_at__gt=datetime.datetime.now(), start_at__date=datetime.date.today())[:1]
+        # races = models.Race.objects.filter(start_at__gt=datetime.datetime.now(), start_at__date=datetime.date.today())[:1]
         races = models.Race.objects.all().prefetch_related('player_set').filter(
-                                player__id__gt=0, start_at__gt=datetime.datetime.now() + datetime.timedelta(minutes=self.wait_until_minutes)
-                            ).order_by('start_at')
+            player__id__gt=0, start_at__gt=datetime.datetime.now() + datetime.timedelta(minutes=self.wait_until_minutes)
+        ).order_by('start_at')
 
         if exclude is not None:
             races = races.exclude(id__in=exclude)

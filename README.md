@@ -59,11 +59,6 @@ The REST API should be running on http://127.0.0.1:8082/api and admin dashboard 
 ### (advanced) BETTING
 
 ```console
-cp scripts/bet_config.json.dist scripts/bet_config.json
-vim scripts/bet_config.json
-```
-
-```console
 docker exec -it cataclop_app python manage.py bet --loop
 ```
 

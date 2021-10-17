@@ -2,16 +2,98 @@ import os
 import subprocess
 
 import datetime
+import random
+import math
+import requests
+import json
 from decimal import Decimal
 
 from .models import Bet
 from cataclop.core.models import Player
+from cataclop.settings import PMU_CLIENT_ID, PMU_CLIENT_DOB, PMU_CLIENT_PASSWORD
 
 from .signals import bet_placed
 
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+class PMUClient:
+
+    def __init__(self):
+        self.session = None
+        self.response = None
+        self.version = 61
+
+    @staticmethod
+    def gen_correlation():
+        l = 10
+        return ''.join([str(math.floor(random.random() * 10)) if random.random() > 0.5 else chr(97 + math.ceil(25 * random.random())) for i in range(l)])
+
+    def login(self):
+        s = requests.Session()
+
+        s.headers.update({
+          "accept": "application/json",
+          "accept-language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7",
+          "cache-control": "no-cache",
+          "content-type": "application/json",
+          "pragma": "no-cache",
+          "sec-ch-ua": "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"macOS\"",
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "same-site",
+          "sec-gpc": "1",
+        })
+
+        s.get("https://www.pmu.fr/")
+        r = s.get("https://connect.awl.pmu.fr/auth/client/{}/session/pinpad".format(self.version))
+        pinpad = r.json()
+        password = ''.join([pinpad["pinPadCodes"][int(c) + 3][1] for c in PMU_CLIENT_PASSWORD])
+        payload = {
+            'codeConf': password,
+            'dateNaissance': PMU_CLIENT_DOB,
+            'numeroExterne': PMU_CLIENT_ID,
+            'pinpadKey': pinpad["keyPinpad"]
+        }
+        r = s.post("https://connect.awl.pmu.fr/auth/client/{}/session".format(self.version), json=payload)
+
+        s.headers.update({'pmu-session-id': s.cookies.get('pmusid')})
+
+        self.session = s
+        self.response = r
+        return self.response.json()
+
+    def bet(self, session_num, race_num, num, amount=None, date=None):
+        if self.session is None:
+            self.login()
+
+        if date is None:
+            date = datetime.datetime.now()
+        if amount is None:
+            amount = 100
+
+        payload = [{
+            'correlationId': self.gen_correlation(),
+            'numeroReunion': session_num,
+            'numeroCourse': race_num,
+            'dateReunion': int(datetime.datetime.strptime(date.strftime('%Y-%m-%d'), '%Y-%m-%d').timestamp()*1000),
+            'pari': 'E_SIMPLE_GAGNANT',
+            'formule': 'UNITAIRE',
+            'bases': [num],
+            'associes': [],
+            'selectionChampLibre': [],
+            'complement': None,
+            'spot': False,
+            'dtlo': False,
+            'valeur': int(amount)
+        }]
+
+        self.response = self.session.post("https://connect.awl.pmu.fr/turfPari/client/{}/parier".format(self.version), json=payload)
+        return self.response.json()
 
 
 class Better:
@@ -36,12 +118,6 @@ class Better:
         if date is None:
             date = datetime.datetime.now()
 
-        urls = {
-            'pmu': 'https://www.pmu.fr/turf/{}/R{}/C{}'.format(date.strftime('%d%m%Y'), session_num, race_num),
-            'unibet': 'https://www.unibet.fr/turf/race/{}-R{}-C{}-t.html'.format(date.strftime('%d-%m-%Y'), session_num,
-                                                                                 race_num)
-        }
-
         # group bets by player
         players_bet = {
             'pmu': [],
@@ -61,25 +137,16 @@ class Better:
             if not exists:
                 players_bet[provider].append(b)
 
-        bet_logs = []
+        client = PMUClient()
+        client.login()
+
+        bets_processed = []
 
         for provider in players_bet.keys():
 
-            url = urls[provider]
-
-            if not len(players_bet[provider]):
+            if provider != 'pmu':
+                logger.warning('provider {} not supported'.format(provider))
                 continue
-
-            bet_cmd = ','.join(['{}:{}'.format(b['num'], b['amount']) for b in players_bet[provider]])
-
-            args = [
-                self.node_path,
-                os.path.join(self.script_path, 'bet.{}.js'.format(provider)),
-                url,
-                bet_cmd,
-                'gagnant',
-                '1' if simulation else '0'
-            ]
 
             for b in players_bet[provider]:
 
@@ -92,28 +159,29 @@ class Better:
                     logger.error('bet player not found')
                     player = None
 
-                bet = Bet(player=player, url=url, amount=Decimal('{}'.format(b['amount'])), simulation=simulation,
+                bet = Bet(player=player, amount=Decimal('{}'.format(b['amount'])), simulation=simulation,
                           program=b['program'])
+
+                t1 = datetime.datetime.now()
+                if not simulation:
+                    try:
+                        client.bet(session_num, race_num, b['num'], amount=b['amount'] * 100, date=date)
+                        bet.stdout = client.response.text()
+                    except Exception as err:
+                        bet.stderr = str(err)
+                        logger.error(err)
+                t2 = datetime.datetime.now()
+
                 bet.stats_prediction_time = b.get('prediction_time', None)
                 bet.stats_scrap_time = b.get('scrap_time', None)
                 bet.provider = provider
-                bet_logs.append(bet)
+                bet.stats_bet_time = (t2 - t1).total_seconds()
+                bet.save()
 
-            t1 = datetime.datetime.now()
-            p = subprocess.run(args, timeout=90, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            t2 = datetime.datetime.now()
-            bet_time = (t2 - t1).total_seconds()
+                bets_processed.append(bet)
 
-            for b in bet_logs:
-                if b.provider == provider:
-                    b.stats_bet_time = bet_time
+                bet_placed.send(sender=self.__class__,
+                                race="{} R{}C{}".format(date.strftime('%Y-%m-%d'), session_num, race_num),
+                                horse=str(bet.player) if bet.player is not None else '?', amount=bet.amount)
 
-        for bet in bet_logs:
-            bet.returncode = p.returncode
-            bet.stderr = p.stderr
-            bet.stdout = p.stdout
-            bet.save()
-
-            bet_placed.send(sender=self.__class__,
-                            race="{} R{}C{}".format(date.strftime('%Y-%m-%d'), session_num, race_num),
-                            horse=str(bet.player) if bet.player is not None else '?', amount=bet.amount)
+        return bets_processed

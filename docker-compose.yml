@@ -55,10 +55,6 @@ services:
     networks:
       - cataclop_internal
 
-#  rabbit:
-#    container_name: cataclop_rabbit
-#    image: rabbitmq
-
 networks:
   cataclop_internal: 
     driver: bridge 
