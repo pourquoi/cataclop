@@ -19,7 +19,6 @@ notebooks/sandbox/*
 
 # config
 .env
-cataclop/settings.py
 scripts/bet_config.json
 scripts/live_config.json
 docker-compose.override.yml
@@ -35,6 +34,8 @@ var/programs/*
 # scrap files
 var/scrap/*
 !var/scrap/.gitkeep
+var/archives/*
+!var/archives/.gitkeep
 
 # db
 var/mysql/*

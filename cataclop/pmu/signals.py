@@ -12,6 +12,8 @@ bet_placed = django.dispatch.Signal(providing_args=["race", "horse", "amount"])
 
 @receiver(bet_placed)
 def bet_sms_notification(sender, **kwargs):
+    if not SMSAPI_USER or not SMSAPI_SECRET:
+        return
     try:
         msg = '{}: bet {}€ on {}'.format(kwargs.get('race'), kwargs.get('amount'), kwargs.get('horse'))
         requests.get('https://smsapi.free-mobile.fr/sendmsg',

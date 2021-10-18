@@ -10,7 +10,6 @@ horse race supervised learning and autonomous betting
 ### 1/ INSTALL
 
 ```console
-cp cataclop/settings.py.dist cataclop/settings.py
 cp .env.dist .env
 ```
 
@@ -23,7 +22,7 @@ docker-compose up -d
 * option 1 : extract an existing archive
 
 ```
-tar xzvf var/races-2021-01.tgz -C var/scrap
+tar xzvf var/archives/races-2021-01.tgz -C var/scrap
 ```
 
 * option 2 : scrapping
