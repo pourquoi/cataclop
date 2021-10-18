@@ -19,7 +19,8 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         curl \
         build-essential \
-        libmariadbclient-dev
+        libmariadbclient-dev \
+        libtiff5-dev libjpeg62-turbo-dev libopenjp2-7-dev
 
 WORKDIR /app
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash
