@@ -26,9 +26,9 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'changeit'
+SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -169,8 +169,8 @@ PMU_CLIENT_ID = env('PMU_CLIENT_ID')
 PMU_CLIENT_PASSWORD = env('PMU_CLIENT_PASSWORD')
 PMU_CLIENT_DOB = env('PMU_CLIENT_DOB')
 
-SMSAPI_USER = 'bob'
-SMSAPI_SECRET = '999999'
+SMSAPI_USER = env('SMSAPI_USER')
+SMSAPI_SECRET = env('SMSAPI_SECRET')
 
 NOTEBOOK_ARGUMENTS = [
     '--notebook-dir', 'notebooks',

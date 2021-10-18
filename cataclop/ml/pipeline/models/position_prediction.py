@@ -101,7 +101,6 @@ class Model(factories.Model):
 
     def train_filter(self, df):
         return None
-        #return (df['start_at'] > '2019-06-01') & (df['start_at'] < '2019-08-01')
 
     def load(self):
         self.models = load(open(os.path.join(self.data_dir, 'models.joblib'), 'rb'))

@@ -252,7 +252,7 @@ class PmuParser:
                     p.position_prediction = program.df.loc[p.id, 'pred']
                     p.save()
             except Exception as err:
-                logger.error("Parser prediction failed: {}".format(err.message))
+                logger.error("Parser prediction failed: {}".format(err))
 
         return race
 
