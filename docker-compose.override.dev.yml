@@ -18,6 +18,8 @@ services:
     volumes:
       - .env:/app/.env
       - ./var:/app/var
+      - ./poetry.lock:/app/peotry.lock
+      - ./pyproject.toml:/app/pyproject.toml
       - ./notebooks:/app/notebooks
       - ./cataclop:/app/cataclop
       - ./dash:/app/dash

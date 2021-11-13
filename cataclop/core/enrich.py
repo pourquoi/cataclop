@@ -16,7 +16,7 @@ def compute_player_stats(p, force=False):
     if p.trainer_winning_rate is not None and not force:
         return
 
-    same_trainer_players = Player.objects.filter(trainer=p.trainer, imported_at__lt=p.imported_at).exclude(
+    same_trainer_players = Player.objects.filter(trainer=p.trainer, race__start_at__lt=p.race.start_at).exclude(
         horse=p.horse)
     stats = same_trainer_players.aggregate(winner_dividend_sum=Sum('winner_dividend'), c=Count('id'),
                                            wins=Count('winner_dividend'))

@@ -260,7 +260,7 @@ class Odds(models.Model):
 class BetResult(models.Model):
     imported_at = models.DateTimeField(auto_now=True)
 
-    combo = models.TextField()
+    combo = models.JSONField()
     dividend = models.IntegerField()
 
     type = models.CharField(max_length=100)

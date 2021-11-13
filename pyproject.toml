@@ -51,6 +51,8 @@ python-dateutil = "*"
 celery = "*"
 keras = "*"
 tensorflow = "==2.4.1"
+Pillow = "^8.4.0"
+skl2onnx = "^1.10.0"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "*"

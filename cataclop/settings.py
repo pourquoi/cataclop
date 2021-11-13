@@ -18,7 +18,9 @@ env = environ.Env(
     EMAIL_RECIPIENTS=(tuple, None),
     PMU_CLIENT_ID=(str, None),
     PMU_CLIENT_PASSWRD=(str, None),
-    PMU_CLIENT_DOB=(str, None)
+    PMU_CLIENT_DOB=(str, None),
+    SMSAPI_USER=(str, None),
+    SMSAPI_SECRET=(str, None)
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))

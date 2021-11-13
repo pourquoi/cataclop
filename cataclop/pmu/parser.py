@@ -220,22 +220,15 @@ class PmuParser:
                     pass
 
         if not self.fast:
-            race.betresult_set.all().delete()
-
-            try:
-                with open(os.path.join(self.root_dir, session.date.isoformat(),
-                                       'R{}C{}-odds.json'.format(session.num, race.num))) as json_data:
-                    bet_results = json.load(json_data)
-                    for r in bet_results:
-                        self.importBetResult(r, race)
-            except FileNotFoundError:
-                pass
+            self.importBetResults(race)
 
         from cataclop.core.enrich import compute_race_trueskill, compute_player_stats
-        compute_race_trueskill(race)
+        if not self.fast:
+            compute_race_trueskill(race)
 
-        for p in race.player_set.all():
-            compute_player_stats(p)
+        if not self.fast:
+            for p in race.player_set.all():
+                compute_player_stats(p)
 
         if self.predict:
             from cataclop.ml.pipeline import factories
@@ -414,30 +407,41 @@ class PmuParser:
 
         return odds
 
+    def importBetResults(self, race):
+        race.betresult_set.all().delete()
+
+        try:
+            with open(os.path.join(self.root_dir, race.session.date.isoformat(),
+                                    'R{}C{}-odds.json'.format(race.session.num, race.num))) as json_data:
+                bet_results = json.load(json_data)
+                for r in bet_results:
+                    self.importBetResult(r, race)
+        except FileNotFoundError:
+            pass
+
     def importBetResult(self, r, race):
 
         for rr in r['rapports']:
-            if r['typePari'] not in ['SIMPLE_GAGNANT', 'SIMPLE_PLACE', 'E_SIMPLE_PLACE', 'E_SIMPLE_GAGNANT']:
-                continue
 
-            result = BetResult(type=r['typePari'], combo=json.dumps(rr['combinaison']),
+            result = BetResult(type=r['typePari'], combo=rr['combinaison'],
                                dividend=rr['dividendePourUnEuro'])
             result.race = race
 
             result.save()
 
-            for n in rr['combinaison']:
-                p = race.get_player(n)
+            if r['typePari'] in ['E_SIMPLE_GAGNANT', 'E_SIMPLE_PLACE']:
+                for n in rr['combinaison']:
+                    p = race.get_player(n)
 
-                if p is None:
-                    continue
+                    if p is None:
+                        continue
 
-                if r['typePari'] == 'E_SIMPLE_GAGNANT':
-                    p.winner_dividend = result.dividend
-                    p.save()
-                elif r['typePari'] == 'E_SIMPLE_PLACE':
-                    p.placed_dividend = result.dividend
-                    p.save()
+                    if r['typePari'] == 'E_SIMPLE_GAGNANT':
+                        p.winner_dividend = result.dividend
+                        p.save()
+                    elif r['typePari'] == 'E_SIMPLE_PLACE':
+                        p.placed_dividend = result.dividend
+                        p.save()
 
 
 class UnibetParser:

@@ -1,19 +1,11 @@
 import copy
 import io
 import h5py
-import keras
+from tensorflow import keras
 
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.wrappers.scikit_learn import KerasRegressor as BaseKerasRegressor
-
-
-def baseline_regressor(input_dim):
-    model = Sequential()
-    model.add(Dense(10, input_dim=input_dim, activation='relu'))
-    model.add(Dense(1))
-    model.compile(loss='mean_squared_error', optimizer='adam')
-    return model
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.wrappers.scikit_learn import KerasRegressor as BaseKerasRegressor
 
 
 class KerasRegressor(BaseKerasRegressor):

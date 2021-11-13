@@ -12,10 +12,7 @@ class PipelineEntity(ABC):
     def __init__(self, name, params=None, version=None):
         self.name = name
 
-        self.version = '1.0'
-
-        if version is not None:
-            self.version = version
+        self.version = '1.0' if version is None else version
 
         self.params = self.defaults.copy()
 
